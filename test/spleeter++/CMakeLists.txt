@@ -5,7 +5,7 @@ add_executable(spleeter_test
 target_link_libraries(spleeter_test
   gtest
   gtest_main
-  pybind11::embed
+  spleeter++
 )
 target_compile_definitions(spleeter_test
   PRIVATE
