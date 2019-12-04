@@ -13,4 +13,5 @@ target_compile_definitions(spleeter_test
   PRIVATE
     SPLEETER_ENV="${spleeter_env_dir}"
     TEST_FILE_PATH="${spleeter_env_dir}/../spleeter-src/audio_example.mp3"
+    OUTPUT_DIR="${CMAKE_CURRENT_BINARY_DIR}"
 )

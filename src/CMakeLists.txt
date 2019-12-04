@@ -1,2 +1,4 @@
 add_subdirectory(spleeter++)
-add_subdirectory(example)
+if(${spleeter_build_examples})
+  add_subdirectory(example)
+endif()
