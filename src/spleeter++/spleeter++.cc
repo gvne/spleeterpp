@@ -33,6 +33,9 @@ void Initialize(const std::string &virtual_environment_path) {
   pybind11::exec("path = os.environ['PATH'].split(':')");
   pybind11::exec("path.append('" + virtual_environment_path + "/bin')");
   pybind11::exec("os.environ['PATH'] = ':'.join(path)");
+  
+  // set the working dir close to the pretrained models
+  pybind11::exec("os.chdir('" + virtual_environment_path + "')");
 
   pybind11::exec(
       "import tempfile"); // we rely on tempfile to create output directories
