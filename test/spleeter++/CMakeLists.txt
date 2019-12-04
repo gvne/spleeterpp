@@ -1,5 +1,6 @@
 add_executable(spleeter_test
-  test_basic.cc
+  setup.cc
+  test_separate.cc
 )
 
 target_link_libraries(spleeter_test
@@ -7,6 +8,7 @@ target_link_libraries(spleeter_test
   gtest_main
   spleeter++
 )
+
 target_compile_definitions(spleeter_test
   PRIVATE
     SPLEETER_ENV="${spleeter_env_dir}"
