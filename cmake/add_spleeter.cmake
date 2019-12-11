@@ -1,8 +1,9 @@
 include(FetchContent)
+set(spleeter_version v1.4.0)
 
 FetchContent_Declare(spleeter
   GIT_REPOSITORY https://github.com/deezer/spleeter.git
-  GIT_TAG        v1.4.0
+  GIT_TAG        ${spleeter_version}
 )
 
 FetchContent_GetProperties(spleeter)
@@ -25,9 +26,12 @@ if(NOT spleeter_POPULATED)
   message(STATUS "Conda environment successfuly setup")
   set(spleeter_env_dir ${spleeter_BINARY_DIR})
 
+  # Make sure we use the python executable of the spleeter environment
+  set(PYTHON_EXECUTABLE ${spleeter_env_dir}/bin/python CACHE STRING "")
+
   # Download the pretrained models to avoid the internet at runtime
   set(pretrained_models "2stems" "4stems" "5stems")
-  set(pretrained_models_url "https://github.com/deezer/spleeter/releases/download/v1.4.0/")
+  set(pretrained_models_url "https://github.com/deezer/spleeter/releases/download/${spleeter_version}/")
   set(pretrained_models_path "${spleeter_BINARY_DIR}/pretrained_models")
   file(MAKE_DIRECTORY ${pretrained_models_path})
 
