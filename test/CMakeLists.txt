@@ -1,1 +1,1 @@
-add_subdirectory(spleeter++)
+add_subdirectory(spleeter)

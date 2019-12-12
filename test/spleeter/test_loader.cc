@@ -5,7 +5,7 @@
 #include "tensorflow/cc/saved_model/loader.h"
 #include "wave/file.h"
 
-TEST(Load, two_stems) {
+TEST(Loader, Sandbox) {
   std::string model_path(SPLEETER_MODELS);
   model_path += "/2stems";
 
