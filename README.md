@@ -1,4 +1,16 @@
+[![Documentation Status](https://readthedocs.org/projects/spleeterpp/badge/?version=latest)](https://spleeterpp.readthedocs.io/en/latest/?badge=latest)
+
 # Spleeter C++ Inference
+
+## Documentation
+
+The developer doc is available on readthedoc.  
+If you ever want to build it, we provide a dockerfile:
+```bash
+docker build -t sp-docs -f docs/Dockerfile .
+docker run -it --rm -v$(pwd):/code sp-docs doxygen
+docker run -it --rm -v$(pwd):/code sp-docs make html
+```
 
 ## How ?
 
