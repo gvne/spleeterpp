@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="namespacespleeter_1_1internal" kind="namespace" language="C++">
+    <compoundname>spleeter::internal</compoundname>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="spleeter_8cc_1a9f0ed86c1a3bfcdeac4655a1e769cfcf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string spleeter::internal::GetModelPath</definition>
+        <argsstring>(const std::string &amp;path_to_models, SeparationType type)</argsstring>
+        <name>GetModelPath</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>path_to_models</declname>
+        </param>
+        <param>
+          <type>SeparationType</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter/spleeter.cc" line="11" column="1" bodyfile="/code/src/spleeter/spleeter.cc" bodystart="11" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="spleeter_8cc_1a505f3d481beb374fc6cb15c5be8de509" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void spleeter::internal::Initialize</definition>
+        <argsstring>(const std::string &amp;path_to_models, SeparationType type, std::error_code &amp;err)</argsstring>
+        <name>Initialize</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>path_to_models</declname>
+        </param>
+        <param>
+          <type>SeparationType</type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>std::error_code &amp;</type>
+          <declname>err</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter/spleeter.cc" line="25" column="1" bodyfile="/code/src/spleeter/spleeter.cc" bodystart="25" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="spleeter_8cc_1a00513ee53516a882a90d324727734222" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt;std::string&gt; spleeter::internal::GetOutputNames</definition>
+        <argsstring>(SeparationType type)</argsstring>
+        <name>GetOutputNames</name>
+        <param>
+          <type>SeparationType</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter/spleeter.cc" line="42" column="1" bodyfile="/code/src/spleeter/spleeter.cc" bodystart="42" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="spleeter_8cc_1aade04ae6bf144225359de826a743bcd5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void spleeter::internal::RunModel</definition>
+        <argsstring>(const Waveform &amp;input, SeparationType separation_type, std::vector&lt; tensorflow::Tensor &gt; *output, std::error_code &amp;err)</argsstring>
+        <name>RunModel</name>
+        <param>
+          <type>const Waveform &amp;</type>
+          <declname>input</declname>
+        </param>
+        <param>
+          <type>SeparationType</type>
+          <declname>separation_type</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; tensorflow::Tensor &gt; *</type>
+          <declname>output</declname>
+        </param>
+        <param>
+          <type>std::error_code &amp;</type>
+          <declname>err</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter/spleeter.cc" line="59" column="1" bodyfile="/code/src/spleeter/spleeter.cc" bodystart="59" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="spleeter_8cc_1a09962c2fd5e1a9d2a52a4aa764713596" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void spleeter::internal::SetOutput</definition>
+        <argsstring>(const std::vector&lt; tensorflow::Tensor &gt; &amp;tf_output, uint64_t frame_count, std::vector&lt; Waveform *&gt; output)</argsstring>
+        <name>SetOutput</name>
+        <param>
+          <type>const std::vector&lt; tensorflow::Tensor &gt; &amp;</type>
+          <declname>tf_output</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>frame_count</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; Waveform *&gt;</type>
+          <declname>output</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter/spleeter.cc" line="87" column="1" bodyfile="/code/src/spleeter/spleeter.cc" bodystart="87" bodyend="96"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/code/src/spleeter/spleeter.cc" line="9" column="1"/>
+  </compounddef>
+</doxygen>

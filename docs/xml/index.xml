@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.8.13">
+  <compound refid="classspleeter_1_1Registry" kind="class"><name>spleeter::Registry</name>
+    <member refid="classspleeter_1_1Registry_1a1bc8bae64ad51dbc9ecdab526af95e38" kind="typedef"><name>BundlePtr</name></member>
+    <member refid="classspleeter_1_1Registry_1a6f1f7e186419a82b2a6f0646341f841a" kind="variable"><name>m_registry</name></member>
+    <member refid="classspleeter_1_1Registry_1ac0d987f1ffbc5658470836908037f332" kind="function"><name>instance</name></member>
+    <member refid="classspleeter_1_1Registry_1a8b0fed2aa25ce34557e98f22952c7b77" kind="function"><name>Register</name></member>
+    <member refid="classspleeter_1_1Registry_1adf0262a7b65bb160642111436730e1fe" kind="function"><name>Get</name></member>
+    <member refid="classspleeter_1_1Registry_1a08301350a6f2697a34b72eebd2698ec8" kind="function"><name>Registry</name></member>
+    <member refid="classspleeter_1_1Registry_1ae514ec64ee348c9828287819ebe2f2b0" kind="function"><name>~Registry</name></member>
+  </compound>
+  <compound refid="namespacespleeter" kind="namespace"><name>spleeter</name>
+    <member refid="spleeter_8h_1aec4a660e27c7c164c02bf146793d20ad" kind="enum"><name>SeparationType</name></member>
+    <member refid="spleeter_8h_1aec4a660e27c7c164c02bf146793d20adabdb529ea88496d57bafb09fd5e636bf4" kind="enumvalue"><name>TwoStems</name></member>
+    <member refid="spleeter_8h_1aec4a660e27c7c164c02bf146793d20adab95a9669b09818def0f2cf88f88fcfca" kind="enumvalue"><name>FourStems</name></member>
+    <member refid="spleeter_8h_1aec4a660e27c7c164c02bf146793d20ada2adce49672f832d9357bee5d9e6f155f" kind="enumvalue"><name>FiveStems</name></member>
+    <member refid="spleeter_8h_1a85c84fe241a7d532b574532c0d3d8804" kind="typedef"><name>Waveform</name></member>
+    <member refid="spleeter_8cc_1a50356673b469490c01c46afab5e6db97" kind="function"><name>Initialize</name></member>
+    <member refid="spleeter_8cc_1a4206dcf9f99db746a5fc5d52d7111d72" kind="function"><name>Split</name></member>
+    <member refid="spleeter_8cc_1a159e164eff7f38c3ec3d16072b77fa1e" kind="function"><name>Split</name></member>
+    <member refid="spleeter_8cc_1add06aa9a9b29628d5a0724815338a79f" kind="function"><name>Split</name></member>
+  </compound>
+  <compound refid="namespacespleeter_1_1internal" kind="namespace"><name>spleeter::internal</name>
+    <member refid="spleeter_8cc_1a9f0ed86c1a3bfcdeac4655a1e769cfcf" kind="function"><name>GetModelPath</name></member>
+    <member refid="spleeter_8cc_1a505f3d481beb374fc6cb15c5be8de509" kind="function"><name>Initialize</name></member>
+    <member refid="spleeter_8cc_1a00513ee53516a882a90d324727734222" kind="function"><name>GetOutputNames</name></member>
+    <member refid="spleeter_8cc_1aade04ae6bf144225359de826a743bcd5" kind="function"><name>RunModel</name></member>
+    <member refid="spleeter_8cc_1a09962c2fd5e1a9d2a52a4aa764713596" kind="function"><name>SetOutput</name></member>
+  </compound>
+  <compound refid="registry_8cc" kind="file"><name>registry.cc</name>
+  </compound>
+  <compound refid="registry_8h" kind="file"><name>registry.h</name>
+  </compound>
+  <compound refid="spleeter_8cc" kind="file"><name>spleeter.cc</name>
+  </compound>
+  <compound refid="spleeter_8h" kind="file"><name>spleeter.h</name>
+  </compound>
+  <compound refid="dir_cf8dda79de50e3e42e3b1f531732fb91" kind="dir"><name>/code/src/spleeter</name>
+  </compound>
+  <compound refid="dir_68267d1309a1af8e8297ef4c3efbcdba" kind="dir"><name>/code/src</name>
+  </compound>
+</doxygenindex>
