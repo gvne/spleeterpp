@@ -1,6 +1,5 @@
 add_library(spleeter
   spleeter.h
-  spleeter.hxx
   spleeter.cc
   registry.h
   registry.cc

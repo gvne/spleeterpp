@@ -3,6 +3,7 @@
 
 #include <string>
 #include <memory>
+#include <unordered_set>
 #include <Eigen/Core>
 
 namespace spleeter {
@@ -11,20 +12,19 @@ using Waveform = Eigen::Matrix2Xf;
 
 enum SeparationType { TwoStems, FourStems, FiveStems };
 
-template <SeparationType... type>
-void Initialize(const std::string &path_to_models);
+void Initialize(const std::string &path_to_models,
+                const std::unordered_set<SeparationType> &separation_type,
+                std::error_code &err);
 
-template <SeparationType type, typename... T>
-void Split(const Waveform &input, T *... outputs);
+void Split(const Waveform &input, Waveform *vocals, Waveform *accompaniment,
+           std::error_code &err);
 
-void Split(const Waveform &input, Waveform *vocals, Waveform *accompaniment);
-void Split(const Waveform &input, Waveform *vocals, Waveform *drums,
-           Waveform *bass, Waveform *other);
-void Split(const Waveform &input, Waveform *vocals, Waveform *drums,
-           Waveform *bass, Waveform *piano, Waveform *other);
+ void Split(const Waveform &input, Waveform *vocals, Waveform *drums,
+           Waveform *bass, Waveform *other, std::error_code& err);
+
+ void Split(const Waveform &input, Waveform *vocals, Waveform *drums,
+           Waveform *bass, Waveform *piano, Waveform *other, std::error_code& err);
 
 } // namespace spleeter
-
-#include "spleeter/spleeter.hxx"
 
 #endif // SPEETER_SPLEETER_H_
