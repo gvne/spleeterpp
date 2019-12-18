@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classspleeter_1_1Registry" kind="class" language="C++" prot="public">
+    <compoundname>spleeter::Registry</compoundname>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classspleeter_1_1Registry_1a1bc8bae64ad51dbc9ecdab526af95e38" prot="public" static="no">
+        <type>std::shared_ptr&lt; tensorflow::SavedModelBundle &gt;</type>
+        <definition>using spleeter::Registry::BundlePtr =  std::shared_ptr&lt;tensorflow::SavedModelBundle&gt;</definition>
+        <argsstring></argsstring>
+        <name>BundlePtr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter/registry.h" line="11" column="1" bodyfile="/code/src/spleeter/registry.h" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classspleeter_1_1Registry_1a6f1f7e186419a82b2a6f0646341f841a" prot="private" static="no" mutable="no">
+        <type>std::map&lt; SeparationType, BundlePtr &gt;</type>
+        <definition>std::map&lt;SeparationType, BundlePtr&gt; spleeter::Registry::m_registry</definition>
+        <argsstring></argsstring>
+        <name>m_registry</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter/registry.h" line="22" column="1" bodyfile="/code/src/spleeter/registry.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classspleeter_1_1Registry_1ac0d987f1ffbc5658470836908037f332" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classspleeter_1_1Registry" kindref="compound">Registry</ref> &amp;</type>
+        <definition>Registry &amp; spleeter::Registry::instance</definition>
+        <argsstring>()</argsstring>
+        <name>instance</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter/registry.h" line="13" column="1" bodyfile="/code/src/spleeter/registry.cc" bodystart="8" bodyend="11"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classspleeter_1_1Registry_1a8b0fed2aa25ce34557e98f22952c7b77" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void spleeter::Registry::Register</definition>
+        <argsstring>(BundlePtr bundle, SeparationType type)</argsstring>
+        <name>Register</name>
+        <param>
+          <type>BundlePtr</type>
+          <declname>bundle</declname>
+        </param>
+        <param>
+          <type>SeparationType</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter/registry.h" line="14" column="1" bodyfile="/code/src/spleeter/registry.cc" bodystart="13" bodyend="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classspleeter_1_1Registry_1adf0262a7b65bb160642111436730e1fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>BundlePtr</type>
+        <definition>Registry::BundlePtr spleeter::Registry::Get</definition>
+        <argsstring>(SeparationType type)</argsstring>
+        <name>Get</name>
+        <param>
+          <type>SeparationType</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter/registry.h" line="15" column="1" bodyfile="/code/src/spleeter/registry.cc" bodystart="17" bodyend="22"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classspleeter_1_1Registry_1a08301350a6f2697a34b72eebd2698ec8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>spleeter::Registry::Registry</definition>
+        <argsstring>()</argsstring>
+        <name>Registry</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter/registry.h" line="18" column="1" bodyfile="/code/src/spleeter/registry.cc" bodystart="5" bodyend="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classspleeter_1_1Registry_1ae514ec64ee348c9828287819ebe2f2b0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>spleeter::Registry::~Registry</definition>
+        <argsstring>()</argsstring>
+        <name>~Registry</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter/registry.h" line="19" column="1" bodyfile="/code/src/spleeter/registry.cc" bodystart="6" bodyend="6"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/code/src/spleeter/registry.h" line="9" column="1" bodyfile="/code/src/spleeter/registry.h" bodystart="9" bodyend="23"/>
+    <listofallmembers>
+      <member refid="classspleeter_1_1Registry_1a1bc8bae64ad51dbc9ecdab526af95e38" prot="public" virt="non-virtual"><scope>spleeter::Registry</scope><name>BundlePtr</name></member>
+      <member refid="classspleeter_1_1Registry_1adf0262a7b65bb160642111436730e1fe" prot="public" virt="non-virtual"><scope>spleeter::Registry</scope><name>Get</name></member>
+      <member refid="classspleeter_1_1Registry_1ac0d987f1ffbc5658470836908037f332" prot="public" virt="non-virtual"><scope>spleeter::Registry</scope><name>instance</name></member>
+      <member refid="classspleeter_1_1Registry_1a6f1f7e186419a82b2a6f0646341f841a" prot="private" virt="non-virtual"><scope>spleeter::Registry</scope><name>m_registry</name></member>
+      <member refid="classspleeter_1_1Registry_1a8b0fed2aa25ce34557e98f22952c7b77" prot="public" virt="non-virtual"><scope>spleeter::Registry</scope><name>Register</name></member>
+      <member refid="classspleeter_1_1Registry_1a08301350a6f2697a34b72eebd2698ec8" prot="private" virt="non-virtual"><scope>spleeter::Registry</scope><name>Registry</name></member>
+      <member refid="classspleeter_1_1Registry_1ae514ec64ee348c9828287819ebe2f2b0" prot="private" virt="non-virtual"><scope>spleeter::Registry</scope><name>~Registry</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

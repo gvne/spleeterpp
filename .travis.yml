@@ -1,0 +1,7 @@
+language: ruby
+
+services:
+  - docker
+
+script:
+  - docker run -v$(pwd):/code gvincke/spleeterpp-ci:latest

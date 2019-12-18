@@ -1,0 +1,339 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="namespacespleeter" kind="namespace" language="C++">
+    <compoundname>spleeter</compoundname>
+    <innerclass refid="classspleeter_1_1Registry" prot="public">spleeter::Registry</innerclass>
+    <innernamespace refid="namespacespleeter_1_1internal">spleeter::internal</innernamespace>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="spleeter_8h_1aec4a660e27c7c164c02bf146793d20ad" prot="public" static="no">
+        <name>SeparationType</name>
+        <enumvalue id="spleeter_8h_1aec4a660e27c7c164c02bf146793d20adabdb529ea88496d57bafb09fd5e636bf4" prot="public">
+          <name>TwoStems</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="spleeter_8h_1aec4a660e27c7c164c02bf146793d20adab95a9669b09818def0f2cf88f88fcfca" prot="public">
+          <name>FourStems</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="spleeter_8h_1aec4a660e27c7c164c02bf146793d20ada2adce49672f832d9357bee5d9e6f155f" prot="public">
+          <name>FiveStems</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter/spleeter.h" line="13" column="1" bodyfile="/code/src/spleeter/spleeter.h" bodystart="13" bodyend="13"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="spleeter_8h_1a85c84fe241a7d532b574532c0d3d8804" prot="public" static="no">
+        <type>Eigen::Matrix2Xf</type>
+        <definition>using spleeter::Waveform = typedef Eigen::Matrix2Xf</definition>
+        <argsstring></argsstring>
+        <name>Waveform</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter/spleeter.h" line="11" column="1" bodyfile="/code/src/spleeter/spleeter.h" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="spleeter_8cc_1a50356673b469490c01c46afab5e6db97" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void spleeter::Initialize</definition>
+        <argsstring>(const std::string &amp;path_to_models, const std::unordered_set&lt; SeparationType &gt; &amp;separation_types, std::error_code &amp;err)</argsstring>
+        <name>Initialize</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>path_to_models</declname>
+        </param>
+        <param>
+          <type>const std::unordered_set&lt; SeparationType &gt; &amp;</type>
+          <declname>separation_types</declname>
+        </param>
+        <param>
+          <type>std::error_code &amp;</type>
+          <declname>err</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Initialize the spleeter tools by loading models at the specified path <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path_to_models</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the path to spleeter exported models. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>separation_types</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the types of separation required </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>err</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>an error code that gets set if something goes wrong </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter/spleeter.cc" line="100" column="1" bodyfile="/code/src/spleeter/spleeter.cc" bodystart="100" bodyend="106"/>
+      </memberdef>
+      <memberdef kind="function" id="spleeter_8cc_1a4206dcf9f99db746a5fc5d52d7111d72" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void spleeter::Split</definition>
+        <argsstring>(const Waveform &amp;input, Waveform *vocals, Waveform *accompaniment, std::error_code &amp;err)</argsstring>
+        <name>Split</name>
+        <param>
+          <type>const Waveform &amp;</type>
+          <declname>input</declname>
+        </param>
+        <param>
+          <type>Waveform *</type>
+          <declname>vocals</declname>
+        </param>
+        <param>
+          <type>Waveform *</type>
+          <declname>accompaniment</declname>
+        </param>
+        <param>
+          <type>std::error_code &amp;</type>
+          <declname>err</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Split the input waveform into vocals and accompaniment <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>input</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the input waveform </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>vocals</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the extracted vocals waveform </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>accompaniment</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the extracted accompaniment waveform </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>err</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>an error code that gets set if something goes wrong. std::errc::protocol_error is obtained when the model hasn&apos;t been properly initialized </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter/spleeter.cc" line="108" column="1" bodyfile="/code/src/spleeter/spleeter.cc" bodystart="108" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="function" id="spleeter_8cc_1a159e164eff7f38c3ec3d16072b77fa1e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void spleeter::Split</definition>
+        <argsstring>(const Waveform &amp;input, Waveform *vocals, Waveform *drums, Waveform *bass, Waveform *other, std::error_code &amp;err)</argsstring>
+        <name>Split</name>
+        <param>
+          <type>const Waveform &amp;</type>
+          <declname>input</declname>
+        </param>
+        <param>
+          <type>Waveform *</type>
+          <declname>vocals</declname>
+        </param>
+        <param>
+          <type>Waveform *</type>
+          <declname>drums</declname>
+        </param>
+        <param>
+          <type>Waveform *</type>
+          <declname>bass</declname>
+        </param>
+        <param>
+          <type>Waveform *</type>
+          <declname>other</declname>
+        </param>
+        <param>
+          <type>std::error_code &amp;</type>
+          <declname>err</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Split the input waveform into vocals, drums, bass and other <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>input</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the input waveform </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>vocals</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the extracted vocals waveform </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>drums</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the extracted drums waveform </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the extracted bass waveform </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the extracted other waveform </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>err</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>an error code that gets set if something goes wrong. std::errc::protocol_error is obtained when the model hasn&apos;t been properly initialized </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter/spleeter.cc" line="118" column="1" bodyfile="/code/src/spleeter/spleeter.cc" bodystart="118" bodyend="126"/>
+      </memberdef>
+      <memberdef kind="function" id="spleeter_8cc_1add06aa9a9b29628d5a0724815338a79f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void spleeter::Split</definition>
+        <argsstring>(const Waveform &amp;input, Waveform *vocals, Waveform *drums, Waveform *bass, Waveform *piano, Waveform *other, std::error_code &amp;err)</argsstring>
+        <name>Split</name>
+        <param>
+          <type>const Waveform &amp;</type>
+          <declname>input</declname>
+        </param>
+        <param>
+          <type>Waveform *</type>
+          <declname>vocals</declname>
+        </param>
+        <param>
+          <type>Waveform *</type>
+          <declname>drums</declname>
+        </param>
+        <param>
+          <type>Waveform *</type>
+          <declname>bass</declname>
+        </param>
+        <param>
+          <type>Waveform *</type>
+          <declname>piano</declname>
+        </param>
+        <param>
+          <type>Waveform *</type>
+          <declname>other</declname>
+        </param>
+        <param>
+          <type>std::error_code &amp;</type>
+          <declname>err</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Split the input waveform into vocals, drums, bass, piano and other <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>input</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the input waveform </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>vocals</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the extracted vocals waveform </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>drums</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the extracted drums waveform </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the extracted bass waveform </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>piano</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the extracted piano waveform </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the extracted other waveform </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>err</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>an error code that gets set if something goes wrong. std::errc::protocol_error is obtained when the model hasn&apos;t been properly initialized </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter/spleeter.cc" line="128" column="1" bodyfile="/code/src/spleeter/spleeter.cc" bodystart="128" bodyend="138"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/code/src/spleeter/registry.cc" line="3" column="1"/>
+  </compounddef>
+</doxygen>

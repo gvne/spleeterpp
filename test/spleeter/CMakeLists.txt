@@ -1,5 +1,5 @@
 add_executable(test_spleeter
-  test_loader.cc
+  # test_loader.cc  # Just a sandbox
   test_spleeter.cc
 )
 

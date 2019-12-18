@@ -56,7 +56,7 @@ def main():
         temp_dir = tempfile.mkdtemp()
         export_model(args.pretrained_path, model, temp_dir)
         created_dir = os.path.join(temp_dir, os.listdir(temp_dir)[0])
-        os.rename(created_dir, destination)
+        shutil.move(created_dir, destination)
         shutil.rmtree(temp_dir)  # cleanup
 
 
