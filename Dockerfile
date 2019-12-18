@@ -16,9 +16,8 @@ RUN apt-get update && apt-get install -y \
 COPY . spleeter/
 
 # bazel install
-RUN bash spleeter/bazel-0.25.2-installer-linux-x86_64.sh
-# RUN wget https://github.com/bazelbuild/bazel/releases/download/0.25.2/bazel-0.25.2-installer-linux-x86_64.sh
-# RUN bash bazel-0.25.2-installer-linux-x86_64.sh --user
+RUN wget https://github.com/bazelbuild/bazel/releases/download/0.25.2/bazel-0.25.2-installer-linux-x86_64.sh
+RUN bash bazel-0.25.2-installer-linux-x86_64.sh --user
 
 # tensorflow bazel build
 RUN git clone https://github.com/tensorflow/tensorflow.git && \
