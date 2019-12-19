@@ -2,8 +2,6 @@ FROM continuumio/anaconda3
 
 MAINTAINER Loreto Parisi loretoparisi@gmail.com
 
-WORKDIR spleeter
-
 RUN apt-get update && apt-get install -y \
     wget \
     unzip \
@@ -14,7 +12,8 @@ RUN apt-get update && apt-get install -y \
     cmake
 
 # spleeterpp source
-COPY . spleeter/
+WORKDIR spleeterpp
+COPY . .
 
 # bazel install
 RUN wget https://github.com/bazelbuild/bazel/releases/download/0.25.2/bazel-0.25.2-installer-linux-x86_64.sh
@@ -29,12 +28,16 @@ RUN cd tensorflow && \
     python tensorflow/tools/pip_package/setup.py install && \
     mv build build-bu && \
     git checkout BUILD && \
-    ./configure && \
+    ./configure 
+
+# build tensorflow to bazel-bin/tensorflow/libtensorflow_cc.so
+RUN cd tensorflow && \
     bazel build --config=monolithic --jobs=6 --verbose_failures //tensorflow:libtensorflow_cc.so
 
 # tensorflow install
 ENV INSTALL_DIR=install
 ENV INCLUDE_DIR=$INSTALL_DIR/include
+
 RUN cd tensorflow && \
     mkdir -p $INSTALL_DIR/bin && \
     cp bazel-bin/tensorflow/libtensorflow_cc.so* $INSTALL_DIR/bin/ && \
@@ -45,9 +48,8 @@ RUN cd tensorflow && \
     cp -r ./bazel-tensorflow/external/eigen_archive/Eigen $INSTALL_DIR/include/third_party/eigen3/Eigen
 
 # spleeterpp build
-RUN cd spleeter && \
-    mkdir build && cd build && \
-    cmake -DTENSORFLOW_CC_INSTALL_DIR=$INSTALL_DIR .. && \
+RUN mkdir build && cd build && \
+    cmake -DTENSORFLOW_CC_INSTALL_DIR=$INSTALL_DIR/bin/ .. && \
     cmake --build .
 
 # defaults command
