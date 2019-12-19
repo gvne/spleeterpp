@@ -10,7 +10,8 @@ RUN apt-get update && apt-get install -y \
     rsync \
     gcc \
     build-essential \
-    software-properties-common
+    software-properties-common \
+    cmake
 
 # spleeterpp source
 COPY . spleeter/
