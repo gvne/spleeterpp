@@ -49,7 +49,7 @@ RUN cd tensorflow && \
 
 # spleeterpp build
 RUN mkdir build && cd build && \
-    cmake -DTENSORFLOW_CC_INSTALL_DIR=$INSTALL_DIR/bin/ .. && \
+    cmake -DTENSORFLOW_CC_INSTALL_DIR=/spleeterpp/tensorflow/install .. && \
     cmake --build .
 
 # defaults command
