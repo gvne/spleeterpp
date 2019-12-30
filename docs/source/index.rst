@@ -2,7 +2,7 @@ Welcome to the Spleeterpp Library documentation!
 ================================================
 
 *Spleeterpp* is a library to ease the use of the `Spleeter
-<https://github.com/deezer/spleeter>`_. project in C++ programs.
+<https://github.com/deezer/spleeter>`_ project in C++ programs.
 
 Example
 ^^^^^^^

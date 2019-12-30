@@ -64,3 +64,23 @@ Finally, install everything in a specific folder:
   mkdir -p $INSTALL_DIR/include/third_party/eigen3/unsupported/
   cp -r ./bazel-tensorflow/external/eigen_archive/unsupported/Eigen $INSTALL_DIR/include/third_party/eigen3/unsupported/Eigen
   cp -r ./bazel-tensorflow/external/eigen_archive/Eigen $INSTALL_DIR/include/third_party/eigen3/Eigen
+
+
+Docker
+^^^^^^
+
+To ease and demonstrate the build on linux, a Dockerfile is provided. Building
+it will process the library itself and most of its dependencies.
+
+Should you wish to use a pre-built, we uploaded the gvincke/spleeterpp-ci:tf-1.14.0
+container to docker hub.
+
+You can also use the pre-built to build a new release. This is used on the CI:
+
+.. code:: bash
+
+  echo "mkdir -p /code/build" >  build.sh
+  echo "cd /code/build" >> build.sh
+  echo "cmake -DTENSORFLOW_CC_INSTALL_DIR=/spleeterpp/tensorflow/install .." >> build.sh
+  echo "cmake --build ." >> build.sh
+  docker run -v$(pwd):/code gvincke/spleeterpp-ci:tf-1.14.0 bash /code/build.sh
