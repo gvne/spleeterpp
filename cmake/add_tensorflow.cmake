@@ -28,4 +28,5 @@ execute_process(COMMAND
   OUTPUT_VARIABLE tensorflow_include_dir
   ERROR_QUIET
 )
+string(STRIP ${tensorflow_include_dir} tensorflow_include_dir)
 set(tensorflow_include_dir ${tensorflow_include_dir} ${TENSORFLOW_CC_INSTALL_DIR}/include)
