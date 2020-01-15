@@ -4,10 +4,8 @@ How To Build
 Instructions
 ^^^^^^^^^^^^
 
-The build system is based on `cmake`. It has two external dependencies:
-
-- `conda` has to be found in the path
-- `tensorflow_cc` install path should be provided
+The build system is based on `cmake`. It requires `conda` installed and
+available on your path.
 
 Then you can build it like any other `cmake` project.
 
@@ -22,6 +20,8 @@ Tensorflow_cc
 ^^^^^^^^^^^^^
 
 The project relies heavily on the `tensorflow_cc` library.
+We provide pre-built version but you can also use your version using the
+TENSORFLOW_CC_INSTALL_DIR cmake variable.
 To build it you should start by cloning it:
 
 
