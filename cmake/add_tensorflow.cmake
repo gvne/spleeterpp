@@ -15,11 +15,10 @@ if (NOT EXISTS ${TENSORFLOW_CC_INSTALL_DIR})
   execute_process(COMMAND ${CMAKE_COMMAND} -E tar -xf ${zipped_lib}
                   WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
   set(TENSORFLOW_CC_INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}/install)
-  if (UNIX AND APPLE)  # TODO: should be included in the zip
-    execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink
-                    ${TENSORFLOW_CC_INSTALL_DIR}/bin/libtensorflow_cc.so
-                    ${TENSORFLOW_CC_INSTALL_DIR}/bin/libtensorflow_cc.so.1)
-  endif()
+  # Rebuild the symlink
+  execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink
+                  ${TENSORFLOW_CC_INSTALL_DIR}/bin/libtensorflow_cc.so.1
+                  ${TENSORFLOW_CC_INSTALL_DIR}/bin/libtensorflow_cc.so)
 endif()
 
 find_library(tensorflow_cc
