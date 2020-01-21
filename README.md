@@ -3,25 +3,15 @@
 
 # Spleeter C++ Inference
 
-## Documentation
-
-The developer doc is available on readthedoc.  
-If you ever want to build it, we provide a dockerfile:
-```bash
-docker build -t sp-docs -f docs/Dockerfile .
-docker run -it --rm -v$(pwd):/code sp-docs doxygen
-docker run -it --rm -v$(pwd):/code sp-docs make html
-```
-
 ## How ?
 
 [Spleeter](https://github.com/deezer/spleeter) is based on `tensorflow`. As
-described in their documentation, we can easily run the inference of such a model in C++.
+described in their documentation, we can easily run the inference of such a
+model in C++.
 
 ## Requirements
 
 * `conda` installed and available in your path
-* the `tensorflow_cc` library (see the Help section for instructions)
 
 ## Build
 
@@ -39,3 +29,13 @@ This will:
 * Generate each models
 * Download the `tensorflow_cc` library
 * Build the `spleeter++` library and its associated tests
+
+## Documentation
+
+The developer doc is available on readthedoc.  
+If you ever want to build it, we provide a dockerfile:
+```bash
+docker build -t sp-docs -f docs/Dockerfile .
+docker run -it --rm -v$(pwd):/code sp-docs doxygen
+docker run -it --rm -v$(pwd):/code sp-docs make html
+```
