@@ -9,11 +9,9 @@
 described in their documentation, we can easily run the inference of such a
 model in C++.
 
-## Requirements
-
-* `conda` installed and available in your path
-
 ## Build
+
+### Note: We only support Unix system at the moment (tested on osx 10.15 and ubuntu 18.04)
 
 We base our work on `cmake`.
 ```bash
@@ -23,11 +21,8 @@ cmake --build .
 ```
 
 This will:
-* Clone `Spleeter` and checkout its release version.
-* Create the `conda` environment
-* Download the pre-trained weights
-* Generate each models
-* Download the `tensorflow_cc` library
+* Download `Spleeter` the pre-trained weights
+* Download the pre-built `tensorflow_cc` library
 * Build the `spleeter++` library and its associated tests
 
 ## Documentation

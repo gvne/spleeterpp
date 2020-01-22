@@ -12,8 +12,24 @@ Then you can build it like any other `cmake` project.
 .. code:: bash
 
   mkdir build && cd build
-  cmake -DTENSORFLOW_CC_INSTALL_DIR=/my/install/dir ..
+  cmake ..
   cmake --build .
+
+
+Spleeter pre-trained models
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The original Spleeter project provide pre-trained model using a tensorflow
+python specific format.
+
+We provided the same models in a converted format in our repository. The cmake
+script will take care of the download step for you.
+
+For those who want to re-generate them from Spleeter, we provide a cmake option
+(spleeter_regenerate_models) that does it for you. Beware that this requires
+`conda` installed and available in your path. It will clone the original
+repository, build the conda environment and run a export script
+(cmake/export_spleeter_models.py).
 
 
 Tensorflow_cc
