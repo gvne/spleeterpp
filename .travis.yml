@@ -1,4 +1,5 @@
 language: cpp
+dist: bionic
 
 script:
   - mkdir -p build && cd build
