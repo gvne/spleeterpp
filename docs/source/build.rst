@@ -56,14 +56,16 @@ Finally, install everything in a specific folder:
 
   # libraries
   mkdir -p $INSTALL_DIR/bin
-  cp bazel-bin/tensorflow/libtensorflow_cc.so* $INSTALL_DIR/bin/
+  cp bazel-bin/tensorflow/libtensorflow_cc.so.1.14.0 $INSTALL_DIR/bin/libtensorflow_cc.so.1
+  ln -s $INSTALL_DIR/bin/libtensorflow_cc.so.1 $INSTALL_DIR/bin/libtensorflow_cc.so
 
   # and headers
-  mkdir -p $INSTALL_DIR/include
+  mkdir -p $INCLUDE_DIR
   rsync -a --prune-empty-dirs --include '*/' --include '*.h' --exclude '*' tensorflow/ $INCLUDE_DIR/tensorflow
-  mkdir -p $INSTALL_DIR/include/third_party/eigen3/unsupported/
-  cp -r ./bazel-tensorflow/external/eigen_archive/unsupported/Eigen $INSTALL_DIR/include/third_party/eigen3/unsupported/Eigen
-  cp -r ./bazel-tensorflow/external/eigen_archive/Eigen $INSTALL_DIR/include/third_party/eigen3/Eigen
+  rsync -a --prune-empty-dirs --include '*/' --include '*.h' --exclude '*' bazel-bin/tensorflow/ $INCLUDE_DIR/tensorflow
+
+  mkdir -p $INCLUDE_DIR/third_party/eigen3/unsupported/
+  cp -r ./third_party/eigen3/unsupported/Eigen $INCLUDE_DIR/third_party/eigen3/unsupported/Eigen
 
 
 Docker
