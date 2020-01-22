@@ -31,6 +31,9 @@ if(NOT spleeter_POPULATED)
 
   # Download the pretrained models to avoid the internet at runtime
   set(pretrained_models "2stems" "4stems" "5stems")
+  set(2stems_sha256 "f3a90b39dd2874269e8b05a48a86745df897b848c61f3958efc80a39152bd692")
+  set(4stems_sha256 "3adb4a50ad4eb18c7c4d65fcf4cf2367a07d48408a5eb7d03cd20067429dfaa8")
+  set(5stems_sha256 "25a1e87eb5f75cc72a4d2d5467a0a50ac75f05611f877c278793742513cc7218")
   set(pretrained_models_url "https://github.com/deezer/spleeter/releases/download/${spleeter_version}/")
   set(pretrained_models_path "${spleeter_BINARY_DIR}/pretrained_models")
   file(MAKE_DIRECTORY ${pretrained_models_path})
@@ -40,19 +43,36 @@ if(NOT spleeter_POPULATED)
     set(zip_file "${pretrained_model_path}/${pretrained_model}.tar.gz")
     set(url "${pretrained_models_url}${pretrained_model}.tar.gz")
 
-    message(STATUS "Downloading ${pretrained_model} model at ${url} to ${zip_file}")
-
     # Only download and unzip if the zip file wasn't downloaded earlier
     file(MAKE_DIRECTORY ${pretrained_model_path})
-    if(NOT EXISTS ${zip_file})
+    set(sha256 "")
+    if (EXISTS ${zip_file})
+      file(SHA256 ${zip_file} sha256)
+    endif()
+
+    if (NOT "${${pretrained_model}_sha256}" STREQUAL "${sha256}")
+      message(STATUS "Downloading ${pretrained_model} model at ${url} to ${zip_file}")
       file(DOWNLOAD ${url} ${zip_file} SHOW_PROGRESS)
       execute_process(
         COMMAND ${CMAKE_COMMAND} -E tar -xf ${zip_file}
         WORKING_DIRECTORY ${pretrained_model_path}
       )
     else()
-      message(STATUS "Already downloaded. Skipping.")
+      message(STATUS "Pre-trained ${pretrained_model} already available.")
     endif()
+
   endforeach()
+
+  # convert the downloaded models for tensorflow_cc
+  set(spleeter_models_dir ${spleeter_env_dir}/exported)
+  if (NOT EXISTS ${spleeter_models_dir})
+    message(STATUS "Exporing pre-trained models")
+    execute_process(
+      COMMAND
+        ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_LIST_DIR}/export_spleeter_models.py
+          ${pretrained_models_path}
+          ${spleeter_models_dir}
+    )
+  endif()
 
 endif()
