@@ -1,13 +1,7 @@
 language: cpp
 
-services:
-  - docker
-
 script:
-  - echo "mkdir -p /code/build" >  build_exec.sh
-  - echo "cd /code/build" >> build_exec.sh
-  - echo "cmake -DTENSORFLOW_CC_INSTALL_DIR=/spleeterpp/tensorflow/install .." >> build_exec.sh
-  - echo "cmake --build ." >> build_exec.sh
-  - echo "export LD_LIBRARY_PATH=/spleeterpp/tensorflow/install/bin" >> build_exec.sh
-  - echo "./test/spleeter/test_spleeter" >> build_exec.sh
-  - docker run -v$(pwd):/code gvincke/spleeterpp-ci:tf-1.14.0 bash /code/build_exec.sh
+  - mkdir -p build && cd build
+  - cmake ..
+  - make
+  - ./test/spleeter/test_spleeter
