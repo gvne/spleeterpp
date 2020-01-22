@@ -21,7 +21,7 @@ cmake --build .
 ```
 
 This will:
-* Download `Spleeter` the pre-trained weights
+* Download the `Spleeter` pre-trained models
 * Download the pre-built `tensorflow_cc` library
 * Build the `spleeter++` library and its associated tests
 
