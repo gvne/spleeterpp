@@ -14,7 +14,7 @@ if(NOT tensorflow_cc)
   # Determine the os type
   set(os_type "linux")
   if (WIN32)
-    message(FATAL_ERROR "Pre-built are not available for windows")
+    set(os_type "win")
   elseif(UNIX AND APPLE)
     set(os_type "osx")
   endif()
@@ -30,9 +30,12 @@ if(NOT tensorflow_cc)
                   WORKING_DIRECTORY ${tensorflow_install_dir})
 
   set(TENSORFLOW_CC_INSTALL_DIR ${tensorflow_install_dir}/install CACHE STRING "" FORCE)
-  execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink
-                  ${TENSORFLOW_CC_INSTALL_DIR}/bin/libtensorflow_cc.so.1
-                  ${TENSORFLOW_CC_INSTALL_DIR}/bin/libtensorflow_cc.so)
+
+  if (UNIX)
+    execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink
+                    ${TENSORFLOW_CC_INSTALL_DIR}/bin/libtensorflow_cc.so.1
+                    ${TENSORFLOW_CC_INSTALL_DIR}/bin/libtensorflow_cc.so)
+  endif()
 
   find_library(tensorflow_cc
     NAMES tensorflow_cc
@@ -49,6 +52,12 @@ message(STATUS "Found tensorflow_cc: ${tensorflow_cc}")
 set(tensorflow_include_dir ${TENSORFLOW_CC_INSTALL_DIR}/include)
 
 # eigen has to be reachable from a specific path. Add a symbolic link
-execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink
-                ${eigen3_SOURCE_DIR}/Eigen
-                ${tensorflow_include_dir}/third_party/eigen3/Eigen)
+if (UNIX)
+  execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink
+                  ${eigen3_SOURCE_DIR}/Eigen
+                  ${tensorflow_include_dir}/third_party/eigen3/Eigen)
+else()
+  execute_process(COMMAND ${CMAKE_COMMAND} -E copy
+                  ${eigen3_SOURCE_DIR}/Eigen
+                  ${tensorflow_include_dir}/third_party/eigen3/Eigen)
+endif()

@@ -20,6 +20,11 @@ include(add_protobuf)
 include(add_absl)
 include(add_tensorflow)
 # --
+if (WIN32)
+  include(runtime)
+  set_runtime(DYNAMIC)
+  add_definitions(-DNOMINMAX)
+endif()
 
 include_directories(src)
 add_subdirectory(src)
