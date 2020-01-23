@@ -18,9 +18,11 @@ TEST(Spleeter, TwoStems) {
   wave::File file;
   file.Open(std::string(TEST_FILE), wave::kIn);
   std::error_code err;
-  auto data = file.Read(err);
-  ASSERT_FALSE(err);
+  std::vector<float> data;
+  file.Read(&data);
   auto source = Eigen::Map<spleeter::Waveform>(data.data(), 2, data.size() / 2);
+
+
 
   // ------------------------------
   // Spleeter !
