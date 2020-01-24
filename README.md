@@ -20,7 +20,7 @@ cmake ..
 cmake --build .
 ```
 
-For windows, we only support Visual Studio 2017.
+For windows, we only support Visual Studio 2017 in Release mode (see [this](https://github.com/tensorflow/tensorflow/issues/17778#issuecomment-384816014)).
 ```bash
 mkdir build && cd build
 cmake -G"Visual Studio 15 2017 Win64"  ..
