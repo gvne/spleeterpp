@@ -1,4 +1,5 @@
 import os
+import sys
 import json
 import argparse
 import tempfile
@@ -6,11 +7,13 @@ import shutil
 
 import tensorflow as tf
 
+sys.path.insert(0, os.getcwd())
+SPLEETER_ROOT = os.path.join(os.getcwd(), "spleeter")
 import spleeter
 from spleeter.model import model_fn
 
 
-SPLEETER_ROOT = os.path.dirname(spleeter.__file__)
+# SPLEETER_ROOT = os.path.dirname(spleeter.__file__)
 
 
 def export_model(pretrained_path: str, model_name: str, export_directory: str):
@@ -33,8 +36,8 @@ def export_model(pretrained_path: str, model_name: str, export_directory: str):
     def receiver():
         shape = (None, parameters['n_channels'])
         features = {
-            'waveform': tf.compat.v1.placeholder(tf.float32, shape=shape),
-            'audio_id': tf.compat.v1.placeholder(tf.string)
+        'stft': tf.compat.v1.placeholder(
+            tf.complex64, shape=(None, parameters['frame_length'] / 2 + 1, parameters['n_channels']))
         }
         return tf.estimator.export.ServingInputReceiver(features, features)
     # export the estimator into a temp directory

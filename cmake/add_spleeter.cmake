@@ -4,6 +4,7 @@ set(spleeter_version v1.4.0)
 FetchContent_Declare(spleeter
   GIT_REPOSITORY https://github.com/deezer/spleeter.git
   GIT_TAG        ${spleeter_version}
+  PATCH_COMMAND  git apply ${CMAKE_CURRENT_LIST_DIR}/patches/spleeter.patch
 )
 
 FetchContent_GetProperties(spleeter)
@@ -72,6 +73,7 @@ if(NOT spleeter_POPULATED)
         ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_LIST_DIR}/export_spleeter_models.py
           ${pretrained_models_path}
           ${spleeter_models_dir}
+      WORKING_DIRECTORY ${spleeter_SOURCE_DIR}
     )
   endif()
 

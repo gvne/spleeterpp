@@ -1,0 +1,65 @@
+diff --git a/spleeter/model/__init__.py b/spleeter/model/__init__.py
+index 384e838..ba30318 100644
+--- a/spleeter/model/__init__.py
++++ b/spleeter/model/__init__.py
+@@ -181,15 +181,16 @@ class EstimatorSpecBuilder(object):
+         """ Compute STFT of waveform and slice the STFT in segment
+          with the right length to feed the network.
+         """
+-        stft_feature = tf.transpose(
+-            stft(
+-                tf.transpose(self._features['waveform']),
+-                self._frame_length,
+-                self._frame_step,
+-                window_fn=lambda frame_length, dtype: (
+-                    hann_window(frame_length, periodic=True, dtype=dtype)),
+-                pad_end=True),
+-            perm=[1, 2, 0])
++        stft_feature = self._features['stft']
++        # stft_feature = tf.transpose(
++        #     stft(
++        #         tf.transpose(self._features['waveform']),
++        #         self._frame_length,
++        #         self._frame_step,
++        #         window_fn=lambda frame_length, dtype: (
++        #             hann_window(frame_length, periodic=True, dtype=dtype)),
++        #         pad_end=True),
++        #     perm=[1, 2, 0])
+         self._features[f'{self._mix_name}_stft'] = stft_feature
+         self._features[f'{self._mix_name}_spectrogram'] = tf.abs(
+             pad_and_partition(stft_feature, self._T))[:, :, :self._F, :]
+@@ -282,7 +283,7 @@ class EstimatorSpecBuilder(object):
+             [e ** separation_exponent for e in output_dict.values()],
+             axis=0
+         ) + self.EPSILON
+-        output_waveform = {}
++        output_mask = {}
+         for instrument in self._instruments:
+             output = output_dict[f'{instrument}_spectrogram']
+             # Compute mask with the model.
+@@ -302,9 +303,10 @@ class EstimatorSpecBuilder(object):
+             instrument_mask = instrument_mask[
+                 :tf.shape(stft_feature)[0], ...]
+             # Compute masked STFT and normalize it.
+-            output_waveform[instrument] = self._inverse_stft(
+-                tf.cast(instrument_mask, dtype=tf.complex64) * stft_feature)
+-        return output_waveform
++            # output_waveform[instrument] = self._inverse_stft(
++            #     tf.cast(instrument_mask, dtype=tf.complex64) * stft_feature)
++            output_mask[instrument] = instrument_mask
++        return output_mask
+ 
+     def _build_output_waveform(self, output_dict):
+         """ Build output waveform from given output dict in order to be used in
+@@ -380,9 +382,9 @@ def model_fn(features, labels, mode, params, config):
+     """
+ 
+     :param features:
+-    :param labels: 
++    :param labels:
+     :param mode: Estimator mode.
+-    :param params: 
++    :param params:
+     :param config: TF configuration (not used).
+     :returns: Built EstimatorSpec.
+     :raise ValueError: If estimator mode is not supported.
