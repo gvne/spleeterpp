@@ -1,8 +1,11 @@
 add_library(spleeter
   spleeter.h
   spleeter.cc
+  type.h
   registry.h
   registry.cc
+  model.h
+  model.cc
 )
 
 target_link_libraries(spleeter
@@ -24,6 +27,7 @@ install(TARGETS spleeter
 )
 install(FILES
   ${CMAKE_CURRENT_SOURCE_DIR}/spleeter.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/type.h
   DESTINATION include/spleeter
 )
 install(FILES

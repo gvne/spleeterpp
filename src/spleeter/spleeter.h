@@ -6,11 +6,9 @@
 #include <unordered_set>
 #include <Eigen/Core>
 
+#include "spleeter/type.h"
+
 namespace spleeter {
-
-using Waveform = Eigen::Matrix2Xf;
-
-enum SeparationType { TwoStems, FourStems, FiveStems };
 
 /// Initialize the spleeter tools by loading models at the specified path
 /// \param path_to_models the path to spleeter exported models.
