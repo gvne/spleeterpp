@@ -5,7 +5,7 @@ project(spleeter++)
 set(CMAKE_CXX_STANDARD 14)
 
 option(spleeter_enable_tests "Enable unit tests" ON)
-option(spleeter_regenerate_models "Build the models from deezer/spleeter repository (requires conda)" OFF)
+option(spleeter_regenerate_models "Build the models from deezer/spleeter repository (requires conda)" ON)
 set(TENSORFLOW_CC_INSTALL_DIR "" CACHE STRING "The tensorflow_cc install directory")
 
 # External dependencies
