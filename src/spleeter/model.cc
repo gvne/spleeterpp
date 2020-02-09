@@ -24,13 +24,13 @@ std::vector<std::string> GetOutputNames(SeparationType type) {
   // $> saved_model_cli show --dir _deps/spleeter-build/exported/Xstems --all
   switch (type) {
   case TwoStems:
-    return {"strided_slice_13", "strided_slice_23"};
+    return {"strided_slice_11", "strided_slice_19"};
   case FourStems:
-    return {"strided_slice_13", "strided_slice_23", "strided_slice_33",
-            "strided_slice_43"};
+    return {"strided_slice_11", "strided_slice_19", "strided_slice_27",
+            "strided_slice_35"};
   case FiveStems:
-    return {"strided_slice_18", "strided_slice_38", "strided_slice_48",
-            "strided_slice_28", "strided_slice_58"};
+    return {"strided_slice_16", "strided_slice_32", "strided_slice_40",
+            "strided_slice_24", "strided_slice_48"};
   default:
     return {};
   }
