@@ -5,6 +5,27 @@
 #include "spleeter/model.h"
 #include "spleeter/registry.h"
 
+#include "rtff/filter.h"
+
+TEST(Spleeter, RTFF) {
+  rtff::Filter filter;
+  std::error_code err;
+  auto channel_number = 1;
+  filter.Init(channel_number, 2048, 1024, rtff::fft_window::Type::Hann, err);
+  ASSERT_FALSE(err);
+
+  filter.execute = [](std::vector<std::complex<float>*> data, uint32_t size) {
+    for (uint8_t channel_idx = 0; channel_idx < data.size(); channel_idx++) {
+      auto buffer = Eigen::Map<Eigen::VectorXcf>(data[channel_idx], size);
+      buffer = Eigen::VectorXcf::Random(size);
+    }
+  };
+  rtff::AudioBuffer buffer(filter.block_size(), filter.channel_count());
+  for (auto index = 0; index < 50; index++) {
+    filter.ProcessBlock(&buffer);
+  }
+}
+
 TEST(Spleeter, Spectrogram) {
   std::error_code err;
   

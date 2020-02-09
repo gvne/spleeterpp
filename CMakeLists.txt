@@ -19,6 +19,7 @@ include(add_eigen)
 include(add_protobuf)
 include(add_absl)
 include(add_tensorflow)
+include(add_rtff)
 # --
 
 include_directories(src)

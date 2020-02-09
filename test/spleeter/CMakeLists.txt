@@ -9,6 +9,8 @@ target_link_libraries(test_spleeter
   spleeter
   ${tensorflow_cc}
   wave
+  rtff
+  mkl
 )
 
 target_include_directories(test_spleeter PUBLIC ${tensorflow_include_dir})
