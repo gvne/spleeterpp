@@ -2,7 +2,7 @@ include(FetchContent)
 
 FetchContent_Declare(rtff
   GIT_REPOSITORY https://github.com/gvne/rtff.git
-  GIT_TAG        71e5789a27dad63a16593538e3a971089aa407da
+  GIT_TAG        acca2d26feb10453e28dc7b4cc369f4f98b4afa6
 )
 
 FetchContent_GetProperties(rtff)
