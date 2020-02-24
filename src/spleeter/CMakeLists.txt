@@ -20,6 +20,11 @@ target_include_directories(spleeter
     ${absl_include_dir}
 )
 
+target_compile_definitions(spleeter
+  PRIVATE
+    SPLEETER_=${spleeter_input_frame_count}
+)
+
 install(TARGETS spleeter
   RUNTIME DESTINATION bin
   LIBRARY DESTINATION lib

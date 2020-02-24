@@ -6,6 +6,7 @@
 #include "spleeter/registry.h"
 
 #include "rtff/filter.h"
+#include "tensorflow/cc/framework/ops.h"
 
 void Write(const spleeter::Waveform& data, const std::string& name) {
   std::vector<float> vec_data(data.size());
@@ -18,6 +19,7 @@ void Write(const spleeter::Waveform& data, const std::string& name) {
 }
 
 TEST(Spleeter, Spectrogram) {
+  Eigen::Tensor<float, 3> tensor(64, 1, 2);
   std::error_code err;
   
   // read a file
@@ -64,27 +66,27 @@ TEST(Spleeter, Spectrogram) {
       tensorflow::TensorShape({1, half_frame_length, 2}));
   
   filter.execute = [bundle, &tf_input, &output](std::vector<std::complex<float>*> data, uint32_t size) {
-    auto flatten = tf_input.flat<std::complex<float>>();
-    auto flatten_ptr = flatten.data();
-    std::copy(data[0], data[0] + size, flatten_ptr);
-    std::copy(data[1], data[1] + size, flatten_ptr + size);
+    auto eigen_input = tf_input.tensor<std::complex<float>, 3>();
+    for (auto frame_index = 0; frame_index < 1 ; frame_index++) {
+      for (auto bin_index = 0; bin_index < size; bin_index++) {
+        for (auto channel_index = 0; channel_index < data.size(); channel_index++) {
+          eigen_input(frame_index, bin_index, channel_index) = data[channel_index][bin_index];
+        }
+      }
+    }
     
     auto status = bundle->session->Run(
         {{"Placeholder", tf_input}}, GetOutputNames(separation_type), {}, &output);
     ASSERT_TRUE(status.ok());
     
-    // Apply the output mask
-    auto mask_size = output[0].dim_size(1);
-    Eigen::Map<Eigen::VectorXf> left_mask(output[0].flat<float>().data(), mask_size);
-    Eigen::Map<Eigen::VectorXf> right_mask(output[0].flat<float>().data() + mask_size, mask_size);
-
-    Eigen::Map<Eigen::VectorXcf> left_channel(data[0], mask_size);
-    Eigen::Map<Eigen::VectorXcf> right_channel(data[1], mask_size);
-    
-    left_channel.array() *= left_mask.array();
-    right_channel.array() *= right_mask.array();
-    
-    output.clear();
+    auto eigen_output = output[0].tensor<float, 3>();
+    for (auto frame_index = 0; frame_index < 1 ; frame_index++) {
+      for (auto bin_index = 0; bin_index < size; bin_index++) {
+        for (auto channel_index = 0; channel_index < data.size(); channel_index++) {
+          data[channel_index][bin_index] *= eigen_output(frame_index, bin_index, channel_index);
+        }
+      }
+    }
   };
   
   // Run each frames
