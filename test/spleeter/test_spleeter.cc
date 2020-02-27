@@ -112,7 +112,7 @@ TEST(Spleeter, Spectrogram) {
   // reduces the temporal information and will lower the quality
   const auto T = SPLEETER_INPUT_FRAME_COUNT;
   // number of frames to process at a time. Always <= T
-  const auto FrameLength = T;
+  const auto FrameLength = T;  // TODO: bug in changing this !
   // NOTE:
   // Every time we run a process, we will do it on SPLEETER_INPUT_FRAME_COUNT.
   // However, if we decide to process smaller frames, it will get more CPU
@@ -124,7 +124,7 @@ TEST(Spleeter, Spectrogram) {
   //
   // We also cross fade between processes to reduce the inconsistency between
   // independent processes
-  const auto OverlapLength = 0;
+  const auto OverlapLength = 0;  // TODO: bug when changing this !
   // ----------------------------------------------------------------------
   const auto FrameLatency = T - (T - FrameLength) / 2;
   const auto StepLength = FrameLength - OverlapLength;
