@@ -22,7 +22,7 @@ target_include_directories(spleeter
 
 target_compile_definitions(spleeter
   PRIVATE
-    SPLEETER_=${spleeter_input_frame_count}
+    SPLEETER_INPUT_FRAME_COUNT=${spleeter_input_frame_count}
 )
 
 install(TARGETS spleeter

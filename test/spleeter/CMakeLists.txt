@@ -20,5 +20,5 @@ target_compile_definitions(test_spleeter
     SPLEETER_MODELS="${spleeter_models_dir}"
     TEST_FILE="${test_audio_path}"
     OUTPUT_DIR="${CMAKE_CURRENT_BINARY_DIR}"
-    EIGEN_NO_DEBUG="ON"
+    SPLEETER_INPUT_FRAME_COUNT=${spleeter_input_frame_count}
 )
