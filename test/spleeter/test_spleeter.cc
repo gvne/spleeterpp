@@ -9,6 +9,10 @@
 
 #include "rtff/filter.h"
 #include "tensorflow/cc/framework/ops.h"
+//#include "tensorflow/cc/ops/array_ops.h"
+#include "tensorflow/core/framework/tensor_util.h"
+
+
 
 void Write(const spleeter::Waveform& data, const std::string& name) {
   std::vector<float> vec_data(data.size());
@@ -21,14 +25,26 @@ void Write(const spleeter::Waveform& data, const std::string& name) {
 }
 
 // TODO: find a better way
-void SetTensorFrame(std::vector<std::complex<float>*> data,
-                    uint32_t size,
-                    tensorflow::Tensor& tensor,
-                    uint16_t frame_index) {
-  auto eigen_input = tensor.tensor<std::complex<float>, 3>();
-  for (auto bin_index = 0; bin_index < size; bin_index++) {
+template <typename T>
+void SetTensorFrame(tensorflow::Tensor* tensor, uint32_t frame_index, std::vector<T*> data) {
+  auto bin_size = tensor->shape().dim_size(1);
+  
+  auto eigen_input = tensor->tensor<T, 3>();
+  for (auto bin_index = 0; bin_index < bin_size; bin_index++) {
     for (auto channel_index = 0; channel_index < data.size(); channel_index++) {
       eigen_input(frame_index, bin_index, channel_index) = data[channel_index][bin_index];
+    }
+  }
+}
+
+template <typename T>
+void GetTensorFrame(std::vector<T*>* data, uint32_t frame_index, const tensorflow::Tensor& tensor) {
+  auto bin_size = tensor.shape().dim_size(1);
+  
+  auto eigen_input = tensor.tensor<T, 3>();
+  for (auto bin_index = 0; bin_index < bin_size; bin_index++) {
+    for (auto channel_index = 0; channel_index < data->size(); channel_index++) {
+      (*data)[channel_index][bin_index] = eigen_input(frame_index, bin_index, channel_index);
     }
   }
 }
@@ -47,23 +63,23 @@ void MoveTensorFrame(tensorflow::Tensor& tensor,
   }
 }
 
-template <typename T>
-void CopyTensorBlock(const tensorflow::Tensor& tensor,
-                     uint16_t first_frame,
-                     uint16_t frame_count,
-                     std::vector<Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic>>* output) {
-  auto frame_size = (*output)[0].rows();
-  auto eigen_tensor = tensor.tensor<T, 3>();
-  
-  for (auto frame_index = first_frame; frame_index < first_frame + frame_count; frame_index++) {
-    for (auto bin_index = 0; bin_index < frame_size; bin_index++) {
-      for (auto channel_index = 0; channel_index < output->size(); channel_index++) {
-        (*output)[channel_index](bin_index, frame_index - first_frame) = \
-          eigen_tensor(frame_index, bin_index, channel_index);
-      }
-    }
-  }
-}
+//template <typename T>
+//void CopyTensorBlock(const tensorflow::Tensor& tensor,
+//                     uint16_t first_frame,
+//                     uint16_t frame_count,
+//                     std::vector<Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic>>* output) {
+//  auto frame_size = (*output)[0].rows();
+//  auto eigen_tensor = tensor.tensor<T, 3>();
+//
+//  for (auto frame_index = first_frame; frame_index < first_frame + frame_count; frame_index++) {
+//    for (auto bin_index = 0; bin_index < frame_size; bin_index++) {
+//      for (auto channel_index = 0; channel_index < output->size(); channel_index++) {
+//        (*output)[channel_index](bin_index, frame_index - first_frame) = \
+//          eigen_tensor(frame_index, bin_index, channel_index);
+//      }
+//    }
+//  }
+//}
 
 TEST(Spleeter, Spectrogram) {
   Eigen::Tensor<float, 3> tensor(64, 1, 2);
@@ -93,10 +109,6 @@ TEST(Spleeter, Spectrogram) {
   filter.set_block_size(block_size);
   rtff::AudioBuffer buffer(block_size, channel_number);
 
-//  const auto frame_count = sample_count / frame_step;
-//  Eigen::MatrixXcf left = Eigen::MatrixXcf::Random(half_frame_length, frame_count);
-//  Eigen::MatrixXcf right = Eigen::MatrixXcf::Random(half_frame_length, frame_count);
-
   const auto separation_type = spleeter::TwoStems;
 
   spleeter::Initialize(std::string(SPLEETER_MODELS), separation_type, err);
@@ -112,7 +124,7 @@ TEST(Spleeter, Spectrogram) {
   // reduces the temporal information and will lower the quality
   const auto T = SPLEETER_INPUT_FRAME_COUNT;
   // number of frames to process at a time. Always <= T
-  const auto FrameLength = T;  // TODO: bug in changing this !
+  const auto FrameLength = T;
   // NOTE:
   // Every time we run a process, we will do it on SPLEETER_INPUT_FRAME_COUNT.
   // However, if we decide to process smaller frames, it will get more CPU
@@ -124,76 +136,87 @@ TEST(Spleeter, Spectrogram) {
   //
   // We also cross fade between processes to reduce the inconsistency between
   // independent processes
-  const auto OverlapLength = 0;  // TODO: bug when changing this !
+  const auto OverlapLength = 0;
   // ----------------------------------------------------------------------
-  const auto FrameLatency = T - (T - FrameLength) / 2;
-  const auto StepLength = FrameLength - OverlapLength;
+  const auto FrameLatency = T - ((T - FrameLength) / 2);
   
+  // Initialize the buffers
+  tensorflow::TensorShape shape {T + OverlapLength, half_frame_length, 2};
+  tensorflow::Tensor network_input(tensorflow::DT_COMPLEX64, shape);
+  tensorflow::Tensor previous_network_input(tensorflow::DT_COMPLEX64, shape);
+  tensorflow::Tensor network_output(tensorflow::DT_FLOAT, shape);
+  std::vector<tensorflow::Tensor> network_result;
   
-
-  // Initialize the input
-  std::vector<tensorflow::Tensor> output;
-  tensorflow::Tensor input(
-      tensorflow::DT_COMPLEX64,
-      tensorflow::TensorShape({T + OverlapLength, half_frame_length, 2}));
+  // -- Organize a mask data buffer for a single frame
+  std::vector<std::vector<float>> mask_vec_data;
+  std::vector<std::vector<float>> previous_mask_vec_data;
+  std::vector<float*> mask_data;
+  std::vector<float*> previous_mask_data;
+  for (auto c = 0; c < filter.channel_count(); c++) {
+    mask_vec_data.push_back(std::vector<float>(half_frame_length, 0));
+    mask_data.push_back(mask_vec_data[c].data());
+    previous_mask_vec_data.push_back(std::vector<float>(half_frame_length, 0));
+    previous_mask_data.push_back(previous_mask_vec_data[c].data());
+  }
+  // --
   
-  // We need to keep the original input and output for future process
-  std::vector<Eigen::MatrixXcf> input_frames = {
-    Eigen::MatrixXcf::Zero(half_frame_length, FrameLength),
-    Eigen::MatrixXcf::Zero(half_frame_length, FrameLength)
-  };
-  std::vector<Eigen::MatrixXf> output_frames = {
-    Eigen::MatrixXf::Zero(half_frame_length, FrameLength),
-    Eigen::MatrixXf::Zero(half_frame_length, FrameLength)
-  };
-
-  uint16_t frame_index = T - FrameLatency;
-  uint16_t input_frame_index = 0;
-  filter.execute = [T, FrameLatency, StepLength, OverlapLength, bundle, &input, &output, &frame_index, &input_frames, &output_frames, &input_frame_index]
+  uint32_t frame_index = 0;
+  filter.execute = [bundle,
+                    &frame_index,
+                    &network_input,
+                    &network_result,
+                    &network_output,
+                    &mask_data,
+                    &previous_mask_data,
+                    &previous_network_input]
     (std::vector<std::complex<float>*> data, uint32_t size) {
       // Set the frame into the input
-      SetTensorFrame(data, size, input, frame_index);
+      auto network_input_frame_index = frame_index + (T - FrameLatency);
+      SetTensorFrame(&network_input, network_input_frame_index, data);
       
-      if (frame_index == T - 1) {  // everything is filled up !
-        // run
+      // Compute the output
+      // TODO: deal with overlap
+      GetTensorFrame(&data, network_input_frame_index, previous_network_input);
+      GetTensorFrame(&mask_data, network_input_frame_index, network_output);
+      for (auto c = 0; c < data.size(); c++) {
+        Eigen::Map<Eigen::VectorXcf>(data[c], size).array() *= Eigen::Map<Eigen::VectorXf>(mask_data[c], size).array();
+      }
+      
+      if (frame_index == FrameLength - 1) {
         auto status = bundle->session->Run(
-            {{"Placeholder", input}}, GetOutputNames(separation_type), {}, &output);
+            {{"Placeholder", network_input}}, GetOutputNames(separation_type), {}, &network_result);
         ASSERT_TRUE(status.ok());
+        // Overlap --> Update the result by adding the previous output frame and devide by 2
+        // TODO: use a cross fade instead of a mean to handle overlap
+        for (auto overlap_frame_index = 0; overlap_frame_index < OverlapLength; overlap_frame_index++) {
+          auto network_output_index = overlap_frame_index + (T - FrameLatency);
+          auto previous_network_output_index = network_output_index + FrameLength;
+
+          GetTensorFrame(&previous_mask_data, previous_network_output_index, network_output);
+          GetTensorFrame(&mask_data, network_output_index, network_result[0]);
+          for (auto c = 0; c < data.size(); c++) {
+            Eigen::Map<Eigen::VectorXf> mask_frame(mask_data[c], size);
+            mask_frame += Eigen::Map<Eigen::VectorXf>(previous_mask_data[c], size);
+            mask_frame /= 2;
+          }
+          SetTensorFrame(&(network_result[0]), network_output_index, mask_data);
+        }
+        // TODO: this is most likely to allocate memory. Redevelop the deep copy to do a simple memcpy
+        network_output = tensorflow::tensor::DeepCopy(network_result[0]);
+        previous_network_input = tensorflow::tensor::DeepCopy(network_input);
         
-        // copy the inputs
-        CopyTensorBlock(input, T - FrameLatency, FrameLength, &input_frames);
-        
-        // and the outputs mask
-        CopyTensorBlock(output[0], T - FrameLatency, FrameLength, &output_frames);
-        
-        // shift the input data of StepLength
+        // shift the input data of FrameLength
         for (auto source_index = T - FrameLatency; source_index < T; source_index++) {
-          auto destination_index = source_index - StepLength;
+          auto destination_index = source_index - FrameLength;
           if (destination_index < 0) {
             continue;
           }
           // Copy frame source_index into destination_index
-          MoveTensorFrame(input, source_index, destination_index, size, data.size());
+          MoveTensorFrame(network_input, source_index, destination_index, size, data.size());
         }
-        // start to fill again
-        frame_index = T - StepLength;
+        frame_index = 0;
       } else {
         frame_index += 1;
-      }
-      
-      // convert the output !
-      // TODO: deal with overlap !
-      for (auto channel_index = 0; channel_index < data.size(); channel_index++) {
-        Eigen::Map<Eigen::VectorXcf> output(data[channel_index], size);
-        auto fft_frame = input_frames[channel_index].col(input_frame_index);
-        auto mask_frame = output_frames[channel_index].col(input_frame_index);
-        
-        output = fft_frame.array() * mask_frame.array();
-      }
-      
-      input_frame_index += 1;
-      if (input_frame_index >= FrameLength) {
-        input_frame_index = 0;
       }
   };
 
@@ -202,15 +225,12 @@ TEST(Spleeter, Spectrogram) {
   for (uint32_t sample_idx = 0;
      sample_idx < data.size() - multichannel_buffer_size;
      sample_idx += multichannel_buffer_size) {
-//    std::cout << sample_idx << " " << data.size() << std::endl;
-    // process the input buffer
+    
     float* sample_ptr = data.data() + sample_idx;
-
     buffer.fromInterleaved(sample_ptr);
     filter.ProcessBlock(&buffer);
     buffer.toInterleaved(sample_ptr);
   }
-
 
   wave::File result_file;
   result_file.Open(std::string(OUTPUT_DIR) + "/result.wav", wave::kOut);
