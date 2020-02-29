@@ -9,10 +9,7 @@
 
 #include "rtff/filter.h"
 #include "tensorflow/cc/framework/ops.h"
-//#include "tensorflow/cc/ops/array_ops.h"
 #include "tensorflow/core/framework/tensor_util.h"
-
-
 
 void Write(const spleeter::Waveform& data, const std::string& name) {
   std::vector<float> vec_data(data.size());
@@ -24,7 +21,11 @@ void Write(const spleeter::Waveform& data, const std::string& name) {
   file.Write(vec_data);
 }
 
-// TODO: find a better way
+/// Copy an fft frame into to tensorflow tensor
+/// \tparam The type of data the tensor holds
+/// \param tensor
+/// \param frame_index the destination frame index in the tensor
+/// \param data the fft frame data
 template <typename T>
 void SetTensorFrame(tensorflow::Tensor* tensor, uint32_t frame_index, std::vector<T*> data) {
   auto bin_size = tensor->shape().dim_size(1);
@@ -37,6 +38,11 @@ void SetTensorFrame(tensorflow::Tensor* tensor, uint32_t frame_index, std::vecto
   }
 }
 
+/// Copy a frame into a vector of data pointers
+/// \tparam The type of data the tensor holds
+/// \param data the output fft frame data
+/// \param frame_index the source frame index in the tensor
+/// \param tensor
 template <typename T>
 void GetTensorFrame(std::vector<T*>* data, uint32_t frame_index, const tensorflow::Tensor& tensor) {
   auto bin_size = tensor.shape().dim_size(1);
@@ -49,11 +55,16 @@ void GetTensorFrame(std::vector<T*>* data, uint32_t frame_index, const tensorflo
   }
 }
 
+/// Move a tensor frame
+/// \param tensor
+/// \param source_index the source frame index
+/// \param destination_index the destination frame index
 void MoveTensorFrame(tensorflow::Tensor& tensor,
                      uint16_t source_index,
-                     uint16_t destination_index,
-                     uint32_t frame_size,
-                     uint8_t channel_count) {
+                     uint16_t destination_index) {
+  auto frame_size = tensor.shape().dim_size(1);
+  auto channel_count = tensor.shape().dim_size(2);
+
   auto eigen_input = tensor.tensor<std::complex<float>, 3>();
   for (auto bin_index = 0; bin_index < frame_size; bin_index++) {
     for (auto channel_index = 0; channel_index < channel_count; channel_index++) {
@@ -62,24 +73,6 @@ void MoveTensorFrame(tensorflow::Tensor& tensor,
     }
   }
 }
-
-//template <typename T>
-//void CopyTensorBlock(const tensorflow::Tensor& tensor,
-//                     uint16_t first_frame,
-//                     uint16_t frame_count,
-//                     std::vector<Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic>>* output) {
-//  auto frame_size = (*output)[0].rows();
-//  auto eigen_tensor = tensor.tensor<T, 3>();
-//
-//  for (auto frame_index = first_frame; frame_index < first_frame + frame_count; frame_index++) {
-//    for (auto bin_index = 0; bin_index < frame_size; bin_index++) {
-//      for (auto channel_index = 0; channel_index < output->size(); channel_index++) {
-//        (*output)[channel_index](bin_index, frame_index - first_frame) = \
-//          eigen_tensor(frame_index, bin_index, channel_index);
-//      }
-//    }
-//  }
-//}
 
 TEST(Spleeter, Spectrogram) {
   Eigen::Tensor<float, 3> tensor(64, 1, 2);
@@ -92,11 +85,9 @@ TEST(Spleeter, Spectrogram) {
   file.Open(test_file, wave::kIn);
   auto data = file.Read(err);
   ASSERT_FALSE(err);
-
-  // 60sec 44.1KHz
-//  const auto sample_count = 44100 * 60;
-  const auto channel_number = 2;
+  
   // stft parameters
+  const auto channel_number = 2;
   const auto frame_length = 4096;
   const auto half_frame_length = frame_length / 2 + 1;
   const auto frame_step = 1024;
@@ -175,7 +166,6 @@ TEST(Spleeter, Spectrogram) {
       SetTensorFrame(&network_input, network_input_frame_index, data);
       
       // Compute the output
-      // TODO: deal with overlap
       GetTensorFrame(&data, network_input_frame_index, previous_network_input);
       GetTensorFrame(&mask_data, network_input_frame_index, network_output);
       for (auto c = 0; c < data.size(); c++) {
@@ -211,8 +201,7 @@ TEST(Spleeter, Spectrogram) {
           if (destination_index < 0) {
             continue;
           }
-          // Copy frame source_index into destination_index
-          MoveTensorFrame(network_input, source_index, destination_index, size, data.size());
+          MoveTensorFrame(network_input, source_index, destination_index);
         }
         frame_index = 0;
       } else {
