@@ -5,6 +5,7 @@ add_executable(test_olspleeter
 target_link_libraries(test_olspleeter
   gtest
   gtest_main
+  tensor
   spleeter
   ${tensorflow_cc}
   wave

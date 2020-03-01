@@ -6,6 +6,7 @@
 
 #include "spleeter/model.h"
 #include "spleeter/registry.h"
+#include "tensor/copy.h"
 
 #include "rtff/filter.h"
 #include "tensorflow/cc/framework/ops.h"
@@ -21,61 +22,7 @@ void Write(const spleeter::Waveform& data, const std::string& name) {
   file.Write(vec_data);
 }
 
-/// Copy an fft frame into to tensorflow tensor
-/// \tparam The type of data the tensor holds
-/// \param tensor
-/// \param frame_index the destination frame index in the tensor
-/// \param data the fft frame data
-template <typename T>
-void SetTensorFrame(tensorflow::Tensor* tensor, uint32_t frame_index, std::vector<T*> data) {
-  auto bin_size = tensor->shape().dim_size(1);
-  
-  auto eigen_input = tensor->tensor<T, 3>();
-  for (auto bin_index = 0; bin_index < bin_size; bin_index++) {
-    for (auto channel_index = 0; channel_index < data.size(); channel_index++) {
-      eigen_input(frame_index, bin_index, channel_index) = data[channel_index][bin_index];
-    }
-  }
-}
-
-/// Copy a frame into a vector of data pointers
-/// \tparam The type of data the tensor holds
-/// \param data the output fft frame data
-/// \param frame_index the source frame index in the tensor
-/// \param tensor
-template <typename T>
-void GetTensorFrame(std::vector<T*>* data, uint32_t frame_index, const tensorflow::Tensor& tensor) {
-  auto bin_size = tensor.shape().dim_size(1);
-  
-  auto eigen_input = tensor.tensor<T, 3>();
-  for (auto bin_index = 0; bin_index < bin_size; bin_index++) {
-    for (auto channel_index = 0; channel_index < data->size(); channel_index++) {
-      (*data)[channel_index][bin_index] = eigen_input(frame_index, bin_index, channel_index);
-    }
-  }
-}
-
-/// Move a tensor frame
-/// \param tensor
-/// \param source_index the source frame index
-/// \param destination_index the destination frame index
-void MoveTensorFrame(tensorflow::Tensor& tensor,
-                     uint16_t source_index,
-                     uint16_t destination_index) {
-  auto frame_size = tensor.shape().dim_size(1);
-  auto channel_count = tensor.shape().dim_size(2);
-
-  auto eigen_input = tensor.tensor<std::complex<float>, 3>();
-  for (auto bin_index = 0; bin_index < frame_size; bin_index++) {
-    for (auto channel_index = 0; channel_index < channel_count; channel_index++) {
-      eigen_input(destination_index, bin_index, channel_index) = \
-        eigen_input(source_index, bin_index, channel_index);
-    }
-  }
-}
-
-TEST(Spleeter, Spectrogram) {
-  Eigen::Tensor<float, 3> tensor(64, 1, 2);
+TEST(OLSpleeter, Spectrogram) {
   std::error_code err;
 
   // read a file
@@ -199,16 +146,16 @@ TEST(Spleeter, Spectrogram) {
       // Set the frame into the input
       const auto stem_count = previous_network_result.size();
       auto network_input_frame_index = frame_index + (T - FrameLatency);
-      SetTensorFrame(&network_input, network_input_frame_index, data);
+      tensor::SetFrame(&network_input, network_input_frame_index, data);
       // --------------------------------
       
       // --------------------------------
       // Compute the output
       // -- get the right frame
-      GetTensorFrame(&data, network_input_frame_index, previous_network_input);
+      tensor::GetFrame(&data, network_input_frame_index, previous_network_input);
       // -- Get each stem mask data
       for (auto stem_index = 0; stem_index < stem_count; stem_index++) {
-        GetTensorFrame(&(masks_data[stem_index]), network_input_frame_index, previous_network_result[stem_index]);
+        tensor::GetFrame(&(masks_data[stem_index]), network_input_frame_index, previous_network_result[stem_index]);
       }
       // -- Apply a mask that is the sum of each masks * volume
       for (auto channel_index = 0; channel_index < data.size(); channel_index++) {
@@ -255,14 +202,14 @@ TEST(Spleeter, Spectrogram) {
             auto network_output_index = overlap_frame_index + (T - FrameLatency);
             auto previous_network_output_index = network_output_index + FrameLength;
 
-            GetTensorFrame(&previous_mask_data, previous_network_output_index, previous_network_result[stem_index]);
-            GetTensorFrame(&mask_data, network_output_index, network_result[stem_index]);
+            tensor::GetFrame(&previous_mask_data, previous_network_output_index, previous_network_result[stem_index]);
+            tensor::GetFrame(&mask_data, network_output_index, network_result[stem_index]);
             for (auto c = 0; c < data.size(); c++) {
               Eigen::Map<Eigen::VectorXf> mask_frame(mask_data[c], size);
               mask_frame += Eigen::Map<Eigen::VectorXf>(previous_mask_data[c], size);
               mask_frame /= 2;
             }
-            SetTensorFrame(&(network_result[stem_index]), network_output_index, mask_data);
+            tensor::SetFrame(&(network_result[stem_index]), network_output_index, mask_data);
           }
         }
         // TODO: this is most likely to allocate memory. Redevelop the deep copy to do a simple memcpy
@@ -278,7 +225,7 @@ TEST(Spleeter, Spectrogram) {
           if (destination_index < 0) {
             continue;
           }
-          MoveTensorFrame(network_input, source_index, destination_index);
+          tensor::MoveFrame(network_input, source_index, destination_index);
         }
         frame_index = 0;
       } else {
