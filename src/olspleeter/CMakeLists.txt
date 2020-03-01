@@ -1,10 +1,13 @@
 add_library(olspleeter
-
+  filter.cc
+  filter.h
 )
 
 target_link_libraries(olspleeter
   ${tensorflow_cc}
   Eigen3::Eigen
+  rtff
+  mkl
 )
 
 target_include_directories(olspleeter

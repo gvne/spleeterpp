@@ -1,5 +1,5 @@
 add_library(tensor
-  copy.cpp
+  copy.cc
   copy.h
 )
 

@@ -7,10 +7,9 @@ target_link_libraries(test_olspleeter
   gtest_main
   tensor
   spleeter
+  olspleeter
   ${tensorflow_cc}
   wave
-  rtff
-  mkl
 )
 
 target_include_directories(test_olspleeter
