@@ -1,9 +1,10 @@
-#include "olspleeter/filter.h"
+#include "spleeter/filter.h"
 
 #include "tensorflow/core/framework/tensor_util.h"
 
-#include "tensor/copy.h"
+#include "spleeter/tensor/copy.h"
 #include "spleeter/model.h"
+#include "spleeter/registry.h"
 
 namespace spleeter {
 
@@ -34,7 +35,7 @@ void Filter::Init(std::error_code &err) {
   rtff::AbstractFilter::Init(channel_number, frame_length,
                              frame_length - frame_step,
                              rtff::fft_window::Type::Hann, err);
-  
+
   m_bundle = Registry::instance().Get(m_type);
   if (!m_bundle) {
     err = std::make_error_code(std::errc::inappropriate_io_control_operation);
@@ -75,17 +76,20 @@ void Filter::PrepareToPlay() {
   const auto stem_count = m_volumes.size();
   // Initialize the buffers
   // -- inputs
-  tensorflow::TensorShape shape {ProcessLength() + OverlapLength(), half_frame_length, 2};
+  tensorflow::TensorShape shape{ProcessLength() + OverlapLength(),
+                                half_frame_length, 2};
   m_network_input = tensorflow::Tensor(tensorflow::DT_COMPLEX64, shape);
-  m_previous_network_input = tensorflow::Tensor(tensorflow::DT_COMPLEX64, shape);
+  m_previous_network_input =
+      tensorflow::Tensor(tensorflow::DT_COMPLEX64, shape);
 
   // -- outputs
   m_network_result.clear();
   m_previous_network_result.clear();
   for (auto stem_index = 0; stem_index < stem_count; stem_index++) {
-    m_previous_network_result.push_back(tensorflow::Tensor(tensorflow::DT_FLOAT, shape));
+    m_previous_network_result.push_back(
+        tensorflow::Tensor(tensorflow::DT_FLOAT, shape));
   }
-  
+
   // -- We also need pre-allocated data to retreive a single frame
   // => For overlap
   m_mask_vec_data.clear();
@@ -97,7 +101,8 @@ void Filter::PrepareToPlay() {
   for (auto c = 0; c < channel_count(); c++) {
     m_mask_vec_data.emplace_back(std::vector<float>(half_frame_length, 0));
     m_mask_data.push_back(m_mask_vec_data[c].data());
-    m_previous_mask_vec_data.emplace_back(std::vector<float>(half_frame_length, 0));
+    m_previous_mask_vec_data.emplace_back(
+        std::vector<float>(half_frame_length, 0));
     m_previous_mask_data.push_back(m_previous_mask_vec_data[c].data());
     m_mask_sum_vec_data.emplace_back(std::vector<float>(half_frame_length, 0));
     m_mask_sum_data.push_back(m_mask_sum_vec_data[c].data());
@@ -107,25 +112,27 @@ void Filter::PrepareToPlay() {
   m_masks_data.clear();
   for (auto stem_index = 0; stem_index < stem_count; stem_index++) {
     std::vector<std::vector<float>> single_mask_vec_data;
-    std::vector<float*> single_mask_data;
+    std::vector<float *> single_mask_data;
     for (auto c = 0; c < channel_count(); c++) {
-      single_mask_vec_data.emplace_back(std::vector<float>(half_frame_length, 0));
+      single_mask_vec_data.emplace_back(
+          std::vector<float>(half_frame_length, 0));
       single_mask_data.push_back(single_mask_vec_data[c].data());
     }
     m_masks_vec_data.emplace_back(std::move(single_mask_vec_data));
     m_masks_data.emplace_back(std::move(single_mask_data));
   }
-  
+
   // Also reset the current frame index
   m_frame_index = 0;
 }
 
-void Filter::ProcessTransformedBlock(std::vector<std::complex<float>*> data,
+void Filter::ProcessTransformedBlock(std::vector<std::complex<float> *> data,
                                      uint32_t size) {
   // --------------------------------
   // Set the frame into the input
   const auto stem_count = m_previous_network_result.size();
-  auto network_input_frame_index = m_frame_index + (ProcessLength() - SpleeterFrameLatency());
+  auto network_input_frame_index =
+      m_frame_index + (ProcessLength() - SpleeterFrameLatency());
   tensor::SetFrame(&m_network_input, network_input_frame_index, data);
   // --------------------------------
 
@@ -135,7 +142,8 @@ void Filter::ProcessTransformedBlock(std::vector<std::complex<float>*> data,
   tensor::GetFrame(&data, network_input_frame_index, m_previous_network_input);
   // -- Get each stem mask data
   for (auto stem_index = 0; stem_index < stem_count; stem_index++) {
-    tensor::GetFrame(&(m_masks_data[stem_index]), network_input_frame_index, m_previous_network_result[stem_index]);
+    tensor::GetFrame(&(m_masks_data[stem_index]), network_input_frame_index,
+                     m_previous_network_result[stem_index]);
   }
   // -- Apply a mask that is the sum of each masks * volume
   for (auto channel_index = 0; channel_index < data.size(); channel_index++) {
@@ -143,14 +151,18 @@ void Filter::ProcessTransformedBlock(std::vector<std::complex<float>*> data,
     // TODO: this does not work and I don't get why... FIXME !!
     if (ForceConservativity()) {
       // -- compute the mask sum (to make it conservative if asked)
-      Eigen::Map<Eigen::VectorXf> mask_sum(m_mask_sum_data[channel_index], size);
+      Eigen::Map<Eigen::VectorXf> mask_sum(m_mask_sum_data[channel_index],
+                                           size);
       mask_sum.array() *= 0.0;
       for (auto stem_index = 0; stem_index < stem_count; stem_index++) {
-        mask_sum += Eigen::Map<Eigen::VectorXf>(m_masks_data[stem_index][channel_index], size);
+        mask_sum += Eigen::Map<Eigen::VectorXf>(
+            m_masks_data[stem_index][channel_index], size);
       }
       // devide each mask by the mask sum
       for (auto stem_index = 0; stem_index < stem_count; stem_index++) {
-        Eigen::Map<Eigen::VectorXf>(m_masks_data[stem_index][channel_index], size).array() /= mask_sum.array();
+        Eigen::Map<Eigen::VectorXf>(m_masks_data[stem_index][channel_index],
+                                    size)
+            .array() /= mask_sum.array();
       }
     }
 
@@ -158,7 +170,8 @@ void Filter::ProcessTransformedBlock(std::vector<std::complex<float>*> data,
     Eigen::Map<Eigen::VectorXf> result_mask(m_mask_data[channel_index], size);
     result_mask.array() *= 0.0;
     for (auto stem_index = 0; stem_index < stem_count; stem_index++) {
-      Eigen::Map<Eigen::VectorXf> stem_mask(m_masks_data[stem_index][channel_index], size);
+      Eigen::Map<Eigen::VectorXf> stem_mask(
+          m_masks_data[stem_index][channel_index], size);
       result_mask.array() += stem_mask.array() * m_volumes[stem_index];
     }
 
@@ -168,41 +181,52 @@ void Filter::ProcessTransformedBlock(std::vector<std::complex<float>*> data,
   }
   // --------------------------------
 
-
   if (m_frame_index == FrameLength() - 1) {
     // --------------------------------
     // Run the extraction !
-    auto status = m_bundle->session->Run(
-        {{"Placeholder", m_network_input}}, GetOutputNames(m_type), {}, &m_network_result);
+    auto status =
+        m_bundle->session->Run({{"Placeholder", m_network_input}},
+                               GetOutputNames(m_type), {}, &m_network_result);
     // TODO: make sure status is checked !
-//    ASSERT_TRUE(status.ok());
-    
-    // Overlap --> Update the result by adding the previous output frame and devide by 2
+    //    ASSERT_TRUE(status.ok());
+
+    // Overlap --> Update the result by adding the previous output frame and
+    // devide by 2
     // TODO: use a cross fade instead of a mean to handle overlap
     for (auto stem_index = 0; stem_index < stem_count; stem_index++) {
-      for (auto overlap_frame_index = 0; overlap_frame_index < OverlapLength(); overlap_frame_index++) {
-        auto network_output_index = overlap_frame_index + (ProcessLength() - SpleeterFrameLatency());
-        auto previous_network_output_index = network_output_index + FrameLength();
+      for (auto overlap_frame_index = 0; overlap_frame_index < OverlapLength();
+           overlap_frame_index++) {
+        auto network_output_index =
+            overlap_frame_index + (ProcessLength() - SpleeterFrameLatency());
+        auto previous_network_output_index =
+            network_output_index + FrameLength();
 
-        tensor::GetFrame(&m_previous_mask_data, previous_network_output_index, m_previous_network_result[stem_index]);
-        tensor::GetFrame(&m_mask_data, network_output_index, m_network_result[stem_index]);
+        tensor::GetFrame(&m_previous_mask_data, previous_network_output_index,
+                         m_previous_network_result[stem_index]);
+        tensor::GetFrame(&m_mask_data, network_output_index,
+                         m_network_result[stem_index]);
         for (auto c = 0; c < data.size(); c++) {
           Eigen::Map<Eigen::VectorXf> mask_frame(m_mask_data[c], size);
-          mask_frame += Eigen::Map<Eigen::VectorXf>(m_previous_mask_data[c], size);
+          mask_frame +=
+              Eigen::Map<Eigen::VectorXf>(m_previous_mask_data[c], size);
           mask_frame /= 2;
         }
-        tensor::SetFrame(&(m_network_result[stem_index]), network_output_index, m_mask_data);
+        tensor::SetFrame(&(m_network_result[stem_index]), network_output_index,
+                         m_mask_data);
       }
     }
-    // TODO: this is most likely to allocate memory. Redevelop the deep copy to do a simple memcpy
+    // TODO: this is most likely to allocate memory. Redevelop the deep copy to
+    // do a simple memcpy
     for (auto stem_index = 0; stem_index < stem_count; stem_index++) {
-      m_previous_network_result[stem_index] = tensorflow::tensor::DeepCopy(m_network_result[stem_index]);
+      m_previous_network_result[stem_index] =
+          tensorflow::tensor::DeepCopy(m_network_result[stem_index]);
     }
     m_previous_network_input = tensorflow::tensor::DeepCopy(m_network_input);
     // --------------------------------
 
     // shift the input data of FrameLength
-    for (int source_index = ProcessLength() - SpleeterFrameLatency(); source_index < ProcessLength(); source_index++) {
+    for (int source_index = ProcessLength() - SpleeterFrameLatency();
+         source_index < ProcessLength(); source_index++) {
       auto destination_index = source_index - FrameLength();
       if (destination_index < 0) {
         continue;

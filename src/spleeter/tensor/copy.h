@@ -1,8 +1,9 @@
-#ifndef SPLEETER_TENSOR_UTILS_H_
-#define SPLEETER_TENSOR_UTILS_H_
+#ifndef SPLEETER_TENSOR_COPY_H_
+#define SPLEETER_TENSOR_COPY_H_
 
 #include "tensorflow/cc/framework/ops.h"
 
+namespace spleeter {
 namespace tensor {
 
 /// Copy an fft frame into to tensorflow tensor
@@ -51,6 +52,7 @@ void GetFrame(std::vector<T *> *data, uint32_t frame_index,
 void MoveFrame(tensorflow::Tensor &tensor, uint16_t source_index,
                uint16_t destination_index);
 
-} // namespace tensor
+}  // namespace tensor
+}  // namespace spleeter
 
-#endif // SPLEETER_TENSOR_UTILS_H_
+#endif // SPLEETER_TENSOR_COPY_H_

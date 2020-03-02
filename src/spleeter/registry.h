@@ -6,10 +6,10 @@
 
 namespace spleeter {
 
+using BundlePtr = std::shared_ptr<tensorflow::SavedModelBundle>;
+
 class Registry {
  public:
-  using BundlePtr = std::shared_ptr<tensorflow::SavedModelBundle>;
-  
   static Registry& instance();
   void Register(BundlePtr bundle, SeparationType type);
   BundlePtr Get(SeparationType type);

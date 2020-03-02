@@ -1,2 +1,1 @@
-# add_subdirectory(spleeter)
-add_subdirectory(olspleeter)
+add_subdirectory(spleeter)

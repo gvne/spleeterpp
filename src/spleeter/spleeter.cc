@@ -15,35 +15,4 @@ void Initialize(const std::string &path_to_models,
   }
 }
 
-void Split(const Waveform &input, Waveform *vocals, Waveform *accompaniment,
-           std::error_code &err) {
-  std::vector<tensorflow::Tensor> tf_output;
-  Run(input, TwoStems, &tf_output, err);
-  if (err) {
-    return;
-  }
-  SetOutput(tf_output, input.cols(), {vocals, accompaniment});
-}
-
-void Split(const Waveform &input, Waveform *vocals, Waveform *drums,
-           Waveform *bass, Waveform *other, std::error_code &err) {
-  std::vector<tensorflow::Tensor> tf_output;
-  Run(input, FourStems, &tf_output, err);
-  if (err) {
-    return;
-  }
-  SetOutput(tf_output, input.cols(), {vocals, drums, bass, other});
-}
-
-void Split(const Waveform &input, Waveform *vocals, Waveform *drums,
-           Waveform *bass, Waveform *piano, Waveform *other,
-           std::error_code &err) {
-  std::vector<tensorflow::Tensor> tf_output;
-  Run(input, FiveStems, &tf_output, err);
-  if (err) {
-    return;
-  }
-  SetOutput(tf_output, input.cols(), {vocals, drums, bass, piano, other});
-}
-
 } // namespace spleeter

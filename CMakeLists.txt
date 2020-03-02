@@ -8,8 +8,6 @@ option(spleeter_enable_tests "Enable unit tests" ON)
 option(spleeter_regenerate_models "Build the models from deezer/spleeter repository (requires conda)" ON)
 set(TENSORFLOW_CC_INSTALL_DIR "" CACHE STRING "The tensorflow_cc install directory")
 # See https://github.com/deezer/spleeter/wiki/3.-Models#audio-parameters
-# This parameter represents most of the system latency. However, reducing that
-# parameter also reduces the quality
 set(spleeter_input_frame_count 64 CACHE STRING "Time length of the input spectrogram segment expressed in short time Fourier transform frames")
 
 set(allowed_frame_count "64;128;256;512")

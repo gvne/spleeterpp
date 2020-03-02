@@ -1,18 +1,21 @@
-#ifndef SPLEETER_OLSPLEETER_FILTER_H_
-#define SPLEETER_OLSPLEETER_FILTER_H_
+#ifndef SPLEETER_FILTER_H_
+#define SPLEETER_FILTER_H_
 
 #include <system_error>
 
-#include "spleeter/type.h"
-#include "spleeter/registry.h"
+#include "tensorflow/cc/saved_model/loader.h"
 #include "rtff/abstract_filter.h"
 
+#include "spleeter/type.h"
+
 namespace spleeter {
+
+using BundlePtr = std::shared_ptr<tensorflow::SavedModelBundle>;
 
 class Filter : public rtff::AbstractFilter {
 public:
   Filter(SeparationType separation_type);
-  
+
   /// Initialize the filter with Spleeter specific options
   void Init(std::error_code& err);
 
@@ -60,25 +63,25 @@ public:
   /// center of the matrix. It is the one that beneficit the most of temporal
   /// information.
   uint32_t FrameLatency() const override;
-  
-  
+
+
 private:
   void PrepareToPlay() override;
   void ProcessTransformedBlock(std::vector<std::complex<float>*> data,
                                uint32_t size) override;
-  
+
   uint32_t SpleeterFrameLatency() const;
-  
+
 private:
   SeparationType m_type;
-  Registry::BundlePtr m_bundle;
+  BundlePtr m_bundle;
   std::vector<float> m_volumes;
-  
+
   uint16_t m_process_length;
   uint16_t m_frame_length;
   uint16_t m_overlap_length;
   bool m_force_conservativity;
-  
+
   // ------------
   // internal buffers
   // -- The frame being processed
@@ -102,4 +105,4 @@ private:
 
 } // namespace spleeter
 
-#endif // SPLEETER_OLSPLEETER_FILTER_H_
+#endif // SPLEETER_FILTER_H_

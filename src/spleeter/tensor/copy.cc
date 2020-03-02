@@ -1,5 +1,6 @@
-#include "tensor/copy.h"
+#include "spleeter/tensor/copy.h"
 
+namespace spleeter {
 namespace tensor {
 
 void MoveFrame(tensorflow::Tensor& tensor,
@@ -16,5 +17,5 @@ void MoveFrame(tensorflow::Tensor& tensor,
     }
   }
 }
-
 }  // namespace tensor
+}  // namespace spleeter

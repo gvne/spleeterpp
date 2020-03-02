@@ -14,7 +14,7 @@ void Registry::Register(BundlePtr bundle, SeparationType type) {
   m_registry[type] = bundle;
 }
 
-Registry::BundlePtr Registry::Get(SeparationType type) {
+BundlePtr Registry::Get(SeparationType type) {
   if (m_registry.find(type) == std::end(m_registry)) {
     return nullptr;
   }
