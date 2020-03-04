@@ -2,9 +2,10 @@
 #define SPLEETER_FILTER_H_
 
 #include <system_error>
+#include <mutex>
 
 #include "tensorflow/cc/saved_model/loader.h"
-#include "rtff/abstract_filter.h"
+#include "artff/abstract_filter.h"
 
 #include "spleeter/type.h"
 
@@ -12,7 +13,7 @@ namespace spleeter {
 
 using BundlePtr = std::shared_ptr<tensorflow::SavedModelBundle>;
 
-class Filter : public rtff::AbstractFilter {
+class Filter : public artff::AbstractFilter {
 public:
   Filter(SeparationType separation_type);
 
@@ -67,8 +68,8 @@ public:
 
 private:
   void PrepareToPlay() override;
-  void ProcessTransformedBlock(std::vector<std::complex<float>*> data,
-                               uint32_t size) override;
+  void AsyncProcessTransformedBlock(std::vector<std::complex<float>*> data,
+                                    uint32_t size) override;
 
   uint32_t SpleeterFrameLatency() const;
 
@@ -101,6 +102,8 @@ private:
   std::vector<float*> m_mask_sum_data;
   std::vector<std::vector<std::vector<float>>> m_masks_vec_data;
   std::vector<std::vector<float*>> m_masks_data;
+  
+  std::mutex m_mutex;
 };
 
 } // namespace spleeter

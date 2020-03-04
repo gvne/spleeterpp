@@ -4,16 +4,6 @@
 
 #include "spleeter/spleeter.h"
 
-void Write(const spleeter::Waveform& data, const std::string& name) {
-  std::vector<float> vec_data(data.size());
-  std::copy(data.data(), data.data() + data.size(), vec_data.data());
-  wave::File file;
-  file.Open(std::string(OUTPUT_DIR) + "/" + name + ".wav", wave::kOut);
-  file.set_sample_rate(44100);
-  file.set_channel_number(2);
-  file.Write(vec_data);
-}
-
 TEST(Spleeter, Filter) {
   std::error_code err;
 
@@ -30,6 +20,7 @@ TEST(Spleeter, Filter) {
   spleeter::Initialize(std::string(SPLEETER_MODELS), {separation_type}, err);
   ASSERT_FALSE(err);
   spleeter::Filter filter(separation_type);
+  filter.set_extra_frame_latency(10);
   filter.Init(err);
   filter.set_volume(0, 1.0);
   filter.set_volume(1, 0.0);

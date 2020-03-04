@@ -9,7 +9,8 @@
 namespace spleeter {
 
 Filter::Filter(SeparationType type)
-    : m_type(type), m_process_length(SPLEETER_INPUT_FRAME_COUNT),
+    : artff::AbstractFilter(), m_type(type),
+      m_process_length(SPLEETER_INPUT_FRAME_COUNT),
       m_frame_length(m_process_length), m_overlap_length(0),
       m_force_conservativity(false) {
   switch (type) {
@@ -63,7 +64,7 @@ void Filter::set_ForceConservativity(bool value) {
 bool Filter::ForceConservativity() const { return m_force_conservativity; }
 
 uint32_t Filter::FrameLatency() const {
-  return rtff::AbstractFilter::FrameLatency() + SpleeterFrameLatency();
+  return artff::AbstractFilter::FrameLatency() + SpleeterFrameLatency();
 }
 
 uint32_t Filter::SpleeterFrameLatency() const {
@@ -71,7 +72,7 @@ uint32_t Filter::SpleeterFrameLatency() const {
 }
 
 void Filter::PrepareToPlay() {
-  rtff::AbstractFilter::PrepareToPlay();
+  artff::AbstractFilter::PrepareToPlay();
   const auto half_frame_length = fft_size() / 2 + 1;
   const auto stem_count = m_volumes.size();
   // Initialize the buffers
@@ -126,8 +127,9 @@ void Filter::PrepareToPlay() {
   m_frame_index = 0;
 }
 
-void Filter::ProcessTransformedBlock(std::vector<std::complex<float> *> data,
-                                     uint32_t size) {
+void Filter::AsyncProcessTransformedBlock(
+    std::vector<std::complex<float> *> data, uint32_t size) {
+  std::lock_guard<std::mutex> lg(m_mutex);
   // --------------------------------
   // Set the frame into the input
   const auto stem_count = m_previous_network_result.size();

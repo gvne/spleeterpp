@@ -15,7 +15,7 @@ add_library(spleeter
 target_link_libraries(spleeter
   ${tensorflow_cc}
   Eigen3::Eigen
-  rtff
+  artff
   mkl  # TODO: don't force the use of mkl. Enable eigen fft ?
 )
 
