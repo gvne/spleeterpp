@@ -21,7 +21,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(add_tensorflow)
 # --
 
-# include_directories(src)
+include_directories(src)
 # add_subdirectory(src)
 
 if (${spleeter_enable_tests})

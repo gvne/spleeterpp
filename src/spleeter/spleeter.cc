@@ -2,6 +2,8 @@
 #include <vector>
 #include "spleeter/registry.h"
 
+#include "spleeter/tf_handle.h"
+
 #include "tensorflow/cc/client/client_session.h"
 #include "tensorflow/cc/saved_model/loader.h"
 
@@ -26,17 +28,31 @@ void Initialize(const std::string &path_to_models, SeparationType type,
                 std::error_code &err) {
   auto path_to_model = GetModelPath(path_to_models, type);
 
-  tensorflow::SessionOptions session_options;
-  tensorflow::RunOptions run_options;
-  std::unordered_set<std::string> tags({"serve"});
-  auto bundle = std::make_shared<tensorflow::SavedModelBundle>();
-  if (!tensorflow::LoadSavedModel(session_options, run_options, path_to_model,
-                                  tags, bundle.get())
-           .ok()) {
+  auto session_options = MakeHandle(
+    TF_NewSessionOptions(), TF_DeleteSessionOptions);
+  auto graph = MakeHandle(TF_NewGraph(), TF_DeleteGraph);
+  auto run_options = MakeHandle(TF_NewBuffer(), TF_DeleteBuffer);
+  auto meta_graph_def = MakeHandle(TF_NewBuffer(), TF_DeleteBuffer);
+  auto status = MakeHandle(TF_NewStatus(), TF_DeleteStatus);
+  std::vector<const char*> tags({"serve"});
+
+  auto session_ptr = TF_LoadSessionFromSavedModel(
+    session_options->get(),
+    run_options->get(),
+    path_to_model.c_str(),
+    tags.data(),
+    tags.size(),
+    graph->get(),
+    meta_graph_def->get(),
+    status->get()
+  );
+
+  if (TF_GetCode(status->get()) == TF_Code::TF_OK) {
     err = std::make_error_code(std::errc::io_error);
     return;
   }
-  Registry::instance().Register(bundle, type);
+  auto session = MakeHandle(session_ptr, SessionDeleter);
+  Registry::instance().Register(std::make_pair(session, graph), type);
 }
 
 std::vector<std::string> GetOutputNames(SeparationType type) {
@@ -65,23 +81,64 @@ void RunModel(const Waveform &input, SeparationType separation_type,
     return;
   }
 
-  // Initialize the input
-  tensorflow::Tensor tf_input(
-      tensorflow::DT_FLOAT,
-      tensorflow::TensorShape({input.cols(), input.rows()}));
+  auto session = bundle.first;
+  auto graph = bundle.second;
 
-  // TODO: Find another way to copy the input data
-  std::copy(input.data(), input.data() + input.size(),
-            tf_input.matrix<float>().data());
+  // Input
+  TF_Output input_op{TF_GraphOperationByName(graph->get(), "Placeholder"), 0};
+  if (!input_op.oper) {
+    err = std::make_error_code(std::errc::protocol_error);
+    return;
+  }
 
-  // Run the extraction
-  auto status = bundle->session->Run({{"Placeholder", tf_input}},
-                                     internal::GetOutputNames(separation_type),
-                                     {}, output);
-  if (!status.ok()) {
+  // Outputs
+  std::vector<TF_Output> output_ops;
+  std::vector<TF_Tensor*> output;
+  for (const auto& output : GetOutputNames(separation_type)) {
+    output_ops.emplace_back(TF_GraphOperationByName(graph->get(), output.c_str()), 0);
+    if (!output_ops[output_ops.size() - 1].oper) {
+        err = std::make_error_code(std::errc::protocol_error);
+        return;
+    }
+    output.push_back(nullptr);
+  }
+
+  TF_SessionRun(
+    session->get(),
+    nullptr,
+    &input_op,
+    inputs.data(),
+    inputs.size(),
+    output_ops.data(),
+    outputs.data(),
+    output_ops.size(),
+    nullptr,
+    0,
+    nullptr,
+    status->get());
+
+  if (TF_GetCode(status->get()) != TF_Code::TF_OK) {
     err = std::make_error_code(std::errc::io_error);
     return;
   }
+
+  // // Initialize the input
+  // tensorflow::Tensor tf_input(
+  //     tensorflow::DT_FLOAT,
+  //     tensorflow::TensorShape({input.cols(), input.rows()}));
+  //
+  // // TODO: Find another way to copy the input data
+  // std::copy(input.data(), input.data() + input.size(),
+  //           tf_input.matrix<float>().data());
+  //
+  // // Run the extraction
+  // auto status = bundle->session->Run({{"Placeholder", tf_input}},
+  //                                    internal::GetOutputNames(separation_type),
+  //                                    {}, output);
+  // if (!status.ok()) {
+  //   err = std::make_error_code(std::errc::io_error);
+  //   return;
+  // }
 }
 
 void SetOutput(const std::vector<tensorflow::Tensor> &tf_output,

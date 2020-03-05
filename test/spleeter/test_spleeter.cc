@@ -4,35 +4,7 @@
 #include <unordered_set>
 #include <complex>
 
-#include <tensorflow/c/c_api.h>
-
-template <typename T>
-class TFHandle {
-public:
-  TFHandle(T* ptr, std::function<void(T*)> deleter) : m_ptr(ptr), m_deleter(deleter) {}
-  ~TFHandle() {
-    m_deleter(m_ptr);
-  }
-  T* get() {
-    return m_ptr;
-  }
-private:
-  T* m_ptr;
-  std::function<void(T*)> m_deleter;
-};
-
-template <typename T>
-TFHandle<T> MakeHandle(T* ptr, void (deleter)(T*)) {
-  return TFHandle<T>(ptr, deleter);
-}
-
-void SessionDeleter(TF_Session* ptr) {
-  auto status = MakeHandle(TF_NewStatus(), TF_DeleteStatus);
-  TF_DeleteSession(ptr, status.get());
-  if (TF_GetCode(status.get()) != TF_Code::TF_OK) {
-    std::cerr << "Failed to release the session handle" << std::endl;
-  }
-}
+#include "spleeter/tf_handle.h"
 
 template <typename T>
 void* NewData(size_t len, size_t* output_size) {
@@ -47,6 +19,8 @@ void DataDeleter(void* data, size_t len, void*) {
 }
 
 TEST(Spleeter, Basic) {
+  using namespace spleeter;
+  
   auto session_options = MakeHandle(TF_NewSessionOptions(), TF_DeleteSessionOptions);
   auto graph = MakeHandle(TF_NewGraph(), TF_DeleteGraph);
   auto run_options = MakeHandle(TF_NewBuffer(), TF_DeleteBuffer);
@@ -58,8 +32,8 @@ TEST(Spleeter, Basic) {
   two_stem_model_dir += "/2stems";
   
   // Initialize the session
-  auto session_ptr = TF_LoadSessionFromSavedModel(session_options.get(), run_options.get(), two_stem_model_dir.c_str(), tags.data(), tags.size(), graph.get(), meta_graph_def.get(), status.get());
-  ASSERT_TRUE(TF_GetCode(status.get()) == TF_Code::TF_OK);
+  auto session_ptr = TF_LoadSessionFromSavedModel(session_options->get(), run_options->get(), two_stem_model_dir.c_str(), tags.data(), tags.size(), graph->get(), meta_graph_def->get(), status->get());
+  ASSERT_TRUE(TF_GetCode(status->get()) == TF_Code::TF_OK);
   auto session = MakeHandle(session_ptr, SessionDeleter);
   
   // 10 seconds stereo
@@ -68,30 +42,30 @@ TEST(Spleeter, Basic) {
   auto data = NewData<std::complex<float>>(input_dims[0] * input_dims[1] * input_dims[2], &data_len);
   
   // Build input
-  TF_Output input_op{TF_GraphOperationByName(graph.get(), "Placeholder"), 0};
+  TF_Output input_op{TF_GraphOperationByName(graph->get(), "Placeholder"), 0};
   ASSERT_TRUE(input_op.oper);
   auto input_tensor_ptr = TF_NewTensor(TF_DataType::TF_COMPLEX, input_dims.data(),input_dims.size(), data, data_len, DataDeleter<std::complex<float>>, nullptr);
   auto input_tensor = MakeHandle(input_tensor_ptr, TF_DeleteTensor);
-  std::vector<TF_Tensor*> inputs = {input_tensor.get()};
+  std::vector<TF_Tensor*> inputs = {input_tensor->get()};
   
   // And the output
-  TF_Output output_vocals_op{TF_GraphOperationByName(graph.get(), "strided_slice_11"), 0};
+  TF_Output output_vocals_op{TF_GraphOperationByName(graph->get(), "strided_slice_11"), 0};
   ASSERT_TRUE(output_vocals_op.oper);
-  TF_Output output_accompaniment_op{TF_GraphOperationByName(graph.get(), "strided_slice_19"), 0};
+  TF_Output output_accompaniment_op{TF_GraphOperationByName(graph->get(), "strided_slice_19"), 0};
   ASSERT_TRUE(output_accompaniment_op.oper);
   std::vector<TF_Output> output_ops = {output_vocals_op, output_accompaniment_op};
   std::vector<TF_Tensor*> outputs = {nullptr, nullptr};
 
-  TF_SessionRun(session.get(), run_options.get(), &input_op, inputs.data(), inputs.size(), output_ops.data(), outputs.data(), output_ops.size(), nullptr, 0, nullptr, status.get());
-  ASSERT_TRUE(TF_GetCode(status.get()) == TF_Code::TF_OK);
+  TF_SessionRun(session->get(), nullptr, &input_op, inputs.data(), inputs.size(), output_ops.data(), outputs.data(), output_ops.size(), nullptr, 0, nullptr, status->get());
+  ASSERT_TRUE(TF_GetCode(status->get()) == TF_Code::TF_OK);
   
 //  auto data = static_cast<float*>(TF_TensorData(output_tensor));
 
   auto vocals = MakeHandle(outputs[0], TF_DeleteTensor);
   auto accompaniment = MakeHandle(outputs[1], TF_DeleteTensor);
   
-  auto vocals_data = static_cast<float*>(TF_TensorData(vocals.get()));
-  auto accompaniment_data = static_cast<float*>(TF_TensorData(accompaniment.get()));
+  auto vocals_data = static_cast<float*>(TF_TensorData(vocals->get()));
+  auto accompaniment_data = static_cast<float*>(TF_TensorData(accompaniment->get()));
 }
 
 // #include "wave/file.h"
