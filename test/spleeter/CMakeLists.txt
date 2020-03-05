@@ -6,16 +6,18 @@ add_executable(test_spleeter
 target_link_libraries(test_spleeter
   gtest
   gtest_main
-  spleeter
-  ${tensorflow_cc}
-  wave
+  tensorflow
+  # spleeter
+  # ${tensorflow_cc}
+  # wave
 )
 
-target_include_directories(test_spleeter PUBLIC ${tensorflow_include_dir})
-
+# target_include_directories(test_spleeter PUBLIC ${tensorflow_include_dir})
+#
 target_compile_definitions(test_spleeter
   PRIVATE
-    SPLEETER_MODELS="${spleeter_models_dir}"
-    TEST_FILE="${test_audio_path}"
-    OUTPUT_DIR="${CMAKE_CURRENT_BINARY_DIR}"
+    SPLEETER_MODELS="/Users/gvne/code/spleeter++/build/_deps/spleeter-build/exported"
+#     SPLEETER_MODELS="${spleeter_models_dir}"
+#     TEST_FILE="${test_audio_path}"
+#     OUTPUT_DIR="${CMAKE_CURRENT_BINARY_DIR}"
 )
