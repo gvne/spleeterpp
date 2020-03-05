@@ -1,31 +1,73 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.8.13">
+  <compound refid="classspleeter_1_1Filter" kind="class"><name>spleeter::Filter</name>
+    <member refid="classspleeter_1_1Filter_1a8305ebded47a397c7945d8fac853d848" kind="variable"><name>m_type</name></member>
+    <member refid="classspleeter_1_1Filter_1a56ceec5fbb6744e1543458de6c5ed692" kind="variable"><name>m_bundle</name></member>
+    <member refid="classspleeter_1_1Filter_1ac3e48a81917edd3d2c6d9bed675dc252" kind="variable"><name>m_volumes</name></member>
+    <member refid="classspleeter_1_1Filter_1a03448316e97afcff9491659b822d9d24" kind="variable"><name>m_process_length</name></member>
+    <member refid="classspleeter_1_1Filter_1a0b293bdf6f864908b58dbe3fdc7f87f7" kind="variable"><name>m_frame_length</name></member>
+    <member refid="classspleeter_1_1Filter_1ab838e9ff6d6fafe01020fa8b4cf761a8" kind="variable"><name>m_overlap_length</name></member>
+    <member refid="classspleeter_1_1Filter_1a475ad4c8b4d07fcc24a96779029109a7" kind="variable"><name>m_force_conservativity</name></member>
+    <member refid="classspleeter_1_1Filter_1a7f650d9497340108b1cdb701ab17df25" kind="variable"><name>m_frame_index</name></member>
+    <member refid="classspleeter_1_1Filter_1a3d0b027cfe88676011e0d7e1409cefa5" kind="variable"><name>m_network_input</name></member>
+    <member refid="classspleeter_1_1Filter_1a0e025ad30a3874f4a978eefe0ab1468e" kind="variable"><name>m_previous_network_input</name></member>
+    <member refid="classspleeter_1_1Filter_1ab7bf69cccffff1df48a2f03344443933" kind="variable"><name>m_network_result</name></member>
+    <member refid="classspleeter_1_1Filter_1a62a3ea84a554f110406d0e022c4f1279" kind="variable"><name>m_previous_network_result</name></member>
+    <member refid="classspleeter_1_1Filter_1aee651c0a9740ffb43ce157b51270d7e9" kind="variable"><name>m_mask_vec_data</name></member>
+    <member refid="classspleeter_1_1Filter_1aae9196ada6e10a10d3b7b8b071b88473" kind="variable"><name>m_previous_mask_vec_data</name></member>
+    <member refid="classspleeter_1_1Filter_1a6c3aef3fddb5ae4777dde2569099e0dc" kind="variable"><name>m_mask_sum_vec_data</name></member>
+    <member refid="classspleeter_1_1Filter_1ac207028d50e8ab7386d78983f0267043" kind="variable"><name>m_mask_data</name></member>
+    <member refid="classspleeter_1_1Filter_1a6b98a4ba00b23b5c4446326480540db7" kind="variable"><name>m_previous_mask_data</name></member>
+    <member refid="classspleeter_1_1Filter_1a10d305323df45ccf4001882b03db352b" kind="variable"><name>m_mask_sum_data</name></member>
+    <member refid="classspleeter_1_1Filter_1af761f3b3e11eaf60d2636c2d9b94e5dd" kind="variable"><name>m_masks_vec_data</name></member>
+    <member refid="classspleeter_1_1Filter_1af566f9b301ce7810cd862caf4c637e5e" kind="variable"><name>m_masks_data</name></member>
+    <member refid="classspleeter_1_1Filter_1a6fd019e936a0eae2b0e787d0f1b50442" kind="variable"><name>m_mutex</name></member>
+    <member refid="classspleeter_1_1Filter_1acaaf4345541afe5545c57d867cedf6f1" kind="function"><name>Filter</name></member>
+    <member refid="classspleeter_1_1Filter_1abaf85eb48aa211b3ca16331ab4f3d485" kind="function"><name>Init</name></member>
+    <member refid="classspleeter_1_1Filter_1af2a5a206f6a4b361f99b1821b5fa01dc" kind="function"><name>set_volume</name></member>
+    <member refid="classspleeter_1_1Filter_1ad4fac13e7116ae1f40d6cf3a3bc6548f" kind="function"><name>volume</name></member>
+    <member refid="classspleeter_1_1Filter_1af242e0b835bacea0d46744067c241b71" kind="function"><name>set_ProcessLength</name></member>
+    <member refid="classspleeter_1_1Filter_1a29b37edad3b144225a33d632cf04cb3e" kind="function"><name>ProcessLength</name></member>
+    <member refid="classspleeter_1_1Filter_1a995a121b3e5300ab2129636943bd6086" kind="function"><name>set_FrameLength</name></member>
+    <member refid="classspleeter_1_1Filter_1a15fc2c5c47730c3569250e3c44434f6b" kind="function"><name>FrameLength</name></member>
+    <member refid="classspleeter_1_1Filter_1a3581c17c71107eab3c97ff58c17ba6ca" kind="function"><name>set_OverlapLength</name></member>
+    <member refid="classspleeter_1_1Filter_1af9a655b894367af8b9a52151f1c99d56" kind="function"><name>OverlapLength</name></member>
+    <member refid="classspleeter_1_1Filter_1ae648103ed818f744b214724e3d621ecd" kind="function"><name>set_ForceConservativity</name></member>
+    <member refid="classspleeter_1_1Filter_1ae8544877085b334b414f838c0b1ae3a7" kind="function"><name>ForceConservativity</name></member>
+    <member refid="classspleeter_1_1Filter_1a586ab362a4723e419284dff19864def2" kind="function"><name>FrameLatency</name></member>
+    <member refid="classspleeter_1_1Filter_1add504b493186402aec127b2d021268ea" kind="function"><name>PrepareToPlay</name></member>
+    <member refid="classspleeter_1_1Filter_1af398288b3ede3b7f4fe9c463149d80b7" kind="function"><name>AsyncProcessTransformedBlock</name></member>
+    <member refid="classspleeter_1_1Filter_1a41bc38f48ed835cbb3aa3956f4ded44c" kind="function"><name>SpleeterFrameLatency</name></member>
+  </compound>
   <compound refid="classspleeter_1_1Registry" kind="class"><name>spleeter::Registry</name>
-    <member refid="classspleeter_1_1Registry_1a1bc8bae64ad51dbc9ecdab526af95e38" kind="typedef"><name>BundlePtr</name></member>
     <member refid="classspleeter_1_1Registry_1a6f1f7e186419a82b2a6f0646341f841a" kind="variable"><name>m_registry</name></member>
     <member refid="classspleeter_1_1Registry_1ac0d987f1ffbc5658470836908037f332" kind="function"><name>instance</name></member>
     <member refid="classspleeter_1_1Registry_1a8b0fed2aa25ce34557e98f22952c7b77" kind="function"><name>Register</name></member>
-    <member refid="classspleeter_1_1Registry_1adf0262a7b65bb160642111436730e1fe" kind="function"><name>Get</name></member>
+    <member refid="classspleeter_1_1Registry_1a0e9cc941e762808c85089466e9bebf3f" kind="function"><name>Get</name></member>
     <member refid="classspleeter_1_1Registry_1a08301350a6f2697a34b72eebd2698ec8" kind="function"><name>Registry</name></member>
     <member refid="classspleeter_1_1Registry_1ae514ec64ee348c9828287819ebe2f2b0" kind="function"><name>~Registry</name></member>
   </compound>
   <compound refid="namespacespleeter" kind="namespace"><name>spleeter</name>
-    <member refid="spleeter_8h_1aec4a660e27c7c164c02bf146793d20ad" kind="enum"><name>SeparationType</name></member>
-    <member refid="spleeter_8h_1aec4a660e27c7c164c02bf146793d20adabdb529ea88496d57bafb09fd5e636bf4" kind="enumvalue"><name>TwoStems</name></member>
-    <member refid="spleeter_8h_1aec4a660e27c7c164c02bf146793d20adab95a9669b09818def0f2cf88f88fcfca" kind="enumvalue"><name>FourStems</name></member>
-    <member refid="spleeter_8h_1aec4a660e27c7c164c02bf146793d20ada2adce49672f832d9357bee5d9e6f155f" kind="enumvalue"><name>FiveStems</name></member>
-    <member refid="spleeter_8h_1a85c84fe241a7d532b574532c0d3d8804" kind="typedef"><name>Waveform</name></member>
+    <member refid="type_8h_1aec4a660e27c7c164c02bf146793d20ad" kind="enum"><name>SeparationType</name></member>
+    <member refid="type_8h_1aec4a660e27c7c164c02bf146793d20adabdb529ea88496d57bafb09fd5e636bf4" kind="enumvalue"><name>TwoStems</name></member>
+    <member refid="type_8h_1aec4a660e27c7c164c02bf146793d20adab95a9669b09818def0f2cf88f88fcfca" kind="enumvalue"><name>FourStems</name></member>
+    <member refid="type_8h_1aec4a660e27c7c164c02bf146793d20ada2adce49672f832d9357bee5d9e6f155f" kind="enumvalue"><name>FiveStems</name></member>
+    <member refid="filter_8h_1ad169de8448911ff73656b1f2cb4d62b8" kind="typedef"><name>BundlePtr</name></member>
+    <member refid="type_8h_1a85c84fe241a7d532b574532c0d3d8804" kind="typedef"><name>Waveform</name></member>
+    <member refid="model_8cc_1a8485e0f61f7b433d835df5b5873c7291" kind="function"><name>GetPath</name></member>
+    <member refid="model_8cc_1ae9e4a22774140095e3ede778573e451e" kind="function"><name>GetOutputNames</name></member>
+    <member refid="model_8cc_1a0dbc582b9d9efd07317be7a62c6209bc" kind="function"><name>Initialize</name></member>
+    <member refid="model_8cc_1aec9e9de76df7d561a4c07c25bf99a71f" kind="function"><name>Run</name></member>
+    <member refid="model_8cc_1ad406cd319f8b788e6656bb1e25c7e364" kind="function"><name>SetOutput</name></member>
     <member refid="spleeter_8cc_1a50356673b469490c01c46afab5e6db97" kind="function"><name>Initialize</name></member>
-    <member refid="spleeter_8cc_1a4206dcf9f99db746a5fc5d52d7111d72" kind="function"><name>Split</name></member>
-    <member refid="spleeter_8cc_1a159e164eff7f38c3ec3d16072b77fa1e" kind="function"><name>Split</name></member>
-    <member refid="spleeter_8cc_1add06aa9a9b29628d5a0724815338a79f" kind="function"><name>Split</name></member>
   </compound>
-  <compound refid="namespacespleeter_1_1internal" kind="namespace"><name>spleeter::internal</name>
-    <member refid="spleeter_8cc_1a9f0ed86c1a3bfcdeac4655a1e769cfcf" kind="function"><name>GetModelPath</name></member>
-    <member refid="spleeter_8cc_1a505f3d481beb374fc6cb15c5be8de509" kind="function"><name>Initialize</name></member>
-    <member refid="spleeter_8cc_1a00513ee53516a882a90d324727734222" kind="function"><name>GetOutputNames</name></member>
-    <member refid="spleeter_8cc_1aade04ae6bf144225359de826a743bcd5" kind="function"><name>RunModel</name></member>
-    <member refid="spleeter_8cc_1a09962c2fd5e1a9d2a52a4aa764713596" kind="function"><name>SetOutput</name></member>
+  <compound refid="filter_8cc" kind="file"><name>filter.cc</name>
+  </compound>
+  <compound refid="filter_8h" kind="file"><name>filter.h</name>
+  </compound>
+  <compound refid="model_8cc" kind="file"><name>model.cc</name>
+  </compound>
+  <compound refid="model_8h" kind="file"><name>model.h</name>
   </compound>
   <compound refid="registry_8cc" kind="file"><name>registry.cc</name>
   </compound>
@@ -34,6 +76,8 @@
   <compound refid="spleeter_8cc" kind="file"><name>spleeter.cc</name>
   </compound>
   <compound refid="spleeter_8h" kind="file"><name>spleeter.h</name>
+  </compound>
+  <compound refid="type_8h" kind="file"><name>type.h</name>
   </compound>
   <compound refid="dir_cf8dda79de50e3e42e3b1f531732fb91" kind="dir"><name>/code/src/spleeter</name>
   </compound>
