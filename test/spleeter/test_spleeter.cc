@@ -37,21 +37,21 @@ TEST(Spleeter, Basic) {
   auto session = MakeHandle(session_ptr, SessionDeleter);
   
   // 10 seconds stereo
-  std::vector<int64_t> input_dims = {10, 2049, 2};
+  std::vector<int64_t> input_dims = {44100 * 10, 2};
   size_t data_len;
-  auto data = NewData<std::complex<float>>(input_dims[0] * input_dims[1] * input_dims[2], &data_len);
+  auto data = NewData<std::complex<float>>(input_dims[0] * input_dims[1], &data_len);
   
   // Build input
   TF_Output input_op{TF_GraphOperationByName(graph->get(), "Placeholder"), 0};
   ASSERT_TRUE(input_op.oper);
-  auto input_tensor_ptr = TF_NewTensor(TF_DataType::TF_COMPLEX, input_dims.data(),input_dims.size(), data, data_len, DataDeleter<std::complex<float>>, nullptr);
+  auto input_tensor_ptr = TF_NewTensor(TF_DataType::TF_FLOAT, input_dims.data(),input_dims.size(), data, data_len, DataDeleter<float>, nullptr);
   auto input_tensor = MakeHandle(input_tensor_ptr, TF_DeleteTensor);
   std::vector<TF_Tensor*> inputs = {input_tensor->get()};
   
   // And the output
-  TF_Output output_vocals_op{TF_GraphOperationByName(graph->get(), "strided_slice_11"), 0};
+  TF_Output output_vocals_op{TF_GraphOperationByName(graph->get(), "strided_slice_13"), 0};
   ASSERT_TRUE(output_vocals_op.oper);
-  TF_Output output_accompaniment_op{TF_GraphOperationByName(graph->get(), "strided_slice_19"), 0};
+  TF_Output output_accompaniment_op{TF_GraphOperationByName(graph->get(), "strided_slice_23"), 0};
   ASSERT_TRUE(output_accompaniment_op.oper);
   std::vector<TF_Output> output_ops = {output_vocals_op, output_accompaniment_op};
   std::vector<TF_Tensor*> outputs = {nullptr, nullptr};
