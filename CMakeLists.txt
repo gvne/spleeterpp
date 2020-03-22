@@ -6,7 +6,6 @@ set(CMAKE_CXX_STANDARD 14)
 
 option(spleeter_enable_tests "Enable unit tests" ON)
 option(spleeter_regenerate_models "Build the models from deezer/spleeter repository (requires conda)" OFF)
-set(TENSORFLOW_CC_INSTALL_DIR "" CACHE STRING "The tensorflow_cc install directory")
 
 # External dependencies
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
@@ -16,8 +15,6 @@ else()
   include(add_spleeter_models)
 endif()
 include(add_eigen)
-include(add_protobuf)
-include(add_absl)
 include(add_tensorflow)
 # --
 

@@ -8,15 +8,8 @@ add_library(spleeter
 )
 
 target_link_libraries(spleeter
-  ${tensorflow_cc}
+  tensorflow
   Eigen3::Eigen
-)
-
-target_include_directories(spleeter
-  PUBLIC
-    ${tensorflow_include_dir}
-    ${protobuf_include_dir}
-    ${absl_include_dir}
 )
 
 install(TARGETS spleeter
@@ -27,10 +20,6 @@ install(TARGETS spleeter
 install(FILES
   ${CMAKE_CURRENT_SOURCE_DIR}/spleeter.h
   DESTINATION include/spleeter
-)
-install(FILES
-  ${tensorflow_cc}
-  DESTINATION lib
 )
 
 # Also install the pretrained models

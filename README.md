@@ -11,8 +11,6 @@ model in C++.
 
 ## Build
 
-### Note: We only support Unix system at the moment (tested on osx 10.15 and ubuntu 18.04)
-
 We base our work on `cmake`.
 ```bash
 mkdir build && cd build
@@ -22,7 +20,7 @@ cmake --build .
 
 This will:
 * Download the `Spleeter` pre-trained models
-* Download the pre-built `tensorflow_cc` library
+* Download the pre-built `tensorflow` C API library
 * Build the `spleeter++` library and its associated tests
 
 ## Documentation
