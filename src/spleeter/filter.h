@@ -4,14 +4,15 @@
 #include <system_error>
 #include <mutex>
 
-#include "tensorflow/cc/saved_model/loader.h"
 #include "artff/abstract_filter.h"
 
+#include "spleeter/tf_handle.h"
 #include "spleeter/type.h"
 
 namespace spleeter {
 
-using BundlePtr = std::shared_ptr<tensorflow::SavedModelBundle>;
+using Bundle = std::pair<TFHandlePtr<TF_Session>, TFHandlePtr<TF_Graph>>;
+using BundlePtr = std::shared_ptr<Bundle>;
 
 class Filter : public artff::AbstractFilter {
 public:
@@ -88,11 +89,12 @@ private:
   // -- The frame being processed
   uint32_t m_frame_index;
   // -- in
-  tensorflow::Tensor m_network_input;
-  tensorflow::Tensor m_previous_network_input;
+  TFHandlePtr<TF_Tensor> m_network_input;
+  TFHandlePtr<TF_Tensor> m_previous_network_input;
+  std::vector<int64_t> m_shapes;
   // -- out
-  std::vector<tensorflow::Tensor> m_network_result;
-  std::vector<tensorflow::Tensor> m_previous_network_result;
+  std::vector<TFHandlePtr<TF_Tensor>> m_network_result;
+  std::vector<TFHandlePtr<TF_Tensor>> m_previous_network_result;
   // -- for single frame processing
   std::vector<std::vector<float>> m_mask_vec_data;
   std::vector<std::vector<float>> m_previous_mask_vec_data;

@@ -5,7 +5,7 @@
 #include <vector>
 #include <system_error>
 
-#include "tensorflow/core/framework/tensor.h"
+#include "tf_handle.h"
 
 #include "spleeter/type.h"
 
@@ -19,7 +19,7 @@ void Initialize(const std::string &path_to_models, SeparationType type,
                 std::error_code &err);
 
 void Run(const Waveform &input, SeparationType separation_type,
-         std::vector<tensorflow::Tensor> *output, std::error_code &err);
+         std::vector<TFHandlePtr<TF_Tensor>> *result, std::error_code &err);
 
 } // namespace spleeter
 

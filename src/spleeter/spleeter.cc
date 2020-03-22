@@ -1,9 +1,9 @@
 #include "spleeter/spleeter.h"
+
 #include <vector>
 #include "spleeter/model.h"
-
-#include "tensorflow/cc/client/client_session.h"
-#include "tensorflow/cc/saved_model/loader.h"
+#include "spleeter/registry.h"
+#include "spleeter/tf_handle.h"
 
 namespace spleeter {
 

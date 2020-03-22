@@ -1,8 +1,6 @@
 #include "spleeter/filter.h"
 
-#include "tensorflow/core/framework/tensor_util.h"
-
-#include "spleeter/tensor/copy.h"
+#include "spleeter/tensor.h"
 #include "spleeter/model.h"
 #include "spleeter/registry.h"
 
@@ -77,18 +75,16 @@ void Filter::PrepareToPlay() {
   const auto stem_count = m_volumes.size();
   // Initialize the buffers
   // -- inputs
-  tensorflow::TensorShape shape{ProcessLength() + OverlapLength(),
-                                half_frame_length, 2};
-  m_network_input = tensorflow::Tensor(tensorflow::DT_COMPLEX64, shape);
-  m_previous_network_input =
-      tensorflow::Tensor(tensorflow::DT_COMPLEX64, shape);
+  m_shapes = {ProcessLength() + OverlapLength(), half_frame_length, 2};
+  m_network_input = TensorAlloc(TF_DataType::TF_COMPLEX, m_shapes);
+  m_previous_network_input = TensorAlloc(TF_DataType::TF_COMPLEX, m_shapes);
 
-  // -- outputs
+//  // -- outputs
   m_network_result.clear();
   m_previous_network_result.clear();
   for (auto stem_index = 0; stem_index < stem_count; stem_index++) {
-    m_previous_network_result.push_back(
-        tensorflow::Tensor(tensorflow::DT_FLOAT, shape));
+    m_network_result.push_back(TensorAlloc(TF_DataType::TF_FLOAT, m_shapes));
+    m_previous_network_result.push_back(TensorAlloc(TF_DataType::TF_FLOAT, m_shapes));
   }
 
   // -- We also need pre-allocated data to retreive a single frame
@@ -135,17 +131,17 @@ void Filter::AsyncProcessTransformedBlock(
   const auto stem_count = m_previous_network_result.size();
   auto network_input_frame_index =
       m_frame_index + (ProcessLength() - SpleeterFrameLatency());
-  tensor::SetFrame(&m_network_input, network_input_frame_index, data);
+  SetFrame(m_network_input, m_shapes, network_input_frame_index, data);
   // --------------------------------
 
   // --------------------------------
   // Compute the output
   // -- get the right frame
-  tensor::GetFrame(&data, network_input_frame_index, m_previous_network_input);
+  GetFrame(&data, network_input_frame_index, m_previous_network_input, m_shapes);
   // -- Get each stem mask data
   for (auto stem_index = 0; stem_index < stem_count; stem_index++) {
-    tensor::GetFrame(&(m_masks_data[stem_index]), network_input_frame_index,
-                     m_previous_network_result[stem_index]);
+    GetFrame(&(m_masks_data[stem_index]), network_input_frame_index,
+                     m_previous_network_result[stem_index], m_shapes);
   }
   // -- Apply a mask that is the sum of each masks * volume
   for (auto channel_index = 0; channel_index < data.size(); channel_index++) {
@@ -186,11 +182,29 @@ void Filter::AsyncProcessTransformedBlock(
   if (m_frame_index == FrameLength() - 1) {
     // --------------------------------
     // Run the extraction !
-    auto status =
-        m_bundle->session->Run({{"Placeholder", m_network_input}},
-                               GetOutputNames(m_type), {}, &m_network_result);
-    // TODO: make sure status is checked !
-    //    ASSERT_TRUE(status.ok());
+    auto session = m_bundle->first;
+    auto graph = m_bundle->second;
+    TF_Output input_op{TF_GraphOperationByName(graph->get(), "Placeholder"), 0};
+    std::vector<TF_Tensor *> inputs = {m_network_input->get()};
+    std::vector<TF_Output> output_ops;
+    std::vector<TF_Tensor *> outputs;
+    for (const auto &output_name : GetOutputNames(m_type)) {
+      TF_Output op{TF_GraphOperationByName(graph->get(), output_name.c_str()), 0};
+      output_ops.emplace_back(op);
+      outputs.push_back(nullptr);
+    }
+
+    auto status = MakeHandle(TF_NewStatus(), TF_DeleteStatus);
+    TF_SessionRun(session->get(), nullptr, &input_op, inputs.data(),
+                  inputs.size(), output_ops.data(), outputs.data(),
+                  output_ops.size(), nullptr, 0, nullptr, status->get());
+    // make sure status is checked !
+    assert(TF_GetCode(status->get()) == TF_Code::TF_OK);
+    
+    // copy the outputs
+    for (auto out_index = 0; out_index < outputs.size(); out_index++) {
+      Copy<float>(outputs[out_index], m_shapes, m_network_result[out_index]);
+    }
 
     // Overlap --> Update the result by adding the previous output frame and
     // devide by 2
@@ -203,38 +217,37 @@ void Filter::AsyncProcessTransformedBlock(
         auto previous_network_output_index =
             network_output_index + FrameLength();
 
-        tensor::GetFrame(&m_previous_mask_data, previous_network_output_index,
-                         m_previous_network_result[stem_index]);
-        tensor::GetFrame(&m_mask_data, network_output_index,
-                         m_network_result[stem_index]);
+        GetFrame(&m_previous_mask_data, previous_network_output_index,
+                         m_previous_network_result[stem_index], m_shapes);
+        GetFrame(&m_mask_data, network_output_index,
+                         m_network_result[stem_index], m_shapes);
         for (auto c = 0; c < data.size(); c++) {
           Eigen::Map<Eigen::VectorXf> mask_frame(m_mask_data[c], size);
           mask_frame +=
               Eigen::Map<Eigen::VectorXf>(m_previous_mask_data[c], size);
           mask_frame /= 2;
         }
-        tensor::SetFrame(&(m_network_result[stem_index]), network_output_index,
+        SetFrame(m_network_result[stem_index], m_shapes, network_output_index,
                          m_mask_data);
       }
     }
-    // TODO: this is most likely to allocate memory. Redevelop the deep copy to
-    // do a simple memcpy
+    
     for (auto stem_index = 0; stem_index < stem_count; stem_index++) {
-      m_previous_network_result[stem_index] =
-          tensorflow::tensor::DeepCopy(m_network_result[stem_index]);
+      Copy<float>(m_network_result[stem_index]->get(), m_shapes,
+                  m_previous_network_result[stem_index]);
     }
-    m_previous_network_input = tensorflow::tensor::DeepCopy(m_network_input);
+    Copy<std::complex<float>>(m_network_input->get(), m_shapes, m_previous_network_input);
     // --------------------------------
 
-    // shift the input data of FrameLength
-    for (int source_index = ProcessLength() - SpleeterFrameLatency();
-         source_index < ProcessLength(); source_index++) {
-      auto destination_index = source_index - FrameLength();
-      if (destination_index < 0) {
-        continue;
-      }
-      tensor::MoveFrame(m_network_input, source_index, destination_index);
-    }
+//    // shift the input data of FrameLength
+//    for (int source_index = ProcessLength() - SpleeterFrameLatency();
+//         source_index < ProcessLength(); source_index++) {
+//      auto destination_index = source_index - FrameLength();
+//      if (destination_index < 0) {
+//        continue;
+//      }
+//      MoveFrame<std::complex<float>>(m_network_input, source_index, destination_index, m_shapes);
+//    }
     m_frame_index = 0;
   } else {
     m_frame_index += 1;

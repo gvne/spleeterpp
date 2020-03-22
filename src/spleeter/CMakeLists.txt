@@ -8,22 +8,17 @@ add_library(spleeter
   model.cc
   filter.cc
   filter.h
-  tensor/copy.h
-  tensor/copy.cc
+  tensor.h
+  tensor.cc
+  tf_handle.h
+  tf_handle.cc
 )
 
 target_link_libraries(spleeter
-  ${tensorflow_cc}
+  tensorflow
   Eigen3::Eigen
   artff
   mkl  # TODO: don't force the use of mkl. Enable eigen fft ?
-)
-
-target_include_directories(spleeter
-  PUBLIC
-    ${tensorflow_include_dir}
-    ${protobuf_include_dir}
-    ${absl_include_dir}
 )
 
 target_compile_definitions(spleeter
@@ -40,10 +35,6 @@ install(FILES
   ${CMAKE_CURRENT_SOURCE_DIR}/spleeter.h
   ${CMAKE_CURRENT_SOURCE_DIR}/type.h
   DESTINATION include/spleeter
-)
-install(FILES
-  ${tensorflow_cc}
-  DESTINATION lib
 )
 
 # Also install the pretrained models

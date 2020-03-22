@@ -5,14 +5,9 @@ add_executable(test_spleeter
 target_link_libraries(test_spleeter
   gtest
   gtest_main
+  tensorflow
   spleeter
-  ${tensorflow_cc}
   wave
-)
-
-target_include_directories(test_spleeter
-  PUBLIC
-    ${tensorflow_include_dir}
 )
 
 target_compile_definitions(test_spleeter

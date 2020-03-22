@@ -11,7 +11,7 @@ model in C++.
 
 ## Build
 
-### Note: We only support Unix system at the moment (tested on osx 10.15 and ubuntu 18.04)
+### Note: The system is tested on osx 10.15, ubuntu 18.04 and Windows10 (VS2017)
 
 We base our work on `cmake`.
 ```bash
@@ -20,9 +20,16 @@ cmake ..
 cmake --build .
 ```
 
+For windows, we only support Visual Studio 2017 in Release mode (see [this](https://github.com/tensorflow/tensorflow/issues/17778#issuecomment-384816014)).
+```bash
+mkdir build && cd build
+cmake -G"Visual Studio 15 2017 Win64"  ..
+cmake --build .
+```
+
 This will:
 * Download the `Spleeter` pre-trained models
-* Download the pre-built `tensorflow_cc` library
+* Download the pre-built `tensorflow` C API library
 * Build the `spleeter++` library and its associated tests
 
 ## Documentation
