@@ -11,10 +11,19 @@ model in C++.
 
 ## Build
 
+### Note: The system is tested on osx 10.15, ubuntu 18.04 and Windows10 (VS2017)
+
 We base our work on `cmake`.
 ```bash
 mkdir build && cd build
 cmake ..
+cmake --build .
+```
+
+For windows, we only support Visual Studio 2017 in Release mode (see [this](https://github.com/tensorflow/tensorflow/issues/17778#issuecomment-384816014)).
+```bash
+mkdir build && cd build
+cmake -G"Visual Studio 15 2017 Win64"  ..
 cmake --build .
 ```
 
