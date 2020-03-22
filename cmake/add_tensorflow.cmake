@@ -25,11 +25,11 @@ if (NOT tensorflow_lib OR NOT tensorflow_framework_lib)
 
   file(DOWNLOAD
     ${tf_url}
-    ${tensorflow_install_dir}/tensorflow_cc.zip
+    ${tensorflow_dir}/tensorflow_cc.zip
     SHOW_PROGRESS
   )
   execute_process(COMMAND ${CMAKE_COMMAND} -E tar -xf tensorflow_cc.zip
-                  WORKING_DIRECTORY ${tensorflow_install_dir})
+                  WORKING_DIRECTORY ${tensorflow_dir})
 
   # Find the libraries again
   find_library(tensorflow_lib
