@@ -7,9 +7,9 @@ target_link_libraries(test_spleeter
   gtest
   gtest_main
   tensorflow
-  # spleeter
+  spleeter
   # ${tensorflow_cc}
-  # wave
+  wave
 )
 
 # target_include_directories(test_spleeter PUBLIC ${tensorflow_include_dir})

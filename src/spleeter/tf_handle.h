@@ -33,13 +33,7 @@ TFHandlePtr<T> MakeHandle(T* ptr, void (deleter)(T*)) {
   return std::make_shared<TFHandle<T>>(ptr, deleter);
 }
 
-void SessionDeleter(TF_Session* ptr) {
-  auto status = MakeHandle(TF_NewStatus(), TF_DeleteStatus);
-  TF_DeleteSession(ptr, status->get());
-  if (TF_GetCode(status->get()) != TF_Code::TF_OK) {
-    std::cerr << "Failed to release the session handle" << std::endl;
-  }
-}
+void SessionDeleter(TF_Session* ptr);
 
 }  // namespace spleeter
 

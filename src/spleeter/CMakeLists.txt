@@ -3,6 +3,8 @@ add_library(spleeter
   spleeter.cc
   registry.h
   registry.cc
+  tf_handle.h
+  tf_handle.cc
 )
 
 target_link_libraries(spleeter

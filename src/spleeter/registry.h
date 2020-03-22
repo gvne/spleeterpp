@@ -1,7 +1,8 @@
 #ifndef SPLEETER_REGISTRY_H_
 #define SPLEETER_REGISTRY_H_
 
-#include "tensorflow/cc/saved_model/loader.h"
+#include <map>
+
 #include "spleeter/tf_handle.h"
 #include "spleeter/spleeter.h"
 
@@ -9,7 +10,8 @@ namespace spleeter {
 
 class Registry {
  public:
-  using BundlePtr = std::pair<TFHandlePtr<TF_Session>, TFHandlePtr<TF_Graph>>;
+  using Bundle = std::pair<TFHandlePtr<TF_Session>, TFHandlePtr<TF_Graph>>;
+  using BundlePtr = std::shared_ptr<Bundle>;
 
   static Registry& instance();
   void Register(BundlePtr bundle, SeparationType type);
