@@ -6,8 +6,7 @@
 #include <unordered_set>
 #include <Eigen/Core>
 
-#include "spleeter_filter/type.h"
-#include "spleeter_filter/filter.h"
+#include "spleeter_common/type.h"
 
 namespace spleeter {
 

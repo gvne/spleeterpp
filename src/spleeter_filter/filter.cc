@@ -1,8 +1,9 @@
 #include "spleeter_filter/filter.h"
 
+#include "spleeter_common/registry.h"
+
 #include "spleeter_filter/tensor.h"
 #include "spleeter_filter/model.h"
-#include "spleeter_filter/registry.h"
 
 namespace spleeter {
 

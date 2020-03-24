@@ -2,9 +2,9 @@
 #define SPLEETER_FILTER_TENSOR_H_
 
 #include <cassert>
-#include <unsupported/Eigen/CXX11/Tensor>
-
-#include "spleeter_filter/tf_handle.h"
+#include <vector>
+#include <complex>
+#include "spleeter_common/tf_handle.h"
 
 namespace spleeter {
 

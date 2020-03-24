@@ -2,7 +2,8 @@
 
 #include "wave/file.h"
 
-#include "spleeter_filter/spleeter.h"
+#include "spleeter_common/spleeter_common.h"
+#include "spleeter_filter/filter.h"
 
 TEST(Spleeter, Filter) {
   std::error_code err;

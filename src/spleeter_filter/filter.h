@@ -1,13 +1,13 @@
-#ifndef SPLEETER_FILTER_H_
-#define SPLEETER_FILTER_H_
+#ifndef SPLEETER_FILTER_FILTER_H_
+#define SPLEETER_FILTER_FILTER_H_
 
 #include <system_error>
 #include <mutex>
 
 #include "artff/abstract_filter.h"
 
-#include "spleeter_filter/tf_handle.h"
-#include "spleeter_filter/type.h"
+#include "spleeter_common/tf_handle.h"
+#include "spleeter_common/type.h"
 
 namespace spleeter {
 
@@ -110,4 +110,4 @@ private:
 
 } // namespace spleeter
 
-#endif // SPLEETER_FILTER_H_
+#endif // SPLEETER_FILTER_FILTER_H_

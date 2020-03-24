@@ -1,4 +1,4 @@
-#include "spleeter_filter/registry.h"
+#include "spleeter_common/registry.h"
 
 namespace spleeter {
 

@@ -2,9 +2,8 @@
 #define SPLEETER_FILTER_REGISTRY_H_
 
 #include <map>
-
-#include "spleeter_filter/tf_handle.h"
-#include "spleeter_filter/spleeter.h"
+#include "spleeter_common/tf_handle.h"
+#include "spleeter_common/type.h"
 
 namespace spleeter {
 

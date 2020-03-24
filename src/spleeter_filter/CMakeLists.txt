@@ -1,20 +1,14 @@
 add_library(spleeter_filter
-  spleeter.h
-  spleeter.cc
-  type.h
-  registry.h
-  registry.cc
   model.h
   model.cc
   filter.cc
   filter.h
   tensor.h
   tensor.cc
-  tf_handle.h
-  tf_handle.cc
 )
 
 target_link_libraries(spleeter_filter
+  spleeter_common
   tensorflow
   Eigen3::Eigen
   artff
