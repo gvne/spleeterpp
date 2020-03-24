@@ -1,10 +1,10 @@
-#include "spleeter/registry.h"
+#include "spleeter_filter/registry.h"
 
 namespace spleeter {
 
 Registry::Registry() {}
 Registry::~Registry() {}
-  
+
 Registry& Registry::instance() {
   static Registry instance;
   return instance;

@@ -2,15 +2,15 @@
 
 #include "wave/file.h"
 
-#include "spleeter/spleeter.h"
+#include "spleeter_filter/spleeter.h"
 
 TEST(Spleeter, Filter) {
   std::error_code err;
 
   // read a file
   wave::File file;
-//  std::string test_file(TEST_FILE);
-  std::string test_file("/Users/gvne/Desktop/snipet.wav");
+  std::string test_file(TEST_FILE);
+//  std::string test_file("/Users/gvne/Desktop/snipet.wav");
   file.Open(test_file, wave::kIn);
   auto data = file.Read(err);
   ASSERT_FALSE(err);

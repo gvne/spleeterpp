@@ -1,9 +1,11 @@
 include(FetchContent)
-set(spleeter_version v1.4.0)
+
+set(spleeter_tag v1.4.0)
+set(spleeter_conda_version 1.4.9)  # 1.5.0 changes options
 
 FetchContent_Declare(spleeter
   GIT_REPOSITORY https://github.com/deezer/spleeter.git
-  GIT_TAG        ${spleeter_version}
+  GIT_TAG        ${spleeter_tag}
   PATCH_COMMAND  git apply ${CMAKE_CURRENT_LIST_DIR}/patches/spleeter.patch
 )
 
@@ -21,7 +23,7 @@ if(NOT spleeter_POPULATED)
   message(STATUS "Installing Conda environment")
   # -- and install the environment
   execute_process(
-    COMMAND ${conda} install -y -c conda-forge spleeter -p ${spleeter_BINARY_DIR}
+    COMMAND ${conda} install -y -c conda-forge spleeter=${spleeter_conda_version} -p ${spleeter_BINARY_DIR}
     WORKING_DIRECTORY ${spleeter_SOURCE_DIR}
   )
   message(STATUS "Conda environment successfuly setup")
@@ -35,7 +37,7 @@ if(NOT spleeter_POPULATED)
   set(2stems_sha256 "f3a90b39dd2874269e8b05a48a86745df897b848c61f3958efc80a39152bd692")
   set(4stems_sha256 "3adb4a50ad4eb18c7c4d65fcf4cf2367a07d48408a5eb7d03cd20067429dfaa8")
   set(5stems_sha256 "25a1e87eb5f75cc72a4d2d5467a0a50ac75f05611f877c278793742513cc7218")
-  set(pretrained_models_url "https://github.com/deezer/spleeter/releases/download/${spleeter_version}/")
+  set(pretrained_models_url "https://github.com/deezer/spleeter/releases/download/${spleeter_tag}/")
   set(pretrained_models_path "${spleeter_BINARY_DIR}/pretrained_models")
   file(MAKE_DIRECTORY ${pretrained_models_path})
 
@@ -66,13 +68,28 @@ if(NOT spleeter_POPULATED)
 
   # convert the downloaded models for tensorflow_cc
   set(spleeter_models_dir ${spleeter_env_dir}/exported)
+  set(spleeter_filter_models_dir ${spleeter_env_dir}/filter_exported)
   if (NOT EXISTS ${spleeter_models_dir})
     message(STATUS "Exporing pre-trained models")
+
     execute_process(
       COMMAND
         ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_LIST_DIR}/export_spleeter_models.py
           ${pretrained_models_path}
           ${spleeter_models_dir}
+      WORKING_DIRECTORY ${spleeter_SOURCE_DIR}
+    )
+  endif()
+
+
+  if (${spleeter_enable_filter} AND NOT EXISTS ${spleeter_filter_models_dir})
+    message(STATUS "Exporing pre-trained models for filter interface")
+
+    execute_process(
+      COMMAND
+        ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_LIST_DIR}/export_spleeter_filter_models.py
+          ${pretrained_models_path}
+          ${spleeter_filter_models_dir}
           ${spleeter_input_frame_count}
       WORKING_DIRECTORY ${spleeter_SOURCE_DIR}
     )

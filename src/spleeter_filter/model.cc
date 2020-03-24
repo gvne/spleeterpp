@@ -1,5 +1,5 @@
-#include "spleeter/model.h"
-#include "spleeter/registry.h"
+#include "spleeter_filter/model.h"
+#include "spleeter_filter/registry.h"
 
 namespace spleeter {
 

@@ -1,9 +1,9 @@
-#include "spleeter/spleeter.h"
+#include "spleeter_filter/spleeter.h"
 
 #include <vector>
-#include "spleeter/model.h"
-#include "spleeter/registry.h"
-#include "spleeter/tf_handle.h"
+#include "spleeter_filter/model.h"
+#include "spleeter_filter/registry.h"
+#include "spleeter_filter/tf_handle.h"
 
 namespace spleeter {
 

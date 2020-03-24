@@ -1,8 +1,8 @@
-#include "spleeter/filter.h"
+#include "spleeter_filter/filter.h"
 
-#include "spleeter/tensor.h"
-#include "spleeter/model.h"
-#include "spleeter/registry.h"
+#include "spleeter_filter/tensor.h"
+#include "spleeter_filter/model.h"
+#include "spleeter_filter/registry.h"
 
 namespace spleeter {
 
@@ -200,7 +200,7 @@ void Filter::AsyncProcessTransformedBlock(
                   output_ops.size(), nullptr, 0, nullptr, status->get());
     // make sure status is checked !
     assert(TF_GetCode(status->get()) == TF_Code::TF_OK);
-    
+
     // copy the outputs
     for (auto out_index = 0; out_index < outputs.size(); out_index++) {
       Copy<float>(outputs[out_index], m_shapes, m_network_result[out_index]);
@@ -231,7 +231,7 @@ void Filter::AsyncProcessTransformedBlock(
                          m_mask_data);
       }
     }
-    
+
     for (auto stem_index = 0; stem_index < stem_count; stem_index++) {
       Copy<float>(m_network_result[stem_index]->get(), m_shapes,
                   m_previous_network_result[stem_index]);

@@ -1,2 +1,5 @@
-add_subdirectory(artff)
+if (${spleeter_enable_filter})
+  add_subdirectory(artff)
+  add_subdirectory(spleeter_filter)
+endif()
 add_subdirectory(spleeter)

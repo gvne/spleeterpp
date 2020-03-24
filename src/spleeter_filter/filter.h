@@ -6,8 +6,8 @@
 
 #include "artff/abstract_filter.h"
 
-#include "spleeter/tf_handle.h"
-#include "spleeter/type.h"
+#include "spleeter_filter/tf_handle.h"
+#include "spleeter_filter/type.h"
 
 namespace spleeter {
 
@@ -104,7 +104,7 @@ private:
   std::vector<float*> m_mask_sum_data;
   std::vector<std::vector<std::vector<float>>> m_masks_vec_data;
   std::vector<std::vector<float*>> m_masks_data;
-  
+
   std::mutex m_mutex;
 };
 

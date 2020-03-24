@@ -1,13 +1,13 @@
-#ifndef SPEETER_SPLEETER_H_
-#define SPEETER_SPLEETER_H_
+#ifndef SPEETER_FILTER_SPLEETER_H_
+#define SPEETER_FILTER_SPLEETER_H_
 
 #include <string>
 #include <memory>
 #include <unordered_set>
 #include <Eigen/Core>
 
-#include "spleeter/type.h"
-#include "spleeter/filter.h"
+#include "spleeter_filter/type.h"
+#include "spleeter_filter/filter.h"
 
 namespace spleeter {
 
@@ -21,4 +21,4 @@ void Initialize(const std::string &path_to_models,
 
 } // namespace spleeter
 
-#endif // SPEETER_SPLEETER_H_
+#endif // SPEETER_FILTER_SPLEETER_H_

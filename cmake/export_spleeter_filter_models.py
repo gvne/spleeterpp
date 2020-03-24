@@ -1,4 +1,5 @@
 import os
+import sys
 import json
 import argparse
 import tempfile
@@ -6,18 +7,21 @@ import shutil
 
 import tensorflow as tf
 
+sys.path.insert(0, os.getcwd())
+SPLEETER_ROOT = os.path.join(os.getcwd(), "spleeter")
 import spleeter
 from spleeter.model import model_fn
 
 
-SPLEETER_ROOT = os.path.dirname(spleeter.__file__)
-
-
-def export_model(pretrained_path: str, model_name: str, export_directory: str):
+def export_model(pretrained_path: str,
+                 input_frame_count: int,
+                 model_name: str,
+                 export_directory: str):
     # read the json parameters
     param_path = os.path.join(SPLEETER_ROOT, "resources", model_name + ".json")
     with open(param_path) as parameter_file:
         parameters = json.load(parameter_file)
+    parameters['T'] = input_frame_count
     parameters['MWF'] = False  # default parameter
 
     # create the estimator
@@ -33,8 +37,8 @@ def export_model(pretrained_path: str, model_name: str, export_directory: str):
     def receiver():
         shape = (None, parameters['n_channels'])
         features = {
-            'waveform': tf.compat.v1.placeholder(tf.float32, shape=shape),
-            'audio_id': tf.compat.v1.placeholder(tf.string)
+        'stft': tf.compat.v1.placeholder(
+            tf.complex64, shape=(None, parameters['frame_length'] / 2 + 1, parameters['n_channels']))
         }
         return tf.estimator.export.ServingInputReceiver(features, features)
     # export the estimator into a temp directory
@@ -45,6 +49,7 @@ def main():
     parser = argparse.ArgumentParser(description='Export spleeter models')
     parser.add_argument("pretrained_path")
     parser.add_argument("export_path")
+    parser.add_argument("input_frame_count")
     args = parser.parse_args()
 
     os.makedirs(args.export_path, exist_ok=True)
@@ -54,7 +59,8 @@ def main():
         # then we move the created folder to the right export path
         destination = os.path.join(args.export_path, model)
         temp_dir = tempfile.mkdtemp()
-        export_model(args.pretrained_path, model, temp_dir)
+        export_model(
+            args.pretrained_path, int(args.input_frame_count), model, temp_dir)
         created_dir = os.path.join(temp_dir, os.listdir(temp_dir)[0])
         shutil.move(created_dir, destination)
         shutil.rmtree(temp_dir)  # cleanup

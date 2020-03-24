@@ -1,5 +1,5 @@
-#ifndef SPLEETER_MODEL_H_
-#define SPLEETER_MODEL_H_
+#ifndef SPLEETER_FILTER_MODEL_H_
+#define SPLEETER_FILTER_MODEL_H_
 
 #include <string>
 #include <vector>
@@ -7,7 +7,7 @@
 
 #include "tf_handle.h"
 
-#include "spleeter/type.h"
+#include "spleeter_filter/type.h"
 
 namespace spleeter {
 
@@ -23,4 +23,4 @@ void Run(const Waveform &input, SeparationType separation_type,
 
 } // namespace spleeter
 
-#endif // SPLEETER_MODEL_H_
+#endif // SPLEETER_FILTER_MODEL_H_

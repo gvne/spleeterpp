@@ -1,10 +1,10 @@
-#ifndef SPLEETER_TENSOR_H_
-#define SPLEETER_TENSOR_H_
+#ifndef SPLEETER_FILTER_TENSOR_H_
+#define SPLEETER_FILTER_TENSOR_H_
 
 #include <cassert>
 #include <unsupported/Eigen/CXX11/Tensor>
 
-#include "spleeter/tf_handle.h"
+#include "spleeter_filter/tf_handle.h"
 
 namespace spleeter {
 
@@ -149,4 +149,4 @@ void Copy(const TF_Tensor *source, std::vector<int64_t> shapes,
 
 } // namespace spleeter
 
-#endif // SPLEETER_TENSOR_H_
+#endif // SPLEETER_FILTER_TENSOR_H_

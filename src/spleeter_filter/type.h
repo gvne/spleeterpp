@@ -1,5 +1,5 @@
-#ifndef SPLEETER_TYPE_H_
-#define SPLEETER_TYPE_H_
+#ifndef SPLEETER_FILTER_TYPE_H_
+#define SPLEETER_FILTER_TYPE_H_
 
 #include <Eigen/Core>
 
@@ -11,4 +11,4 @@ using Waveform = Eigen::Matrix2Xf;
 
 }  // namespace spleeter
 
-#endif  // SPLEETER_TYPE_H_
+#endif  // SPLEETER_FILTER_TYPE_H_

@@ -1,5 +1,5 @@
-#ifndef SPLEETER_TF_HANDLE_H_
-#define SPLEETER_TF_HANDLE_H_
+#ifndef SPLEETER_FILTER_TF_HANDLE_H_
+#define SPLEETER_FILTER_TF_HANDLE_H_
 
 #include <memory>
 #include <functional>
@@ -40,4 +40,4 @@ void SessionDeleter(TF_Session* ptr);
 
 }  // namespace spleeter
 
-#endif  // SPLEETER_TF_HANDLE_H_
+#endif  // SPLEETER_FILTER_TF_HANDLE_H_

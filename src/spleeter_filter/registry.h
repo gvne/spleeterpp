@@ -1,10 +1,10 @@
-#ifndef SPLEETER_REGISTRY_H_
-#define SPLEETER_REGISTRY_H_
+#ifndef SPLEETER_FILTER_REGISTRY_H_
+#define SPLEETER_FILTER_REGISTRY_H_
 
 #include <map>
 
-#include "spleeter/tf_handle.h"
-#include "spleeter/spleeter.h"
+#include "spleeter_filter/tf_handle.h"
+#include "spleeter_filter/spleeter.h"
 
 namespace spleeter {
 
@@ -27,4 +27,4 @@ class Registry {
 
 }  // namespace spleeter
 
-#endif  // SPLEETER_REGISTRY_H_
+#endif  // SPLEETER_FILTER_REGISTRY_H_
