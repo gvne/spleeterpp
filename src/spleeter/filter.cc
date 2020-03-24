@@ -239,15 +239,15 @@ void Filter::AsyncProcessTransformedBlock(
     Copy<std::complex<float>>(m_network_input->get(), m_shapes, m_previous_network_input);
     // --------------------------------
 
-//    // shift the input data of FrameLength
-//    for (int source_index = ProcessLength() - SpleeterFrameLatency();
-//         source_index < ProcessLength(); source_index++) {
-//      auto destination_index = source_index - FrameLength();
-//      if (destination_index < 0) {
-//        continue;
-//      }
-//      MoveFrame<std::complex<float>>(m_network_input, source_index, destination_index, m_shapes);
-//    }
+    // shift the input data of FrameLength
+    for (int source_index = ProcessLength() - SpleeterFrameLatency();
+         source_index < ProcessLength(); source_index++) {
+      auto destination_index = source_index - FrameLength();
+      if (destination_index < 0) {
+        continue;
+      }
+      MoveFrame<std::complex<float>>(m_network_input, source_index, destination_index, m_shapes);
+    }
     m_frame_index = 0;
   } else {
     m_frame_index += 1;
