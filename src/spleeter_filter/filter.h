@@ -5,14 +5,9 @@
 #include <mutex>
 
 #include "artff/abstract_filter.h"
-
-#include "spleeter_common/tf_handle.h"
 #include "spleeter_common/type.h"
 
 namespace spleeter {
-
-using Bundle = std::pair<TFHandlePtr<TF_Session>, TFHandlePtr<TF_Graph>>;
-using BundlePtr = std::shared_ptr<Bundle>;
 
 class Filter : public artff::AbstractFilter {
 public:
@@ -76,36 +71,17 @@ private:
 
 private:
   SeparationType m_type;
-  BundlePtr m_bundle;
   std::vector<float> m_volumes;
 
   uint16_t m_process_length;
   uint16_t m_frame_length;
   uint16_t m_overlap_length;
   bool m_force_conservativity;
-
-  // ------------
-  // internal buffers
-  // -- The frame being processed
-  uint32_t m_frame_index;
-  // -- in
-  TFHandlePtr<TF_Tensor> m_network_input;
-  TFHandlePtr<TF_Tensor> m_previous_network_input;
-  std::vector<int64_t> m_shapes;
-  // -- out
-  std::vector<TFHandlePtr<TF_Tensor>> m_network_result;
-  std::vector<TFHandlePtr<TF_Tensor>> m_previous_network_result;
-  // -- for single frame processing
-  std::vector<std::vector<float>> m_mask_vec_data;
-  std::vector<std::vector<float>> m_previous_mask_vec_data;
-  std::vector<std::vector<float>> m_mask_sum_vec_data;
-  std::vector<float*> m_mask_data;
-  std::vector<float*> m_previous_mask_data;
-  std::vector<float*> m_mask_sum_data;
-  std::vector<std::vector<std::vector<float>>> m_masks_vec_data;
-  std::vector<std::vector<float*>> m_masks_data;
-
+  
   std::mutex m_mutex;
+  
+  class Impl;
+  std::shared_ptr<Impl> m_impl;
 };
 
 } // namespace spleeter

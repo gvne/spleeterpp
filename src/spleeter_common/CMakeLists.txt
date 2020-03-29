@@ -22,6 +22,5 @@ install(TARGETS spleeter_common
 install(FILES
   ${CMAKE_CURRENT_SOURCE_DIR}/spleeter_common.h
   ${CMAKE_CURRENT_SOURCE_DIR}/type.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/tf_handle.h
   DESTINATION include/spleeter_common/
 )
