@@ -10,17 +10,6 @@
 
 namespace spleeter {
 
-//using Waveform = Eigen::Matrix2Xf;
-//enum SeparationType { TwoStems, FourStems, FiveStems };
-
-///// Initialize the spleeter tools by loading models at the specified path
-///// \param path_to_models the path to spleeter exported models.
-///// \param separation_types the types of separation required
-///// \param err an error code that gets set if something goes wrong
-//void Initialize(const std::string &path_to_models,
-//                const std::unordered_set<SeparationType> &separation_types,
-//                std::error_code &err);
-
 /// Split the input waveform into vocals and accompaniment
 /// \param input the input waveform
 /// \param vocals the extracted vocals waveform
