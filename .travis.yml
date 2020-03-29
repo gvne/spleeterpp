@@ -6,3 +6,4 @@ script:
   - cmake ..
   - make
   - ./test/spleeter/test_spleeter
+  - ./test/spleeter_filter/test_spleeter_filter
