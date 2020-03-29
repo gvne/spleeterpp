@@ -1,6 +1,9 @@
 #include "spleeter/model.h"
+#include "spleeter_common/registry.h"
 
 namespace spleeter {
+
+void TensorNoDeleter(void* data, size_t len, void* arg) {}
 
 void RunModel(const Waveform &input, SeparationType separation_type,
               const std::vector<std::string>& output_names,

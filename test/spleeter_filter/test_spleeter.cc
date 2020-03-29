@@ -10,8 +10,8 @@ TEST(Spleeter, Filter) {
 
   // read a file
   wave::File file;
-//  std::string test_file(TEST_FILE);
-  std::string test_file("/Users/gvne/Desktop/snipet.wav");
+  std::string test_file(TEST_FILE);
+//  std::string test_file("/Users/gvne/Desktop/snipet.wav");
   file.Open(test_file, wave::kIn);
   auto data = file.Read(err);
   ASSERT_FALSE(err);
