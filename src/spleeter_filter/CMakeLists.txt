@@ -24,14 +24,13 @@ install(TARGETS spleeter_filter
   LIBRARY DESTINATION lib
   ARCHIVE DESTINATION lib
 )
-# install(FILES
-#   ${CMAKE_CURRENT_SOURCE_DIR}/spleeter.h
-#   ${CMAKE_CURRENT_SOURCE_DIR}/type.h
-#   DESTINATION include/spleeter
-# )
+install(FILES
+  ${CMAKE_CURRENT_SOURCE_DIR}/filter.h
+  DESTINATION include/spleeter_filter
+)
 
 # Also install the pretrained models
 install(DIRECTORY
-  ${spleeter_models_dir}/
-  DESTINATION models
+  ${spleeter_filter_models_dir}/
+  DESTINATION models/filter
 )
