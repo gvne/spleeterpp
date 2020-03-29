@@ -12,7 +12,6 @@ target_link_libraries(spleeter_filter
   tensorflow
   Eigen3::Eigen
   artff
-  mkl  # TODO: don't force the use of mkl. Enable eigen fft ?
 )
 
 target_compile_definitions(spleeter_filter

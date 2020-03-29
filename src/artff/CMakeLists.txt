@@ -9,5 +9,4 @@ add_library(artff
 
 target_link_libraries(artff
   rtff
-  mkl
 )
