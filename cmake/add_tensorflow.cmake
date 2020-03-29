@@ -33,11 +33,11 @@ if (NOT tensorflow_lib OR NOT tensorflow_framework_lib)
 
   # Find the libraries again
   find_library(tensorflow_lib
-    NAMES tensorflow
+    NAMES tensorflow.1
     PATHS ${tensorflow_dir}/lib
   )
   find_library(tensorflow_framework_lib
-    NAMES tensorflow_framework
+    NAMES tensorflow_framework.1
     PATHS ${tensorflow_dir}/lib
   )
   if (NOT tensorflow_lib OR NOT tensorflow_framework_lib)
@@ -56,6 +56,25 @@ target_include_directories(tensorflow
   INTERFACE
     ${tensorflow_dir}/include
 )
-INSTALL(FILES ${tensorflow_lib} ${tensorflow_framework_lib}
-  DESTINATION lib
-)
+
+# install tensorflow
+if(IS_SYMLINK ${tensorflow_lib})
+  get_filename_component(filename ${tensorflow_lib} NAME)
+  get_filename_component(dir ${tensorflow_lib} DIRECTORY)
+  file(READ_SYMLINK "${tensorflow_lib}" raw_symlink)
+
+  INSTALL(FILES ${dir}/${raw_symlink} DESTINATION lib RENAME ${filename})
+else()
+  INSTALL(FILES ${tensorflow_lib} DESTINATION lib)
+endif()
+
+# And tensorflow framework
+if(IS_SYMLINK ${tensorflow_framework_lib})
+  get_filename_component(filename ${tensorflow_framework_lib} NAME)
+  get_filename_component(dir ${tensorflow_framework_lib} DIRECTORY)
+  file(READ_SYMLINK "${tensorflow_framework_lib}" raw_symlink)
+
+  INSTALL(FILES ${dir}/${raw_symlink} DESTINATION lib RENAME ${filename})
+else()
+  INSTALL(FILES ${tensorflow_framework_lib} DESTINATION lib)
+endif()
