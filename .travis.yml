@@ -2,8 +2,12 @@ language: cpp
 dist: bionic
 
 script:
+  # update cmake
+  - wget https://github.com/Kitware/CMake/releases/download/v3.17.0/cmake-3.17.0-Linux-x86_64.tar.gz
+  - tar xzf cmake-3.17.0-Linux-x86_64.tar.gz -C /tmp --strip 1
+  # Build the project
   - mkdir -p build && cd build
-  - cmake ..
+  - /tmp/cmake ..
   - make
   - ./test/spleeter/test_spleeter
   - ./test/spleeter_filter/test_spleeter_filter
