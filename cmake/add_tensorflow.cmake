@@ -1,12 +1,20 @@
 set(tensorflow_dir ${CMAKE_CURRENT_BINARY_DIR}/tensorflow)
 
-# Find the libraries
+# On OSX, we want to install the libtensorflow.1.dylib
+set(tensorflow_lib_name tensorflow)
+set(tensorflow_framework_name tensorflow_framework)
+if (UNIX AND APPLE)
+  set(tensorflow_lib_name tensorflow.1)
+  set(tensorflow_framework_name tensorflow_framework.1)
+endif()
+
+# Find the libraries again
 find_library(tensorflow_lib
-  NAMES tensorflow
+  NAMES ${tensorflow_lib_name}
   PATHS ${tensorflow_dir}/lib
 )
 find_library(tensorflow_framework_lib
-  NAMES tensorflow_framework
+  NAMES ${tensorflow_framework}
   PATHS ${tensorflow_dir}/lib
 )
 
@@ -33,11 +41,11 @@ if (NOT tensorflow_lib OR NOT tensorflow_framework_lib)
 
   # Find the libraries again
   find_library(tensorflow_lib
-    NAMES tensorflow.1
+    NAMES ${tensorflow_lib_name}
     PATHS ${tensorflow_dir}/lib
   )
   find_library(tensorflow_framework_lib
-    NAMES tensorflow_framework.1
+    NAMES ${tensorflow_framework}
     PATHS ${tensorflow_dir}/lib
   )
   if (NOT tensorflow_lib OR NOT tensorflow_framework_lib)
