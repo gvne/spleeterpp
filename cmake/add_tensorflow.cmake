@@ -14,7 +14,7 @@ find_library(tensorflow_lib
   PATHS ${tensorflow_dir}/lib
 )
 find_library(tensorflow_framework_lib
-  NAMES ${tensorflow_framework}
+  NAMES ${tensorflow_framework_name}
   PATHS ${tensorflow_dir}/lib
 )
 
@@ -45,7 +45,7 @@ if (NOT tensorflow_lib OR NOT tensorflow_framework_lib)
     PATHS ${tensorflow_dir}/lib
   )
   find_library(tensorflow_framework_lib
-    NAMES ${tensorflow_framework}
+    NAMES ${tensorflow_framework_name}
     PATHS ${tensorflow_dir}/lib
   )
   if (NOT tensorflow_lib OR NOT tensorflow_framework_lib)
