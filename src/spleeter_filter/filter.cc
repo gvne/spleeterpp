@@ -103,6 +103,8 @@ uint32_t Filter::SpleeterFrameLatency() const {
 }
 
 void Filter::PrepareToPlay() {
+  std::lock_guard<std::mutex> lg(m_mutex);
+  
   artff::AbstractFilter::PrepareToPlay();
   const auto half_frame_length = fft_size() / 2 + 1;
   const auto stem_count = m_volumes.size();
