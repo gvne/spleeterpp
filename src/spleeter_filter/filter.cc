@@ -104,7 +104,7 @@ uint32_t Filter::SpleeterFrameLatency() const {
 
 void Filter::PrepareToPlay() {
   std::lock_guard<std::mutex> lg(m_mutex);
-  
+
   artff::AbstractFilter::PrepareToPlay();
   const auto half_frame_length = fft_size() / 2 + 1;
   const auto stem_count = m_volumes.size();
@@ -184,7 +184,7 @@ void Filter::AsyncProcessTransformedBlock(
   // -- Get each stem mask data
   for (auto stem_index = 0; stem_index < stem_count; stem_index++) {
     GetFrame(&(m_impl->masks_data[stem_index]), network_input_frame_index,
-             m_impl->previous_network_result[stem_index], m_impl->shapes);
+             m_impl->network_result[stem_index], m_impl->shapes);
   }
   // -- Apply a mask that is the sum of each masks * volume
   for (auto channel_index = 0; channel_index < data.size(); channel_index++) {
@@ -250,6 +250,8 @@ void Filter::AsyncProcessTransformedBlock(
     for (auto out_index = 0; out_index < outputs.size(); out_index++) {
       Copy<float>(outputs[out_index], m_impl->shapes,
                   m_impl->network_result[out_index]);
+      // TODO: delete the outpus or we will get a memory leak...
+      TF_DeleteTensor(outputs[out_index]);
     }
 
     // Overlap --> Update the result by adding the previous output frame and
@@ -262,15 +264,17 @@ void Filter::AsyncProcessTransformedBlock(
             overlap_frame_index + (ProcessLength() - SpleeterFrameLatency());
         auto previous_network_output_index =
             network_output_index + FrameLength();
-
         GetFrame(&(m_impl->previous_mask_data), previous_network_output_index,
                  m_impl->previous_network_result[stem_index], m_impl->shapes);
         GetFrame(&(m_impl->mask_data), network_output_index,
                  m_impl->network_result[stem_index], m_impl->shapes);
-        for (auto c = 0; c < data.size(); c++) {
-          Eigen::Map<Eigen::VectorXf> mask_frame(m_impl->mask_data[c], size);
-          mask_frame +=
-              Eigen::Map<Eigen::VectorXf>(m_impl->previous_mask_data[c], size);
+
+        for (auto channel_index = 0; channel_index < data.size();
+             channel_index++) {
+          Eigen::Map<Eigen::VectorXf> mask_frame(
+              m_impl->mask_data[channel_index], size);
+          mask_frame += Eigen::Map<Eigen::VectorXf>(
+              m_impl->previous_mask_data[channel_index], size);
           mask_frame /= 2;
         }
         SetFrame(m_impl->network_result[stem_index], m_impl->shapes,
@@ -278,21 +282,19 @@ void Filter::AsyncProcessTransformedBlock(
       }
     }
 
+    // keep the output
     for (auto stem_index = 0; stem_index < stem_count; stem_index++) {
       Copy<float>(m_impl->network_result[stem_index]->get(), m_impl->shapes,
                   m_impl->previous_network_result[stem_index]);
     }
+    // And the input
     Copy<std::complex<float>>(m_impl->network_input->get(), m_impl->shapes,
                               m_impl->previous_network_input);
     // --------------------------------
 
     // shift the input data of FrameLength
-    for (int source_index = ProcessLength() - SpleeterFrameLatency();
-         source_index < ProcessLength(); source_index++) {
+    for (int source_index = FrameLength(); source_index < ProcessLength() + OverlapLength(); source_index++) {
       auto destination_index = source_index - FrameLength();
-      if (destination_index < 0) {
-        continue;
-      }
       MoveFrame<std::complex<float>>(m_impl->network_input, source_index,
                                      destination_index, m_impl->shapes);
     }
