@@ -12,6 +12,7 @@ namespace internal {
 
 template <typename T> void *DataAlloc(size_t len, size_t *data_len) {
   auto ptr = new T[len];
+  memset(ptr, 0, len * sizeof(T));
   *data_len = len * sizeof(T);
   return static_cast<void *>(ptr);
 }
