@@ -38,27 +38,35 @@ if (NOT tensorflow_lib OR NOT tensorflow_framework_lib)
   )
   execute_process(COMMAND ${CMAKE_COMMAND} -E tar -xf tensorflow_cc.zip
                   WORKING_DIRECTORY ${tensorflow_dir})
+endif()
 
-  # Find the libraries again
-  find_library(tensorflow_lib
-    NAMES ${tensorflow_lib_name}
-    PATHS ${tensorflow_dir}/lib
-  )
+# Find the libraries again
+find_library(tensorflow_lib
+  NAMES ${tensorflow_lib_name}
+  PATHS ${tensorflow_dir}/lib
+)
+if (NOT tensorflow_lib)
+  message(FATAL_ERROR "Tensorflow could not be included")
+endif()
+
+add_library(tensorflow INTERFACE)
+if (MSVC)
+  # On windows we don't have and don't need the tensorflow_framework library
+  set(tensorflow_libs ${tensorflow_lib})
+else()
   find_library(tensorflow_framework_lib
     NAMES ${tensorflow_framework_name}
     PATHS ${tensorflow_dir}/lib
+    REQUIRED
   )
-  if (NOT tensorflow_lib OR NOT tensorflow_framework_lib)
-    message(FATAL_ERROR "Tensorflow could not be included")
+  if (NOT tensorflow_framework_lib)
+    message(FATAL_ERROR "Tensorflow framework could not be included")
   endif()
-endif()
 
-# -- Create lib target
-add_library(tensorflow INTERFACE)
+  set(tensorflow_libs ${tensorflow_lib} ${tensorflow_framework_lib})
+endif()
 target_link_libraries(tensorflow
-  INTERFACE
-    ${tensorflow_lib}
-    ${tensorflow_framework_lib}
+  INTERFACE ${tensorflow_libs}
 )
 target_include_directories(tensorflow
   INTERFACE

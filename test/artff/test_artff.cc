@@ -16,7 +16,8 @@ TEST(ARTFF, Basic) {
   wave::File file;
   std::string test_file(TEST_FILE);
   file.Open(test_file, wave::kIn);
-  auto data = file.Read(err);
+  std::vector<float> data;
+  file.Read(&data);
   ASSERT_FALSE(err);
 
   MyFilter filter;

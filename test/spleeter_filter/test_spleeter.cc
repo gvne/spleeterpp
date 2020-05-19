@@ -13,7 +13,8 @@ TEST(Spleeter, Filter) {
   std::string test_file(TEST_FILE);
 //  std::string test_file("/Users/gvne/Desktop/snipet.wav");
   file.Open(test_file, wave::kIn);
-  auto data = file.Read(err);
+  std::vector<float> data;
+  file.Read(&data);
   ASSERT_FALSE(err);
 
   // Initialize the filter
