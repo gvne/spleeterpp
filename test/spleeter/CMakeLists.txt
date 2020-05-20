@@ -19,3 +19,5 @@ target_compile_definitions(test_spleeter
     TEST_FILE="${test_audio_path}"
     OUTPUT_DIR="${CMAKE_CURRENT_BINARY_DIR}"
 )
+
+gtest_discover_tests(test_spleeter)
