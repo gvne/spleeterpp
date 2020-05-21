@@ -5,6 +5,8 @@
 #include <vector>
 #include <iostream>
 #include <future>
+
+#include "artff/semaphore.h"
 #include "artff/buffer/circular_frame_buffer.h"
 #include "artff/buffer/circular_future_buffer.h"
 
@@ -22,7 +24,7 @@ namespace artff {
 /// Adding some computation latency fixes the problem
 class AbstractFilter : public rtff::AbstractFilter {
 public:
-  AbstractFilter();
+  AbstractFilter(bool sequential = false);
   void set_extra_frame_latency(uint32_t count);
   uint32_t set_extra_frame_latency() const;
   virtual uint32_t FrameLatency() const override;
@@ -36,8 +38,13 @@ protected:
   virtual void
   AsyncProcessTransformedBlock(std::vector<std::complex<float> *> data,
                                uint32_t size) = 0;
+  void SequentialAsyncProcessTransformedBlock(
+      std::vector<std::complex<float>*> data, uint32_t size);
 
 private:
+  bool m_sequential;
+  Semaphore m_semaphore;
+
   uint32_t m_extra_frame_latency;
 
   // Storage

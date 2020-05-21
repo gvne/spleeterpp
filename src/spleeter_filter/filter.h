@@ -78,8 +78,6 @@ private:
   uint16_t m_overlap_length;
   bool m_force_conservativity;
   
-  std::mutex m_mutex;
-  
   class Impl;
   std::shared_ptr<Impl> m_impl;
 };

@@ -3,8 +3,8 @@
 
 namespace artff {
 
-AbstractFilter::AbstractFilter()
-    : rtff::AbstractFilter(), m_extra_frame_latency(0) {}
+AbstractFilter::AbstractFilter(bool sequential)
+    : rtff::AbstractFilter(), m_sequential(sequential), m_extra_frame_latency(0) {}
 
 void AbstractFilter::set_extra_frame_latency(uint32_t count) {
   m_extra_frame_latency = count;
@@ -22,14 +22,30 @@ void AbstractFilter::ProcessTransformedBlock(
   }
   // Store data to process & start the processing
   auto stored_data = m_circular_frame_buffer.Push(data);
-  auto f = std::make_shared<std::future<void>>(std::async(
-      std::launch::async, &AbstractFilter::AsyncProcessTransformedBlock, this,
-      stored_data, size));
+  std::shared_ptr<std::future<void>> f;
+  if (!m_sequential) {
+    f = std::make_shared<std::future<void>>(std::async(
+          std::launch::async, &AbstractFilter::AsyncProcessTransformedBlock, this,
+          stored_data, size));
+  } else {
+    m_semaphore.Wait();
+    f = std::make_shared<std::future<void>>(std::async(
+          std::launch::async, 
+          &AbstractFilter::SequentialAsyncProcessTransformedBlock, this,
+          stored_data, size));
+  }
+  
   m_circular_future.Push(f);
 
   // Wait for the desired process to finish and copy the output data
   m_circular_future.Pop();
   m_circular_frame_buffer.Pop(&data);
+}
+
+void AbstractFilter::SequentialAsyncProcessTransformedBlock(
+        std::vector<std::complex<float>*> data, uint32_t size) {
+  AsyncProcessTransformedBlock(data, size);
+  m_semaphore.Notify();
 }
 
 void AbstractFilter::PrepareToPlay() {
