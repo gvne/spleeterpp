@@ -18,4 +18,4 @@ build_script:
   - cmake --build .
 
 test_script:
-  - cmd: C:/projects/spleeterpp/test/spleeter_filter/Debug/test_spleeter_filter.exe --gtest_output=xml:tests.xml
+  - cmd: C:/projects/spleeterpp/build/test/spleeter_filter/Debug/test_spleeter_filter.exe --gtest_output=xml:tests.xml
