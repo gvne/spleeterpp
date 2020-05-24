@@ -11,11 +11,11 @@ install:
   - cmd : mklvars.bat intel64 #Fills the env variables MKLROOT LIB INCLUDE
 
 build_script:
-  - dir
+  - cd C:\projects\spleeterpp
   - mkdir build
   - cd build
   - cmake -Drtff_use_mkl=ON ..
   - cmake --build .
 
 test_script:
-  - cmd: ./test/spleeter_filter/Debug/test_spleeter_filter.exe --gtest_output=xml:tests.xml
+  - cmd: C:/projects/spleeterpp/test/spleeter_filter/Debug/test_spleeter_filter.exe --gtest_output=xml:tests.xml
