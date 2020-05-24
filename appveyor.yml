@@ -1,0 +1,21 @@
+version: 1.0.{build}
+
+image:
+  - Visual Studio 2019
+
+install:
+  - ps: (new-object net.webclient).DownloadFile('https://s3.amazonaws.com/audionamix-public/w_mkl_2017.3.210.exe', 'C:/users/appveyor/w_mkl_2017.3.210.exe')
+  - cmd : C:/users/appveyor/w_mkl_2017.3.210.exe -f C:/users/appveyor --s --x
+  - cmd : C:/users/appveyor/setup.exe install --output=output --eula=accept
+  - cmd : cd "C:/Program Files (x86)/IntelSWTools/compilers_and_libraries_2017/windows/mkl/bin/"
+  - cmd : mklvars.bat intel64 #Fills the env variables MKLROOT LIB INCLUDE
+
+build_script:
+  - dir
+  - mkdir build
+  - cd build
+  - cmake -Drtff_use_mkl=ON ..
+  - cmake --build .
+
+test_script:
+  - cmd: ./test/spleeter_filter/Debug/test_spleeter_filter.exe --gtest_output=xml:tests.xml
