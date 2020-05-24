@@ -2,15 +2,10 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
   <compounddef id="dir_cf8dda79de50e3e42e3b1f531732fb91" kind="dir">
     <compoundname>/code/src/spleeter</compoundname>
-    <innerfile refid="filter_8cc">filter.cc</innerfile>
-    <innerfile refid="filter_8h">filter.h</innerfile>
     <innerfile refid="model_8cc">model.cc</innerfile>
     <innerfile refid="model_8h">model.h</innerfile>
-    <innerfile refid="registry_8cc">registry.cc</innerfile>
-    <innerfile refid="registry_8h">registry.h</innerfile>
     <innerfile refid="spleeter_8cc">spleeter.cc</innerfile>
     <innerfile refid="spleeter_8h">spleeter.h</innerfile>
-    <innerfile refid="type_8h">type.h</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

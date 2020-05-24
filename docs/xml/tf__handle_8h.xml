@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="tf__handle_8h" kind="file" language="C++">
+    <compoundname>tf_handle.h</compoundname>
+    <includes local="no">memory</includes>
+    <includes local="no">functional</includes>
+    <includes local="no">iostream</includes>
+    <includes local="no">tensorflow/c/c_api.h</includes>
+    <includedby refid="model_8h" local="yes">/code/src/spleeter/model.h</includedby>
+    <includedby refid="registry_8h" local="yes">/code/src/spleeter_common/registry.h</includedby>
+    <includedby refid="spleeter__common_8cc" local="yes">/code/src/spleeter_common/spleeter_common.cc</includedby>
+    <includedby refid="tf__handle_8cc" local="yes">/code/src/spleeter_common/tf_handle.cc</includedby>
+    <includedby refid="filter_8cc" local="yes">/code/src/spleeter_filter/filter.cc</includedby>
+    <includedby refid="filter_2model_8h" local="yes">/code/src/spleeter_filter/model.h</includedby>
+    <includedby refid="tensor_8h" local="yes">/code/src/spleeter_filter/tensor.h</includedby>
+    <incdepgraph>
+      <node id="124">
+        <label>functional</label>
+      </node>
+      <node id="125">
+        <label>iostream</label>
+      </node>
+      <node id="122">
+        <label>/code/src/spleeter_common/tf_handle.h</label>
+        <link refid="tf__handle_8h"/>
+        <childnode refid="123" relation="include">
+        </childnode>
+        <childnode refid="124" relation="include">
+        </childnode>
+        <childnode refid="125" relation="include">
+        </childnode>
+        <childnode refid="126" relation="include">
+        </childnode>
+      </node>
+      <node id="126">
+        <label>tensorflow/c/c_api.h</label>
+      </node>
+      <node id="123">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="128">
+        <label>/code/src/spleeter/model.h</label>
+        <link refid="model_8h_source"/>
+      </node>
+      <node id="130">
+        <label>/code/src/spleeter_filter/model.h</label>
+        <link refid="filter_2model_8h_source"/>
+      </node>
+      <node id="129">
+        <label>/code/src/spleeter_common/registry.h</label>
+        <link refid="registry_8h_source"/>
+      </node>
+      <node id="131">
+        <label>/code/src/spleeter_filter/tensor.h</label>
+        <link refid="tensor_8h_source"/>
+      </node>
+      <node id="127">
+        <label>/code/src/spleeter_common/tf_handle.h</label>
+        <link refid="tf__handle_8h"/>
+        <childnode refid="128" relation="include">
+        </childnode>
+        <childnode refid="129" relation="include">
+        </childnode>
+        <childnode refid="130" relation="include">
+        </childnode>
+        <childnode refid="131" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classspleeter_1_1TFHandle" prot="public">spleeter::TFHandle</innerclass>
+    <innernamespace refid="namespacespleeter">spleeter</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>SPLEETER_FILTER_TF_HANDLE_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SPLEETER_FILTER_TF_HANDLE_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;memory&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;functional&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;iostream&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;tensorflow/c/c_api.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacespleeter" kindref="compound">spleeter</ref><sp/>{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="13" refid="classspleeter_1_1TFHandle" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classspleeter_1_1TFHandle" kindref="compound">TFHandle</ref><sp/>{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><ref refid="classspleeter_1_1TFHandle" kindref="compound">TFHandle</ref>(T*<sp/>ptr,<sp/>std::function&lt;</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">(T*)&gt;<sp/>deleter)<sp/>:<sp/>m_ptr(ptr),<sp/>m_deleter(deleter)<sp/>{}</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><ref refid="classspleeter_1_1TFHandle" kindref="compound">TFHandle</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classspleeter_1_1TFHandle" kindref="compound">TFHandle</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/>~<ref refid="classspleeter_1_1TFHandle" kindref="compound">TFHandle</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/>m_deleter(m_ptr);</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/>T*<sp/></highlight><highlight class="keyword">get</highlight><highlight class="normal">()<sp/>{</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_ptr;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T*<sp/></highlight><highlight class="keyword">get</highlight><highlight class="normal">()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_ptr;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/>T*<sp/>m_ptr;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/>std::function&lt;void(T*)&gt;<sp/>m_deleter;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>TFHandlePtr<sp/>=<sp/>std::shared_ptr&lt;TFHandle&lt;T&gt;&gt;;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal">TFHandlePtr&lt;T&gt;<sp/>MakeHandle(T*<sp/>ptr,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>(deleter)(T*))<sp/>{</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::make_shared&lt;TFHandle&lt;T&gt;&gt;(ptr,<sp/>deleter);</highlight></codeline>
+<codeline lineno="37"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SessionDeleter(TF_Session*<sp/>ptr);</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal">}<sp/><sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>spleeter</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/><sp/>//<sp/>SPLEETER_FILTER_TF_HANDLE_H_</highlight></codeline>
+    </programlisting>
+    <location file="/code/src/spleeter_common/tf_handle.h"/>
+  </compounddef>
+</doxygen>

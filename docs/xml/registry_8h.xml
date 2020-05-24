@@ -2,78 +2,58 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
   <compounddef id="registry_8h" kind="file" language="C++">
     <compoundname>registry.h</compoundname>
-    <includes local="yes">tensorflow/cc/saved_model/loader.h</includes>
-    <includes refid="spleeter_8h" local="yes">spleeter/spleeter.h</includes>
-    <includedby refid="filter_8cc" local="yes">/code/src/spleeter/filter.cc</includedby>
+    <includes local="no">map</includes>
+    <includes refid="tf__handle_8h" local="yes">spleeter_common/tf_handle.h</includes>
+    <includes refid="type_8h" local="yes">spleeter_common/type.h</includes>
     <includedby refid="model_8cc" local="yes">/code/src/spleeter/model.cc</includedby>
-    <includedby refid="registry_8cc" local="yes">/code/src/spleeter/registry.cc</includedby>
+    <includedby refid="registry_8cc" local="yes">/code/src/spleeter_common/registry.cc</includedby>
+    <includedby refid="spleeter__common_8cc" local="yes">/code/src/spleeter_common/spleeter_common.cc</includedby>
+    <includedby refid="filter_8cc" local="yes">/code/src/spleeter_filter/filter.cc</includedby>
     <incdepgraph>
-      <node id="70">
-        <label>tensorflow/cc/saved_model/loader.h</label>
+      <node id="86">
+        <label>functional</label>
       </node>
-      <node id="78">
-        <label>system_error</label>
-      </node>
-      <node id="75">
+      <node id="90">
         <label>Eigen/Core</label>
       </node>
-      <node id="72">
-        <label>string</label>
+      <node id="83">
+        <label>map</label>
       </node>
-      <node id="74">
-        <label>unordered_set</label>
-      </node>
-      <node id="80">
-        <label>artff/abstract_filter.h</label>
-      </node>
-      <node id="69">
-        <label>/code/src/spleeter/registry.h</label>
+      <node id="82">
+        <label>/code/src/spleeter_common/registry.h</label>
         <link refid="registry_8h"/>
-        <childnode refid="70" relation="include">
+        <childnode refid="83" relation="include">
         </childnode>
-        <childnode refid="71" relation="include">
+        <childnode refid="84" relation="include">
         </childnode>
-      </node>
-      <node id="77">
-        <label>spleeter/filter.h</label>
-        <link refid="filter_8h_source"/>
-        <childnode refid="78" relation="include">
-        </childnode>
-        <childnode refid="79" relation="include">
-        </childnode>
-        <childnode refid="70" relation="include">
-        </childnode>
-        <childnode refid="80" relation="include">
-        </childnode>
-        <childnode refid="76" relation="include">
+        <childnode refid="89" relation="include">
         </childnode>
       </node>
-      <node id="79">
-        <label>mutex</label>
-      </node>
-      <node id="71">
-        <label>spleeter/spleeter.h</label>
-        <link refid="spleeter_8h_source"/>
-        <childnode refid="72" relation="include">
-        </childnode>
-        <childnode refid="73" relation="include">
-        </childnode>
-        <childnode refid="74" relation="include">
-        </childnode>
-        <childnode refid="75" relation="include">
-        </childnode>
-        <childnode refid="76" relation="include">
-        </childnode>
-        <childnode refid="77" relation="include">
-        </childnode>
-      </node>
-      <node id="76">
-        <label>spleeter/type.h</label>
+      <node id="89">
+        <label>spleeter_common/type.h</label>
         <link refid="type_8h_source"/>
-        <childnode refid="75" relation="include">
+        <childnode refid="90" relation="include">
         </childnode>
       </node>
-      <node id="73">
+      <node id="87">
+        <label>iostream</label>
+      </node>
+      <node id="84">
+        <label>spleeter_common/tf_handle.h</label>
+        <link refid="tf__handle_8h_source"/>
+        <childnode refid="85" relation="include">
+        </childnode>
+        <childnode refid="86" relation="include">
+        </childnode>
+        <childnode refid="87" relation="include">
+        </childnode>
+        <childnode refid="88" relation="include">
+        </childnode>
+      </node>
+      <node id="88">
+        <label>tensorflow/c/c_api.h</label>
+      </node>
+      <node id="85">
         <label>memory</label>
       </node>
     </incdepgraph>
@@ -84,34 +64,36 @@
     <detaileddescription>
     </detaileddescription>
     <programlisting>
-<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>SPLEETER_REGISTRY_H_</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SPLEETER_REGISTRY_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>SPLEETER_FILTER_REGISTRY_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SPLEETER_FILTER_REGISTRY_H_</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="3"><highlight class="normal"></highlight></codeline>
-<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;tensorflow/cc/saved_model/loader.h&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;spleeter/spleeter.h&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="6"><highlight class="normal"></highlight></codeline>
-<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacespleeter" kindref="compound">spleeter</ref><sp/>{</highlight></codeline>
-<codeline lineno="8"><highlight class="normal"></highlight></codeline>
-<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>BundlePtr<sp/>=<sp/>std::shared_ptr&lt;tensorflow::SavedModelBundle&gt;;</highlight></codeline>
-<codeline lineno="10"><highlight class="normal"></highlight></codeline>
-<codeline lineno="11" refid="classspleeter_1_1Registry" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classspleeter_1_1Registry" kindref="compound">Registry</ref><sp/>{</highlight></codeline>
-<codeline lineno="12"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="13"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classspleeter_1_1Registry" kindref="compound">Registry</ref>&amp;<sp/>instance();</highlight></codeline>
-<codeline lineno="14"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Register(BundlePtr<sp/>bundle,<sp/>SeparationType<sp/>type);</highlight></codeline>
-<codeline lineno="15"><highlight class="normal"><sp/><sp/>BundlePtr<sp/>Get(SeparationType<sp/>type);</highlight></codeline>
-<codeline lineno="16"><highlight class="normal"><sp/><sp/></highlight></codeline>
-<codeline lineno="17"><highlight class="normal"><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="18"><highlight class="normal"><sp/><sp/><ref refid="classspleeter_1_1Registry" kindref="compound">Registry</ref>();</highlight></codeline>
-<codeline lineno="19"><highlight class="normal"><sp/><sp/>~<ref refid="classspleeter_1_1Registry" kindref="compound">Registry</ref>();</highlight></codeline>
-<codeline lineno="20"><highlight class="normal"><sp/><sp/></highlight></codeline>
-<codeline lineno="21"><highlight class="normal"><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="22"><highlight class="normal"><sp/><sp/>std::map&lt;SeparationType,<sp/>BundlePtr&gt;<sp/>m_registry;</highlight></codeline>
-<codeline lineno="23"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="24"><highlight class="normal"></highlight></codeline>
-<codeline lineno="25"><highlight class="normal">}<sp/><sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>spleeter</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;map&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;spleeter_common/tf_handle.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;spleeter_common/type.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacespleeter" kindref="compound">spleeter</ref><sp/>{</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>Bundle<sp/>=<sp/>std::pair&lt;TFHandlePtr&lt;TF_Session&gt;,<sp/>TFHandlePtr&lt;TF_Graph&gt;&gt;;</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>BundlePtr<sp/>=<sp/>std::shared_ptr&lt;Bundle&gt;;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13" refid="classspleeter_1_1Registry" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classspleeter_1_1Registry" kindref="compound">Registry</ref><sp/>{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classspleeter_1_1Registry" kindref="compound">Registry</ref>&amp;<sp/>instance();</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Register(BundlePtr<sp/>bundle,<sp/>SeparationType<sp/>type);</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/>BundlePtr<sp/>Get(SeparationType<sp/>type);</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><ref refid="classspleeter_1_1Registry" kindref="compound">Registry</ref>();</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/>~<ref refid="classspleeter_1_1Registry" kindref="compound">Registry</ref>();</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/>std::map&lt;SeparationType,<sp/>BundlePtr&gt;<sp/>m_registry;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="26"><highlight class="normal"></highlight></codeline>
-<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/><sp/>//<sp/>SPLEETER_REGISTRY_H_</highlight></codeline>
+<codeline lineno="27"><highlight class="normal">}<sp/><sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>spleeter</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/><sp/>//<sp/>SPLEETER_FILTER_REGISTRY_H_</highlight></codeline>
     </programlisting>
-    <location file="/code/src/spleeter/registry.h"/>
+    <location file="/code/src/spleeter_common/registry.h"/>
   </compounddef>
 </doxygen>

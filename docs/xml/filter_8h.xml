@@ -4,66 +4,41 @@
     <compoundname>filter.h</compoundname>
     <includes local="no">system_error</includes>
     <includes local="no">mutex</includes>
-    <includes local="yes">tensorflow/cc/saved_model/loader.h</includes>
     <includes local="yes">artff/abstract_filter.h</includes>
-    <includes refid="type_8h" local="yes">spleeter/type.h</includes>
-    <includedby refid="filter_8cc" local="yes">/code/src/spleeter/filter.cc</includedby>
-    <includedby refid="spleeter_8h" local="yes">/code/src/spleeter/spleeter.h</includedby>
+    <includes refid="type_8h" local="yes">spleeter_common/type.h</includes>
+    <includedby refid="filter_8cc" local="yes">/code/src/spleeter_filter/filter.cc</includedby>
     <incdepgraph>
-      <node id="22">
-        <label>tensorflow/cc/saved_model/loader.h</label>
-      </node>
-      <node id="20">
+      <node id="164">
         <label>system_error</label>
       </node>
-      <node id="25">
+      <node id="163">
+        <label>/code/src/spleeter_filter/filter.h</label>
+        <link refid="filter_8h"/>
+        <childnode refid="164" relation="include">
+        </childnode>
+        <childnode refid="165" relation="include">
+        </childnode>
+        <childnode refid="166" relation="include">
+        </childnode>
+        <childnode refid="167" relation="include">
+        </childnode>
+      </node>
+      <node id="168">
         <label>Eigen/Core</label>
       </node>
-      <node id="23">
+      <node id="166">
         <label>artff/abstract_filter.h</label>
       </node>
-      <node id="19">
-        <label>/code/src/spleeter/filter.h</label>
-        <link refid="filter_8h"/>
-        <childnode refid="20" relation="include">
-        </childnode>
-        <childnode refid="21" relation="include">
-        </childnode>
-        <childnode refid="22" relation="include">
-        </childnode>
-        <childnode refid="23" relation="include">
-        </childnode>
-        <childnode refid="24" relation="include">
+      <node id="167">
+        <label>spleeter_common/type.h</label>
+        <link refid="type_8h_source"/>
+        <childnode refid="168" relation="include">
         </childnode>
       </node>
-      <node id="21">
+      <node id="165">
         <label>mutex</label>
       </node>
-      <node id="24">
-        <label>spleeter/type.h</label>
-        <link refid="type_8h_source"/>
-        <childnode refid="25" relation="include">
-        </childnode>
-      </node>
     </incdepgraph>
-    <invincdepgraph>
-      <node id="28">
-        <label>/code/src/spleeter/registry.h</label>
-        <link refid="registry_8h_source"/>
-      </node>
-      <node id="26">
-        <label>/code/src/spleeter/filter.h</label>
-        <link refid="filter_8h"/>
-        <childnode refid="27" relation="include">
-        </childnode>
-      </node>
-      <node id="27">
-        <label>/code/src/spleeter/spleeter.h</label>
-        <link refid="spleeter_8h_source"/>
-        <childnode refid="28" relation="include">
-        </childnode>
-      </node>
-    </invincdepgraph>
     <innerclass refid="classspleeter_1_1Filter" prot="public">spleeter::Filter</innerclass>
     <innernamespace refid="namespacespleeter">spleeter</innernamespace>
     <briefdescription>
@@ -71,94 +46,70 @@
     <detaileddescription>
     </detaileddescription>
     <programlisting>
-<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>SPLEETER_FILTER_H_</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SPLEETER_FILTER_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>SPLEETER_FILTER_FILTER_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SPLEETER_FILTER_FILTER_H_</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="3"><highlight class="normal"></highlight></codeline>
 <codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;system_error&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;mutex&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="6"><highlight class="normal"></highlight></codeline>
-<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;tensorflow/cc/saved_model/loader.h&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;artff/abstract_filter.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;artff/abstract_filter.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;spleeter_common/type.h&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight></codeline>
-<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;spleeter/type.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacespleeter" kindref="compound">spleeter</ref><sp/>{</highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight></codeline>
-<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacespleeter" kindref="compound">spleeter</ref><sp/>{</highlight></codeline>
-<codeline lineno="13"><highlight class="normal"></highlight></codeline>
-<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>BundlePtr<sp/>=<sp/>std::shared_ptr&lt;tensorflow::SavedModelBundle&gt;;</highlight></codeline>
+<codeline lineno="12" refid="classspleeter_1_1Filter" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classspleeter_1_1Filter" kindref="compound">Filter</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>artff::AbstractFilter<sp/>{</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><ref refid="classspleeter_1_1Filter" kindref="compound">Filter</ref>(SeparationType<sp/>separation_type);</highlight></codeline>
 <codeline lineno="15"><highlight class="normal"></highlight></codeline>
-<codeline lineno="16" refid="classspleeter_1_1Filter" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classspleeter_1_1Filter" kindref="compound">Filter</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>artff::AbstractFilter<sp/>{</highlight></codeline>
-<codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="18"><highlight class="normal"><sp/><sp/><ref refid="classspleeter_1_1Filter" kindref="compound">Filter</ref>(SeparationType<sp/>separation_type);</highlight></codeline>
-<codeline lineno="19"><highlight class="normal"></highlight></codeline>
-<codeline lineno="21"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classspleeter_1_1Filter_1abaf85eb48aa211b3ca16331ab4f3d485" kindref="member">Init</ref>(std::error_code&amp;<sp/>err);</highlight></codeline>
-<codeline lineno="22"><highlight class="normal"></highlight></codeline>
-<codeline lineno="23"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>------</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="24"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>FILTER<sp/>PARAMETERS</highlight></codeline>
-<codeline lineno="28"><highlight class="comment"></highlight><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classspleeter_1_1Filter_1af2a5a206f6a4b361f99b1821b5fa01dc" kindref="member">set_volume</ref>(uint8_t<sp/>stem_index,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>value);</highlight></codeline>
-<codeline lineno="29"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>volume(uint8_t<sp/>stem_index)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="30"><highlight class="normal"></highlight></codeline>
-<codeline lineno="31"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>----------------------------------------------------------------------</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="32"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>ALGORITHM<sp/>PARAMETERS</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="33"><highlight class="normal"></highlight></codeline>
-<codeline lineno="38"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classspleeter_1_1Filter_1af242e0b835bacea0d46744067c241b71" kindref="member">set_ProcessLength</ref>(uint16_t<sp/>size);</highlight></codeline>
-<codeline lineno="39"><highlight class="normal"><sp/><sp/>uint16_t<sp/>ProcessLength()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="40"><highlight class="normal"></highlight></codeline>
-<codeline lineno="44"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classspleeter_1_1Filter_1a995a121b3e5300ab2129636943bd6086" kindref="member">set_FrameLength</ref>(uint16_t<sp/>size);</highlight></codeline>
-<codeline lineno="45"><highlight class="normal"><sp/><sp/>uint16_t<sp/>FrameLength()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="46"><highlight class="normal"></highlight></codeline>
-<codeline lineno="50"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classspleeter_1_1Filter_1a3581c17c71107eab3c97ff58c17ba6ca" kindref="member">set_OverlapLength</ref>(uint16_t<sp/>size);</highlight></codeline>
-<codeline lineno="51"><highlight class="normal"><sp/><sp/>uint16_t<sp/>OverlapLength()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="52"><highlight class="normal"></highlight></codeline>
-<codeline lineno="56"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classspleeter_1_1Filter_1ae648103ed818f744b214724e3d621ecd" kindref="member">set_ForceConservativity</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>value);</highlight></codeline>
-<codeline lineno="57"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>ForceConservativity()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="58"><highlight class="normal"></highlight></codeline>
-<codeline lineno="66"><highlight class="normal"><sp/><sp/>uint32_t<sp/><ref refid="classspleeter_1_1Filter_1a586ab362a4723e419284dff19864def2" kindref="member">FrameLatency</ref>()<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="67"><highlight class="normal"></highlight></codeline>
-<codeline lineno="68"><highlight class="normal"></highlight></codeline>
-<codeline lineno="69"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="70"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>PrepareToPlay()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="71"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AsyncProcessTransformedBlock(std::vector&lt;std::complex&lt;float&gt;*&gt;<sp/>data,</highlight></codeline>
-<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>size)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="73"><highlight class="normal"></highlight></codeline>
-<codeline lineno="74"><highlight class="normal"><sp/><sp/>uint32_t<sp/>SpleeterFrameLatency()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classspleeter_1_1Filter_1abaf85eb48aa211b3ca16331ab4f3d485" kindref="member">Init</ref>(std::error_code&amp;<sp/>err);</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>------</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>FILTER<sp/>PARAMETERS</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"></highlight><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classspleeter_1_1Filter_1af2a5a206f6a4b361f99b1821b5fa01dc" kindref="member">set_volume</ref>(uint8_t<sp/>stem_index,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>value);</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>volume(uint8_t<sp/>stem_index)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>----------------------------------------------------------------------</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>ALGORITHM<sp/>PARAMETERS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classspleeter_1_1Filter_1af242e0b835bacea0d46744067c241b71" kindref="member">set_ProcessLength</ref>(uint16_t<sp/>size);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/>uint16_t<sp/>ProcessLength()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classspleeter_1_1Filter_1a995a121b3e5300ab2129636943bd6086" kindref="member">set_FrameLength</ref>(uint16_t<sp/>size);</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/>uint16_t<sp/>FrameLength()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classspleeter_1_1Filter_1a3581c17c71107eab3c97ff58c17ba6ca" kindref="member">set_OverlapLength</ref>(uint16_t<sp/>size);</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/>uint16_t<sp/>OverlapLength()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classspleeter_1_1Filter_1ae648103ed818f744b214724e3d621ecd" kindref="member">set_ForceConservativity</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>value);</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>ForceConservativity()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/>uint32_t<sp/><ref refid="classspleeter_1_1Filter_1a586ab362a4723e419284dff19864def2" kindref="member">FrameLatency</ref>()<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>PrepareToPlay()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AsyncProcessTransformedBlock(std::vector&lt;std::complex&lt;float&gt;*&gt;<sp/>data,</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>size)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/>uint32_t<sp/>SpleeterFrameLatency()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/>SeparationType<sp/>m_type;</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/>std::vector&lt;float&gt;<sp/>m_volumes;</highlight></codeline>
 <codeline lineno="75"><highlight class="normal"></highlight></codeline>
-<codeline lineno="76"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="77"><highlight class="normal"><sp/><sp/>SeparationType<sp/>m_type;</highlight></codeline>
-<codeline lineno="78"><highlight class="normal"><sp/><sp/>BundlePtr<sp/>m_bundle;</highlight></codeline>
-<codeline lineno="79"><highlight class="normal"><sp/><sp/>std::vector&lt;float&gt;<sp/>m_volumes;</highlight></codeline>
-<codeline lineno="80"><highlight class="normal"></highlight></codeline>
-<codeline lineno="81"><highlight class="normal"><sp/><sp/>uint16_t<sp/>m_process_length;</highlight></codeline>
-<codeline lineno="82"><highlight class="normal"><sp/><sp/>uint16_t<sp/>m_frame_length;</highlight></codeline>
-<codeline lineno="83"><highlight class="normal"><sp/><sp/>uint16_t<sp/>m_overlap_length;</highlight></codeline>
-<codeline lineno="84"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>m_force_conservativity;</highlight></codeline>
-<codeline lineno="85"><highlight class="normal"></highlight></codeline>
-<codeline lineno="86"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>------------</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="87"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>internal<sp/>buffers</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="88"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>--<sp/>The<sp/>frame<sp/>being<sp/>processed</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="89"><highlight class="normal"><sp/><sp/>uint32_t<sp/>m_frame_index;</highlight></codeline>
-<codeline lineno="90"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>--<sp/>in</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="91"><highlight class="normal"><sp/><sp/>tensorflow::Tensor<sp/>m_network_input;</highlight></codeline>
-<codeline lineno="92"><highlight class="normal"><sp/><sp/>tensorflow::Tensor<sp/>m_previous_network_input;</highlight></codeline>
-<codeline lineno="93"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>--<sp/>out</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="94"><highlight class="normal"><sp/><sp/>std::vector&lt;tensorflow::Tensor&gt;<sp/>m_network_result;</highlight></codeline>
-<codeline lineno="95"><highlight class="normal"><sp/><sp/>std::vector&lt;tensorflow::Tensor&gt;<sp/>m_previous_network_result;</highlight></codeline>
-<codeline lineno="96"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>--<sp/>for<sp/>single<sp/>frame<sp/>processing</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="97"><highlight class="normal"><sp/><sp/>std::vector&lt;std::vector&lt;float&gt;&gt;<sp/>m_mask_vec_data;</highlight></codeline>
-<codeline lineno="98"><highlight class="normal"><sp/><sp/>std::vector&lt;std::vector&lt;float&gt;&gt;<sp/>m_previous_mask_vec_data;</highlight></codeline>
-<codeline lineno="99"><highlight class="normal"><sp/><sp/>std::vector&lt;std::vector&lt;float&gt;&gt;<sp/>m_mask_sum_vec_data;</highlight></codeline>
-<codeline lineno="100"><highlight class="normal"><sp/><sp/>std::vector&lt;float*&gt;<sp/>m_mask_data;</highlight></codeline>
-<codeline lineno="101"><highlight class="normal"><sp/><sp/>std::vector&lt;float*&gt;<sp/>m_previous_mask_data;</highlight></codeline>
-<codeline lineno="102"><highlight class="normal"><sp/><sp/>std::vector&lt;float*&gt;<sp/>m_mask_sum_data;</highlight></codeline>
-<codeline lineno="103"><highlight class="normal"><sp/><sp/>std::vector&lt;std::vector&lt;std::vector&lt;float&gt;&gt;&gt;<sp/>m_masks_vec_data;</highlight></codeline>
-<codeline lineno="104"><highlight class="normal"><sp/><sp/>std::vector&lt;std::vector&lt;float*&gt;&gt;<sp/>m_masks_data;</highlight></codeline>
-<codeline lineno="105"><highlight class="normal"><sp/><sp/></highlight></codeline>
-<codeline lineno="106"><highlight class="normal"><sp/><sp/>std::mutex<sp/>m_mutex;</highlight></codeline>
-<codeline lineno="107"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="108"><highlight class="normal"></highlight></codeline>
-<codeline lineno="109"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>spleeter</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="110"><highlight class="normal"></highlight></codeline>
-<codeline lineno="111"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/>//<sp/>SPLEETER_FILTER_H_</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/>uint16_t<sp/>m_process_length;</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/>uint16_t<sp/>m_frame_length;</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/>uint16_t<sp/>m_overlap_length;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>m_force_conservativity;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classspleeter_1_1Filter_1_1Impl" kindref="compound">Impl</ref>;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/>std::shared_ptr&lt;Impl&gt;<sp/>m_impl;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>spleeter</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/>//<sp/>SPLEETER_FILTER_FILTER_H_</highlight></codeline>
     </programlisting>
-    <location file="/code/src/spleeter/filter.h"/>
+    <location file="/code/src/spleeter_filter/filter.h"/>
   </compounddef>
 </doxygen>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="dir_960157c8da09d6d02f997f6b381aed41" kind="dir">
+    <compoundname>/code/src/spleeter_common</compoundname>
+    <innerfile refid="registry_8cc">registry.cc</innerfile>
+    <innerfile refid="registry_8h">registry.h</innerfile>
+    <innerfile refid="spleeter__common_8cc">spleeter_common.cc</innerfile>
+    <innerfile refid="spleeter__common_8h">spleeter_common.h</innerfile>
+    <innerfile refid="tf__handle_8cc">tf_handle.cc</innerfile>
+    <innerfile refid="tf__handle_8h">tf_handle.h</innerfile>
+    <innerfile refid="type_8h">type.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/code/src/spleeter_common/"/>
+  </compounddef>
+</doxygen>

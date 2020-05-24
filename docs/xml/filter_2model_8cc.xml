@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="filter_2model_8cc" kind="file" language="C++">
+    <compoundname>model.cc</compoundname>
+    <includes refid="filter_2model_8h" local="yes">spleeter_filter/model.h</includes>
+    <incdepgraph>
+      <node id="17">
+        <label>system_error</label>
+      </node>
+      <node id="20">
+        <label>functional</label>
+      </node>
+      <node id="14">
+        <label>spleeter_filter/model.h</label>
+        <link refid="filter_2model_8h_source"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>Eigen/Core</label>
+      </node>
+      <node id="15">
+        <label>string</label>
+      </node>
+      <node id="23">
+        <label>spleeter_common/type.h</label>
+        <link refid="type_8h_source"/>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>vector</label>
+      </node>
+      <node id="13">
+        <label>/code/src/spleeter_filter/model.cc</label>
+        <link refid="filter_2model_8cc"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>iostream</label>
+      </node>
+      <node id="18">
+        <label>spleeter_common/tf_handle.h</label>
+        <link refid="tf__handle_8h_source"/>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>tensorflow/c/c_api.h</label>
+      </node>
+      <node id="19">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespacespleeter">spleeter</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;spleeter_filter/model.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacespleeter" kindref="compound">spleeter</ref><sp/>{</highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal">std::vector&lt;std::string&gt;<sp/>GetOutputNames(SeparationType<sp/>type)<sp/>{</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Found<sp/>using<sp/>the<sp/>command</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>$&gt;<sp/>saved_model_cli<sp/>show<sp/>--dir<sp/>_deps/spleeter-build/exported/Xstems<sp/>--all</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(type)<sp/>{</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>TwoStems:</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>{</highlight><highlight class="stringliteral">&quot;strided_slice_11&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;strided_slice_19&quot;</highlight><highlight class="normal">};</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>FourStems:</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>{</highlight><highlight class="stringliteral">&quot;strided_slice_11&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;strided_slice_19&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;strided_slice_27&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;strided_slice_35&quot;</highlight><highlight class="normal">};</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>FiveStems:</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>{</highlight><highlight class="stringliteral">&quot;strided_slice_16&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;strided_slice_32&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;strided_slice_40&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;strided_slice_24&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;strided_slice_48&quot;</highlight><highlight class="normal">};</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>{};</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="20"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>spleeter</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/code/src/spleeter_filter/model.cc"/>
+  </compounddef>
+</doxygen>

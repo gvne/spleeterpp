@@ -4,6 +4,8 @@
     <compoundname>spleeter</compoundname>
     <innerclass refid="classspleeter_1_1Filter" prot="public">spleeter::Filter</innerclass>
     <innerclass refid="classspleeter_1_1Registry" prot="public">spleeter::Registry</innerclass>
+    <innerclass refid="classspleeter_1_1TFHandle" prot="public">spleeter::TFHandle</innerclass>
+    <innernamespace refid="namespacespleeter_1_1internal">spleeter::internal</innernamespace>
       <sectiondef kind="enum">
       <memberdef kind="enum" id="type_8h_1aec4a660e27c7c164c02bf146793d20ad" prot="public" static="no">
         <name>SeparationType</name>
@@ -34,13 +36,26 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/code/src/spleeter/type.h" line="8" column="1" bodyfile="/code/src/spleeter/type.h" bodystart="8" bodyend="8"/>
+        <location file="/code/src/spleeter_common/type.h" line="8" column="1" bodyfile="/code/src/spleeter_common/type.h" bodystart="8" bodyend="8"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="filter_8h_1ad169de8448911ff73656b1f2cb4d62b8" prot="public" static="no">
-        <type>std::shared_ptr&lt; tensorflow::SavedModelBundle &gt;</type>
-        <definition>typedef std::shared_ptr&lt; tensorflow::SavedModelBundle &gt; spleeter::BundlePtr</definition>
+      <memberdef kind="typedef" id="registry_8h_1a7999e61aa9708fbf30a7bcf1c80ba09b" prot="public" static="no">
+        <type>std::pair&lt; TFHandlePtr&lt; TF_Session &gt;, TFHandlePtr&lt; TF_Graph &gt; &gt;</type>
+        <definition>typedef std::pair&lt; TFHandlePtr&lt; TF_Session &gt;, TFHandlePtr&lt; TF_Graph &gt; &gt; spleeter::Bundle</definition>
+        <argsstring></argsstring>
+        <name>Bundle</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_common/registry.h" line="10" column="1" bodyfile="/code/src/spleeter_common/registry.h" bodystart="10" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="registry_8h_1ae64e8c9bd21414a326802bb33eaee26c" prot="public" static="no">
+        <type>std::shared_ptr&lt; Bundle &gt;</type>
+        <definition>typedef std::shared_ptr&lt; Bundle &gt; spleeter::BundlePtr</definition>
         <argsstring></argsstring>
         <name>BundlePtr</name>
         <briefdescription>
@@ -49,7 +64,20 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/code/src/spleeter/filter.h" line="14" column="1" bodyfile="/code/src/spleeter/filter.h" bodystart="14" bodyend="-1"/>
+        <location file="/code/src/spleeter_common/registry.h" line="11" column="1" bodyfile="/code/src/spleeter_common/registry.h" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="tf__handle_8h_1af19f8572624c49365667b321a2a56475" prot="public" static="no">
+        <type>std::shared_ptr&lt; <ref refid="classspleeter_1_1TFHandle" kindref="compound">TFHandle</ref>&lt; T &gt; &gt;</type>
+        <definition>using spleeter::TFHandlePtr = typedef std::shared_ptr&lt;TFHandle&lt;T&gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>TFHandlePtr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_common/tf_handle.h" line="32" column="1" bodyfile="/code/src/spleeter_common/tf_handle.h" bodystart="32" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="type_8h_1a85c84fe241a7d532b574532c0d3d8804" prot="public" static="no">
         <type>Eigen::Matrix2Xf</type>
@@ -62,11 +90,340 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/code/src/spleeter/type.h" line="10" column="1" bodyfile="/code/src/spleeter/type.h" bodystart="10" bodyend="-1"/>
+        <location file="/code/src/spleeter_common/type.h" line="10" column="1" bodyfile="/code/src/spleeter_common/type.h" bodystart="10" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="func">
-      <memberdef kind="function" id="model_8cc_1a8485e0f61f7b433d835df5b5873c7291" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="model_8cc_1a8d380c75b9d47187a690ff50c7816651" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void spleeter::TensorNoDeleter</definition>
+        <argsstring>(void *data, size_t len, void *arg)</argsstring>
+        <name>TensorNoDeleter</name>
+        <param>
+          <type>void *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>len</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>arg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter/model.cc" line="6" column="1" bodyfile="/code/src/spleeter/model.cc" bodystart="6" bodyend="6"/>
+      </memberdef>
+      <memberdef kind="function" id="model_8cc_1ac33e1d7def4da2b2c7a7c763177c01ed" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void spleeter::RunModel</definition>
+        <argsstring>(const Waveform &amp;input, SeparationType separation_type, const std::vector&lt; std::string &gt; &amp;output_names, std::vector&lt; TFHandlePtr&lt; TF_Tensor &gt;&gt; *result, std::error_code &amp;err)</argsstring>
+        <name>RunModel</name>
+        <param>
+          <type>const Waveform &amp;</type>
+          <declname>input</declname>
+        </param>
+        <param>
+          <type>SeparationType</type>
+          <declname>separation_type</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>output_names</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; TFHandlePtr&lt; TF_Tensor &gt;&gt; *</type>
+          <declname>result</declname>
+        </param>
+        <param>
+          <type>std::error_code &amp;</type>
+          <declname>err</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter/model.cc" line="8" column="1" bodyfile="/code/src/spleeter/model.cc" bodystart="8" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="model_8cc_1ada8bedb780eb934027dd7d7d6b81d2d3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void spleeter::SetOutput</definition>
+        <argsstring>(const std::vector&lt; TFHandlePtr&lt; TF_Tensor &gt;&gt; &amp;tf_output, uint64_t frame_count, std::vector&lt; Waveform *&gt; output)</argsstring>
+        <name>SetOutput</name>
+        <param>
+          <type>const std::vector&lt; TFHandlePtr&lt; TF_Tensor &gt;&gt; &amp;</type>
+          <declname>tf_output</declname>
+        </param>
+        <param>
+          <type>uint64_t</type>
+          <declname>frame_count</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; Waveform *&gt;</type>
+          <declname>output</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter/model.cc" line="74" column="1" bodyfile="/code/src/spleeter/model.cc" bodystart="74" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="spleeter_8cc_1ae9e4a22774140095e3ede778573e451e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt; std::string &gt; spleeter::GetOutputNames</definition>
+        <argsstring>(SeparationType type)</argsstring>
+        <name>GetOutputNames</name>
+        <param>
+          <type>SeparationType</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter/spleeter.cc" line="8" column="1" bodyfile="/code/src/spleeter/spleeter.cc" bodystart="8" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="spleeter_8cc_1a4206dcf9f99db746a5fc5d52d7111d72" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void spleeter::Split</definition>
+        <argsstring>(const Waveform &amp;input, Waveform *vocals, Waveform *accompaniment, std::error_code &amp;err)</argsstring>
+        <name>Split</name>
+        <param>
+          <type>const Waveform &amp;</type>
+          <declname>input</declname>
+        </param>
+        <param>
+          <type>Waveform *</type>
+          <declname>vocals</declname>
+        </param>
+        <param>
+          <type>Waveform *</type>
+          <declname>accompaniment</declname>
+        </param>
+        <param>
+          <type>std::error_code &amp;</type>
+          <declname>err</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Split the input waveform into vocals and accompaniment <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>input</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the input waveform </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>vocals</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the extracted vocals waveform </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>accompaniment</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the extracted accompaniment waveform </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>err</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>an error code that gets set if something goes wrong. std::errc::protocol_error is obtained when the model hasn&apos;t been properly initialized </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter/spleeter.cc" line="25" column="1" bodyfile="/code/src/spleeter/spleeter.cc" bodystart="25" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="spleeter_8cc_1a159e164eff7f38c3ec3d16072b77fa1e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void spleeter::Split</definition>
+        <argsstring>(const Waveform &amp;input, Waveform *vocals, Waveform *drums, Waveform *bass, Waveform *other, std::error_code &amp;err)</argsstring>
+        <name>Split</name>
+        <param>
+          <type>const Waveform &amp;</type>
+          <declname>input</declname>
+        </param>
+        <param>
+          <type>Waveform *</type>
+          <declname>vocals</declname>
+        </param>
+        <param>
+          <type>Waveform *</type>
+          <declname>drums</declname>
+        </param>
+        <param>
+          <type>Waveform *</type>
+          <declname>bass</declname>
+        </param>
+        <param>
+          <type>Waveform *</type>
+          <declname>other</declname>
+        </param>
+        <param>
+          <type>std::error_code &amp;</type>
+          <declname>err</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Split the input waveform into vocals, drums, bass and other <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>input</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the input waveform </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>vocals</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the extracted vocals waveform </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>drums</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the extracted drums waveform </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the extracted bass waveform </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the extracted other waveform </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>err</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>an error code that gets set if something goes wrong. std::errc::protocol_error is obtained when the model hasn&apos;t been properly initialized </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter/spleeter.cc" line="35" column="1" bodyfile="/code/src/spleeter/spleeter.cc" bodystart="35" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="spleeter_8cc_1add06aa9a9b29628d5a0724815338a79f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void spleeter::Split</definition>
+        <argsstring>(const Waveform &amp;input, Waveform *vocals, Waveform *drums, Waveform *bass, Waveform *piano, Waveform *other, std::error_code &amp;err)</argsstring>
+        <name>Split</name>
+        <param>
+          <type>const Waveform &amp;</type>
+          <declname>input</declname>
+        </param>
+        <param>
+          <type>Waveform *</type>
+          <declname>vocals</declname>
+        </param>
+        <param>
+          <type>Waveform *</type>
+          <declname>drums</declname>
+        </param>
+        <param>
+          <type>Waveform *</type>
+          <declname>bass</declname>
+        </param>
+        <param>
+          <type>Waveform *</type>
+          <declname>piano</declname>
+        </param>
+        <param>
+          <type>Waveform *</type>
+          <declname>other</declname>
+        </param>
+        <param>
+          <type>std::error_code &amp;</type>
+          <declname>err</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Split the input waveform into vocals, drums, bass, piano and other <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>input</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the input waveform </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>vocals</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the extracted vocals waveform </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>drums</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the extracted drums waveform </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the extracted bass waveform </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>piano</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the extracted piano waveform </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the extracted other waveform </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>err</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>an error code that gets set if something goes wrong. std::errc::protocol_error is obtained when the model hasn&apos;t been properly initialized </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter/spleeter.cc" line="45" column="1" bodyfile="/code/src/spleeter/spleeter.cc" bodystart="45" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="spleeter__common_8cc_1a8485e0f61f7b433d835df5b5873c7291" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
         <definition>std::string spleeter::GetPath</definition>
         <argsstring>(const std::string &amp;path_to_models, SeparationType type)</argsstring>
@@ -85,26 +442,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/code/src/spleeter/model.cc" line="9" column="1" bodyfile="/code/src/spleeter/model.cc" bodystart="9" bodyend="20"/>
+        <location file="/code/src/spleeter_common/spleeter_common.cc" line="10" column="1" bodyfile="/code/src/spleeter_common/spleeter_common.cc" bodystart="10" bodyend="21"/>
       </memberdef>
-      <memberdef kind="function" id="model_8cc_1ae9e4a22774140095e3ede778573e451e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>std::vector&lt; std::string &gt;</type>
-        <definition>std::vector&lt; std::string &gt; spleeter::GetOutputNames</definition>
-        <argsstring>(SeparationType type)</argsstring>
-        <name>GetOutputNames</name>
-        <param>
-          <type>SeparationType</type>
-          <declname>type</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/code/src/spleeter/model.cc" line="22" column="1" bodyfile="/code/src/spleeter/model.cc" bodystart="22" bodyend="37"/>
-      </memberdef>
-      <memberdef kind="function" id="model_8cc_1a0dbc582b9d9efd07317be7a62c6209bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="spleeter__common_8cc_1a0dbc582b9d9efd07317be7a62c6209bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void spleeter::Initialize</definition>
         <argsstring>(const std::string &amp;path_to_models, SeparationType type, std::error_code &amp;err)</argsstring>
@@ -127,63 +467,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/code/src/spleeter/model.cc" line="39" column="1" bodyfile="/code/src/spleeter/model.cc" bodystart="39" bodyend="54"/>
+        <location file="/code/src/spleeter_common/spleeter_common.cc" line="23" column="1" bodyfile="/code/src/spleeter_common/spleeter_common.cc" bodystart="23" bodyend="46"/>
       </memberdef>
-      <memberdef kind="function" id="model_8cc_1aec9e9de76df7d561a4c07c25bf99a71f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void spleeter::Run</definition>
-        <argsstring>(const Waveform &amp;input, SeparationType separation_type, std::vector&lt; tensorflow::Tensor &gt; *output, std::error_code &amp;err)</argsstring>
-        <name>Run</name>
-        <param>
-          <type>const Waveform &amp;</type>
-          <declname>input</declname>
-        </param>
-        <param>
-          <type>SeparationType</type>
-          <declname>separation_type</declname>
-        </param>
-        <param>
-          <type>std::vector&lt; tensorflow::Tensor &gt; *</type>
-          <declname>output</declname>
-        </param>
-        <param>
-          <type>std::error_code &amp;</type>
-          <declname>err</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/code/src/spleeter/model.cc" line="56" column="1" bodyfile="/code/src/spleeter/model.cc" bodystart="56" bodyend="81"/>
-      </memberdef>
-      <memberdef kind="function" id="model_8cc_1ad406cd319f8b788e6656bb1e25c7e364" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void spleeter::SetOutput</definition>
-        <argsstring>(const std::vector&lt; tensorflow::Tensor &gt; &amp;tf_output, uint64_t frame_count, std::vector&lt; Waveform *&gt; output)</argsstring>
-        <name>SetOutput</name>
-        <param>
-          <type>const std::vector&lt; tensorflow::Tensor &gt; &amp;</type>
-          <declname>tf_output</declname>
-        </param>
-        <param>
-          <type>uint64_t</type>
-          <declname>frame_count</declname>
-        </param>
-        <param>
-          <type>std::vector&lt; Waveform *&gt;</type>
-          <declname>output</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/code/src/spleeter/model.cc" line="83" column="1" bodyfile="/code/src/spleeter/model.cc" bodystart="83" bodyend="92"/>
-      </memberdef>
-      <memberdef kind="function" id="spleeter_8cc_1a50356673b469490c01c46afab5e6db97" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="spleeter__common_8cc_1a50356673b469490c01c46afab5e6db97" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void spleeter::Initialize</definition>
         <argsstring>(const std::string &amp;path_to_models, const std::unordered_set&lt; SeparationType &gt; &amp;separation_types, std::error_code &amp;err)</argsstring>
@@ -228,13 +514,358 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/code/src/spleeter/spleeter.cc" line="10" column="1" bodyfile="/code/src/spleeter/spleeter.cc" bodystart="10" bodyend="16"/>
+        <location file="/code/src/spleeter_common/spleeter_common.cc" line="48" column="1" bodyfile="/code/src/spleeter_common/spleeter_common.cc" bodystart="48" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="tf__handle_8cc_1ad112f93303ec09fb396c7645e2a40098" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void spleeter::SessionDeleter</definition>
+        <argsstring>(TF_Session *ptr)</argsstring>
+        <name>SessionDeleter</name>
+        <param>
+          <type>TF_Session *</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_common/tf_handle.cc" line="5" column="1" bodyfile="/code/src/spleeter_common/tf_handle.cc" bodystart="5" bodyend="11"/>
+      </memberdef>
+      <memberdef kind="function" id="tf__handle_8h_1ab32467f162926155b8a2fffd86642d25" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>TFHandlePtr&lt; T &gt;</type>
+        <definition>TFHandlePtr&lt;T&gt; spleeter::MakeHandle</definition>
+        <argsstring>(T *ptr, void(deleter)(T *))</argsstring>
+        <name>MakeHandle</name>
+        <param>
+          <type>T *</type>
+          <declname>ptr</declname>
+        </param>
+        <param>
+          <type>void(deleter)(T *)</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_common/tf_handle.h" line="35" column="1" bodyfile="/code/src/spleeter_common/tf_handle.h" bodystart="35" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor_8cc_1a75d8c80d80df4aa45f757ff4a0b2a082" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>TFHandlePtr&lt; TF_Tensor &gt;</type>
+        <definition>TFHandlePtr&lt; TF_Tensor &gt; spleeter::TensorAlloc</definition>
+        <argsstring>(TF_DataType type, std::vector&lt; int64_t &gt; shapes)</argsstring>
+        <name>TensorAlloc</name>
+        <param>
+          <type>TF_DataType</type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; int64_t &gt;</type>
+          <declname>shapes</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Allocate a new tensor with the given shape and data type <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the tensorflow datatype. Note: only TF_FLOAT and TF_COMPLEX are supported at the moment </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>shapes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the desired shape </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A handle to the tensor </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_filter/tensor.cc" line="5" column="1" bodyfile="/code/src/spleeter_filter/tensor.cc" bodystart="5" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor_8h_1a698cc5089115c3447ed2132397e82acd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void spleeter::SetFrame</definition>
+        <argsstring>(TFHandlePtr&lt; TF_Tensor &gt; tensor, std::vector&lt; int64_t &gt; shapes, uint32_t frame_index, std::vector&lt; T *&gt; data)</argsstring>
+        <name>SetFrame</name>
+        <param>
+          <type>TFHandlePtr&lt; TF_Tensor &gt;</type>
+          <declname>tensor</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; int64_t &gt;</type>
+          <declname>shapes</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>frame_index</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; T *&gt;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Copy an fft frame into to tensorflow tensor <parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of data the tensor holds </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>shapes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the tensor shapes </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>frame_index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the destination frame index in the tensor </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the fft frame data </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_filter/tensor.h" line="80" column="1" bodyfile="/code/src/spleeter_filter/tensor.h" bodystart="80" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor_8h_1adb1e91dc91984cf41f6880df3d40a7f7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void spleeter::GetFrame</definition>
+        <argsstring>(std::vector&lt; T *&gt; *data, uint32_t frame_index, const TFHandlePtr&lt; TF_Tensor &gt; tensor, std::vector&lt; int64_t &gt; shapes)</argsstring>
+        <name>GetFrame</name>
+        <param>
+          <type>std::vector&lt; T *&gt; *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>frame_index</declname>
+        </param>
+        <param>
+          <type>const TFHandlePtr&lt; TF_Tensor &gt;</type>
+          <declname>tensor</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; int64_t &gt;</type>
+          <declname>shapes</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Copy a frame into a vector of data pointers <parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of data the tensor holds </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the output fft frame data </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>frame_index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the source frame index in the tensor </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>shapes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the tensor shapes </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_filter/tensor.h" line="99" column="1" bodyfile="/code/src/spleeter_filter/tensor.h" bodystart="99" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor_8h_1ad4990e8febcb7eadfe2a5f0bdccfd762" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void spleeter::MoveFrame</definition>
+        <argsstring>(TFHandlePtr&lt; TF_Tensor &gt; tensor, uint32_t source_index, uint32_t destination_index, std::vector&lt; int64_t &gt; shapes)</argsstring>
+        <name>MoveFrame</name>
+        <param>
+          <type>TFHandlePtr&lt; TF_Tensor &gt;</type>
+          <declname>tensor</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>source_index</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>destination_index</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; int64_t &gt;</type>
+          <declname>shapes</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Move a tensor frame <parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of data the tensor holds </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>source_index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the source frame index </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>destination_index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the destination frame index </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_filter/tensor.h" line="118" column="1" bodyfile="/code/src/spleeter_filter/tensor.h" bodystart="118" bodyend="128"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor_8h_1a6e2ec1ed878fd51e1420d4ccc26d8f83" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void spleeter::Copy</definition>
+        <argsstring>(const TF_Tensor *source, std::vector&lt; int64_t &gt; shapes, TFHandlePtr&lt; TF_Tensor &gt; destination)</argsstring>
+        <name>Copy</name>
+        <param>
+          <type>const TF_Tensor *</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; int64_t &gt;</type>
+          <declname>shapes</declname>
+        </param>
+        <param>
+          <type>TFHandlePtr&lt; TF_Tensor &gt;</type>
+          <declname>destination</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Copy a frame into a vector of data pointers <parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of data the tensor holds </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>source</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>shapes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the tensor shapes </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>destination</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_filter/tensor.h" line="136" column="1" bodyfile="/code/src/spleeter_filter/tensor.h" bodystart="136" bodyend="150"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/code/src/spleeter/filter.cc" line="9" column="1"/>
+    <location file="/code/src/spleeter/model.cc" line="4" column="1"/>
   </compounddef>
 </doxygen>

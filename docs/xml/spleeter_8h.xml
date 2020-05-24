@@ -6,84 +6,56 @@
     <includes local="no">memory</includes>
     <includes local="no">unordered_set</includes>
     <includes local="no">Eigen/Core</includes>
-    <includes refid="type_8h" local="yes">spleeter/type.h</includes>
-    <includes refid="filter_8h" local="yes">spleeter/filter.h</includes>
-    <includedby refid="registry_8h" local="yes">/code/src/spleeter/registry.h</includedby>
+    <includes refid="spleeter__common_8h" local="yes">spleeter_common/spleeter_common.h</includes>
     <includedby refid="spleeter_8cc" local="yes">/code/src/spleeter/spleeter.cc</includedby>
     <incdepgraph>
-      <node id="108">
-        <label>tensorflow/cc/saved_model/loader.h</label>
+      <node id="68">
+        <label>spleeter_common/spleeter_common.h</label>
+        <link refid="spleeter__common_8h_source"/>
+        <childnode refid="64" relation="include">
+        </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
+        <childnode refid="66" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+        <childnode refid="69" relation="include">
+        </childnode>
       </node>
-      <node id="106">
-        <label>system_error</label>
-      </node>
-      <node id="103">
+      <node id="67">
         <label>Eigen/Core</label>
       </node>
-      <node id="100">
+      <node id="64">
         <label>string</label>
       </node>
-      <node id="102">
+      <node id="66">
         <label>unordered_set</label>
       </node>
-      <node id="109">
-        <label>artff/abstract_filter.h</label>
-      </node>
-      <node id="105">
-        <label>spleeter/filter.h</label>
-        <link refid="filter_8h_source"/>
-        <childnode refid="106" relation="include">
-        </childnode>
-        <childnode refid="107" relation="include">
-        </childnode>
-        <childnode refid="108" relation="include">
-        </childnode>
-        <childnode refid="109" relation="include">
-        </childnode>
-        <childnode refid="104" relation="include">
+      <node id="69">
+        <label>spleeter_common/type.h</label>
+        <link refid="type_8h_source"/>
+        <childnode refid="67" relation="include">
         </childnode>
       </node>
-      <node id="107">
-        <label>mutex</label>
-      </node>
-      <node id="99">
+      <node id="63">
         <label>/code/src/spleeter/spleeter.h</label>
         <link refid="spleeter_8h"/>
-        <childnode refid="100" relation="include">
+        <childnode refid="64" relation="include">
         </childnode>
-        <childnode refid="101" relation="include">
+        <childnode refid="65" relation="include">
         </childnode>
-        <childnode refid="102" relation="include">
+        <childnode refid="66" relation="include">
         </childnode>
-        <childnode refid="103" relation="include">
+        <childnode refid="67" relation="include">
         </childnode>
-        <childnode refid="104" relation="include">
-        </childnode>
-        <childnode refid="105" relation="include">
+        <childnode refid="68" relation="include">
         </childnode>
       </node>
-      <node id="104">
-        <label>spleeter/type.h</label>
-        <link refid="type_8h_source"/>
-        <childnode refid="103" relation="include">
-        </childnode>
-      </node>
-      <node id="101">
+      <node id="65">
         <label>memory</label>
       </node>
     </incdepgraph>
-    <invincdepgraph>
-      <node id="111">
-        <label>/code/src/spleeter/registry.h</label>
-        <link refid="registry_8h_source"/>
-      </node>
-      <node id="110">
-        <label>/code/src/spleeter/spleeter.h</label>
-        <link refid="spleeter_8h"/>
-        <childnode refid="111" relation="include">
-        </childnode>
-      </node>
-    </invincdepgraph>
     <innernamespace refid="namespacespleeter">spleeter</innernamespace>
     <briefdescription>
     </briefdescription>
@@ -98,18 +70,24 @@
 <codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;unordered_set&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Eigen/Core&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="8"><highlight class="normal"></highlight></codeline>
-<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;spleeter/type.h&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;spleeter/filter.h&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="11"><highlight class="normal"></highlight></codeline>
-<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacespleeter" kindref="compound">spleeter</ref><sp/>{</highlight></codeline>
-<codeline lineno="13"><highlight class="normal"></highlight></codeline>
-<codeline lineno="18"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Initialize(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>&amp;path_to_models,</highlight></codeline>
-<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::unordered_set&lt;SeparationType&gt;<sp/>&amp;separation_types,</highlight></codeline>
-<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::error_code<sp/>&amp;err);</highlight></codeline>
-<codeline lineno="21"><highlight class="normal"></highlight></codeline>
-<codeline lineno="22"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>spleeter</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="23"><highlight class="normal"></highlight></codeline>
-<codeline lineno="24"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/>//<sp/>SPEETER_SPLEETER_H_</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;spleeter_common/spleeter_common.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacespleeter" kindref="compound">spleeter</ref><sp/>{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Split(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Waveform<sp/>&amp;input,<sp/>Waveform<sp/>*vocals,<sp/>Waveform<sp/>*accompaniment,</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::error_code<sp/>&amp;err);</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Split(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Waveform<sp/>&amp;input,<sp/>Waveform<sp/>*vocals,<sp/>Waveform<sp/>*drums,</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Waveform<sp/>*bass,<sp/>Waveform<sp/>*other,<sp/>std::error_code<sp/>&amp;err);</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Split(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Waveform<sp/>&amp;input,<sp/>Waveform<sp/>*vocals,<sp/>Waveform<sp/>*drums,</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Waveform<sp/>*bass,<sp/>Waveform<sp/>*piano,<sp/>Waveform<sp/>*other,</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::error_code<sp/>&amp;err);</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>spleeter</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/>//<sp/>SPEETER_SPLEETER_H_</highlight></codeline>
     </programlisting>
     <location file="/code/src/spleeter/spleeter.h"/>
   </compounddef>

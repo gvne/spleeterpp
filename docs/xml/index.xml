@@ -1,27 +1,25 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.8.13">
+  <compound refid="classspleeter_1_1internal_1_1Adapter" kind="class"><name>spleeter::internal::Adapter</name>
+    <member refid="classspleeter_1_1internal_1_1Adapter_1a16068cfba78d32b5559d08885173a305" kind="variable"><name>m_tensor</name></member>
+    <member refid="classspleeter_1_1internal_1_1Adapter_1a3790cd5bdca49ba14b216383e2ef31a0" kind="variable"><name>m_shapes</name></member>
+    <member refid="classspleeter_1_1internal_1_1Adapter_1a6de577e4dee25a41d29e66645a7f2c3b" kind="variable"><name>m_frame_index</name></member>
+    <member refid="classspleeter_1_1internal_1_1Adapter_1a2860e9f08b9f8829e019bae4cda5f833" kind="variable"><name>m_bin_index</name></member>
+    <member refid="classspleeter_1_1internal_1_1Adapter_1a08e45f34d0e0510743462d2fba94cd2e" kind="variable"><name>m_channel_index</name></member>
+    <member refid="classspleeter_1_1internal_1_1Adapter_1ac06e590134e2910682bf6bc39bd50e30" kind="function"><name>Adapter</name></member>
+    <member refid="classspleeter_1_1internal_1_1Adapter_1a7ead696b1a0f29772bc2269500f85e90" kind="function"><name>operator()</name></member>
+    <member refid="classspleeter_1_1internal_1_1Adapter_1a4339c2ee67113b1ea412ab7fcf31cdb7" kind="function"><name>frame_count</name></member>
+    <member refid="classspleeter_1_1internal_1_1Adapter_1a7c1560ffbe3314c9e44ab2505da979c2" kind="function"><name>bin_count</name></member>
+    <member refid="classspleeter_1_1internal_1_1Adapter_1a9ef887a4a333521d74146ba2073fd292" kind="function"><name>channel_count</name></member>
+  </compound>
   <compound refid="classspleeter_1_1Filter" kind="class"><name>spleeter::Filter</name>
     <member refid="classspleeter_1_1Filter_1a8305ebded47a397c7945d8fac853d848" kind="variable"><name>m_type</name></member>
-    <member refid="classspleeter_1_1Filter_1a56ceec5fbb6744e1543458de6c5ed692" kind="variable"><name>m_bundle</name></member>
     <member refid="classspleeter_1_1Filter_1ac3e48a81917edd3d2c6d9bed675dc252" kind="variable"><name>m_volumes</name></member>
     <member refid="classspleeter_1_1Filter_1a03448316e97afcff9491659b822d9d24" kind="variable"><name>m_process_length</name></member>
     <member refid="classspleeter_1_1Filter_1a0b293bdf6f864908b58dbe3fdc7f87f7" kind="variable"><name>m_frame_length</name></member>
     <member refid="classspleeter_1_1Filter_1ab838e9ff6d6fafe01020fa8b4cf761a8" kind="variable"><name>m_overlap_length</name></member>
     <member refid="classspleeter_1_1Filter_1a475ad4c8b4d07fcc24a96779029109a7" kind="variable"><name>m_force_conservativity</name></member>
-    <member refid="classspleeter_1_1Filter_1a7f650d9497340108b1cdb701ab17df25" kind="variable"><name>m_frame_index</name></member>
-    <member refid="classspleeter_1_1Filter_1a3d0b027cfe88676011e0d7e1409cefa5" kind="variable"><name>m_network_input</name></member>
-    <member refid="classspleeter_1_1Filter_1a0e025ad30a3874f4a978eefe0ab1468e" kind="variable"><name>m_previous_network_input</name></member>
-    <member refid="classspleeter_1_1Filter_1ab7bf69cccffff1df48a2f03344443933" kind="variable"><name>m_network_result</name></member>
-    <member refid="classspleeter_1_1Filter_1a62a3ea84a554f110406d0e022c4f1279" kind="variable"><name>m_previous_network_result</name></member>
-    <member refid="classspleeter_1_1Filter_1aee651c0a9740ffb43ce157b51270d7e9" kind="variable"><name>m_mask_vec_data</name></member>
-    <member refid="classspleeter_1_1Filter_1aae9196ada6e10a10d3b7b8b071b88473" kind="variable"><name>m_previous_mask_vec_data</name></member>
-    <member refid="classspleeter_1_1Filter_1a6c3aef3fddb5ae4777dde2569099e0dc" kind="variable"><name>m_mask_sum_vec_data</name></member>
-    <member refid="classspleeter_1_1Filter_1ac207028d50e8ab7386d78983f0267043" kind="variable"><name>m_mask_data</name></member>
-    <member refid="classspleeter_1_1Filter_1a6b98a4ba00b23b5c4446326480540db7" kind="variable"><name>m_previous_mask_data</name></member>
-    <member refid="classspleeter_1_1Filter_1a10d305323df45ccf4001882b03db352b" kind="variable"><name>m_mask_sum_data</name></member>
-    <member refid="classspleeter_1_1Filter_1af761f3b3e11eaf60d2636c2d9b94e5dd" kind="variable"><name>m_masks_vec_data</name></member>
-    <member refid="classspleeter_1_1Filter_1af566f9b301ce7810cd862caf4c637e5e" kind="variable"><name>m_masks_data</name></member>
-    <member refid="classspleeter_1_1Filter_1a6fd019e936a0eae2b0e787d0f1b50442" kind="variable"><name>m_mutex</name></member>
+    <member refid="classspleeter_1_1Filter_1af5b6d674f8763ef9be09c73580bf5862" kind="variable"><name>m_impl</name></member>
     <member refid="classspleeter_1_1Filter_1acaaf4345541afe5545c57d867cedf6f1" kind="function"><name>Filter</name></member>
     <member refid="classspleeter_1_1Filter_1abaf85eb48aa211b3ca16331ab4f3d485" kind="function"><name>Init</name></member>
     <member refid="classspleeter_1_1Filter_1af2a5a206f6a4b361f99b1821b5fa01dc" kind="function"><name>set_volume</name></member>
@@ -39,6 +37,24 @@
     <member refid="classspleeter_1_1Filter_1af398288b3ede3b7f4fe9c463149d80b7" kind="function"><name>AsyncProcessTransformedBlock</name></member>
     <member refid="classspleeter_1_1Filter_1a41bc38f48ed835cbb3aa3956f4ded44c" kind="function"><name>SpleeterFrameLatency</name></member>
   </compound>
+  <compound refid="classspleeter_1_1Filter_1_1Impl" kind="class"><name>spleeter::Filter::Impl</name>
+    <member refid="classspleeter_1_1Filter_1_1Impl_1ac9fe28d2e7b849b185816afd7b3875a4" kind="variable"><name>bundle</name></member>
+    <member refid="classspleeter_1_1Filter_1_1Impl_1ab65eb83f7ba5647c9f14f5f53166629b" kind="variable"><name>frame_index</name></member>
+    <member refid="classspleeter_1_1Filter_1_1Impl_1a677bcea88a5ea3d87d0a05cb7f8d5906" kind="variable"><name>network_input</name></member>
+    <member refid="classspleeter_1_1Filter_1_1Impl_1abab67261133fe3d34abbfa99be2d67e3" kind="variable"><name>previous_network_input</name></member>
+    <member refid="classspleeter_1_1Filter_1_1Impl_1aa42c5cf5f7c4f8c64fcc128eba54ea83" kind="variable"><name>shapes</name></member>
+    <member refid="classspleeter_1_1Filter_1_1Impl_1a881775f1210381e2cf5c43417b14d97f" kind="variable"><name>network_result</name></member>
+    <member refid="classspleeter_1_1Filter_1_1Impl_1a7a51810a42966ba655795c44f0756632" kind="variable"><name>previous_network_result</name></member>
+    <member refid="classspleeter_1_1Filter_1_1Impl_1a3bae5777963c19b951c464976723b9b0" kind="variable"><name>mask_vec_data</name></member>
+    <member refid="classspleeter_1_1Filter_1_1Impl_1ad6ea954adcd3500ba286d9af4803f4c1" kind="variable"><name>previous_mask_vec_data</name></member>
+    <member refid="classspleeter_1_1Filter_1_1Impl_1a509ebe6766a030fd35fcbcc03e15f0bb" kind="variable"><name>mask_sum_vec_data</name></member>
+    <member refid="classspleeter_1_1Filter_1_1Impl_1aef7c1b8d695c78b93da65d05d2ff32ce" kind="variable"><name>mask_data</name></member>
+    <member refid="classspleeter_1_1Filter_1_1Impl_1a27611d0f03c6750e67b9a172b8f0981d" kind="variable"><name>previous_mask_data</name></member>
+    <member refid="classspleeter_1_1Filter_1_1Impl_1aa08e365ef841e62cc64a0493d1c6e521" kind="variable"><name>mask_sum_data</name></member>
+    <member refid="classspleeter_1_1Filter_1_1Impl_1a621b30acfa64fadc6edb7e3337668cbb" kind="variable"><name>masks_vec_data</name></member>
+    <member refid="classspleeter_1_1Filter_1_1Impl_1a5caefab17f04b10d8a21536684de9662" kind="variable"><name>masks_data</name></member>
+    <member refid="classspleeter_1_1Filter_1_1Impl_1ac253d105b0c99ff8a8b280a99406b92c" kind="function"><name>Impl</name></member>
+  </compound>
   <compound refid="classspleeter_1_1Registry" kind="class"><name>spleeter::Registry</name>
     <member refid="classspleeter_1_1Registry_1a6f1f7e186419a82b2a6f0646341f841a" kind="variable"><name>m_registry</name></member>
     <member refid="classspleeter_1_1Registry_1ac0d987f1ffbc5658470836908037f332" kind="function"><name>instance</name></member>
@@ -47,39 +63,85 @@
     <member refid="classspleeter_1_1Registry_1a08301350a6f2697a34b72eebd2698ec8" kind="function"><name>Registry</name></member>
     <member refid="classspleeter_1_1Registry_1ae514ec64ee348c9828287819ebe2f2b0" kind="function"><name>~Registry</name></member>
   </compound>
+  <compound refid="classspleeter_1_1TFHandle" kind="class"><name>spleeter::TFHandle</name>
+    <member refid="classspleeter_1_1TFHandle_1afa12a1dadbb989ca2a63a80e3adce251" kind="variable"><name>m_ptr</name></member>
+    <member refid="classspleeter_1_1TFHandle_1a42ecef4d983c13c4f83a0ac6463e3188" kind="variable"><name>m_deleter</name></member>
+    <member refid="classspleeter_1_1TFHandle_1a4d41bbc4972649492ef6e70c9970516e" kind="function"><name>TFHandle</name></member>
+    <member refid="classspleeter_1_1TFHandle_1a39426ec9482fb90cf8dede16b4f9a3d8" kind="function"><name>TFHandle</name></member>
+    <member refid="classspleeter_1_1TFHandle_1adff7c927303ae562f76491b84f3c1f14" kind="function"><name>~TFHandle</name></member>
+    <member refid="classspleeter_1_1TFHandle_1a0c9d1adc2e7928744a82996c8b57e27c" kind="function"><name>get</name></member>
+    <member refid="classspleeter_1_1TFHandle_1ac0e09e65c504cbae5dc39170d48afda3" kind="function"><name>get</name></member>
+  </compound>
   <compound refid="namespacespleeter" kind="namespace"><name>spleeter</name>
     <member refid="type_8h_1aec4a660e27c7c164c02bf146793d20ad" kind="enum"><name>SeparationType</name></member>
     <member refid="type_8h_1aec4a660e27c7c164c02bf146793d20adabdb529ea88496d57bafb09fd5e636bf4" kind="enumvalue"><name>TwoStems</name></member>
     <member refid="type_8h_1aec4a660e27c7c164c02bf146793d20adab95a9669b09818def0f2cf88f88fcfca" kind="enumvalue"><name>FourStems</name></member>
     <member refid="type_8h_1aec4a660e27c7c164c02bf146793d20ada2adce49672f832d9357bee5d9e6f155f" kind="enumvalue"><name>FiveStems</name></member>
-    <member refid="filter_8h_1ad169de8448911ff73656b1f2cb4d62b8" kind="typedef"><name>BundlePtr</name></member>
+    <member refid="registry_8h_1a7999e61aa9708fbf30a7bcf1c80ba09b" kind="typedef"><name>Bundle</name></member>
+    <member refid="registry_8h_1ae64e8c9bd21414a326802bb33eaee26c" kind="typedef"><name>BundlePtr</name></member>
+    <member refid="tf__handle_8h_1af19f8572624c49365667b321a2a56475" kind="typedef"><name>TFHandlePtr</name></member>
     <member refid="type_8h_1a85c84fe241a7d532b574532c0d3d8804" kind="typedef"><name>Waveform</name></member>
-    <member refid="model_8cc_1a8485e0f61f7b433d835df5b5873c7291" kind="function"><name>GetPath</name></member>
-    <member refid="model_8cc_1ae9e4a22774140095e3ede778573e451e" kind="function"><name>GetOutputNames</name></member>
-    <member refid="model_8cc_1a0dbc582b9d9efd07317be7a62c6209bc" kind="function"><name>Initialize</name></member>
-    <member refid="model_8cc_1aec9e9de76df7d561a4c07c25bf99a71f" kind="function"><name>Run</name></member>
-    <member refid="model_8cc_1ad406cd319f8b788e6656bb1e25c7e364" kind="function"><name>SetOutput</name></member>
-    <member refid="spleeter_8cc_1a50356673b469490c01c46afab5e6db97" kind="function"><name>Initialize</name></member>
+    <member refid="model_8cc_1a8d380c75b9d47187a690ff50c7816651" kind="function"><name>TensorNoDeleter</name></member>
+    <member refid="model_8cc_1ac33e1d7def4da2b2c7a7c763177c01ed" kind="function"><name>RunModel</name></member>
+    <member refid="model_8cc_1ada8bedb780eb934027dd7d7d6b81d2d3" kind="function"><name>SetOutput</name></member>
+    <member refid="spleeter_8cc_1ae9e4a22774140095e3ede778573e451e" kind="function"><name>GetOutputNames</name></member>
+    <member refid="spleeter_8cc_1a4206dcf9f99db746a5fc5d52d7111d72" kind="function"><name>Split</name></member>
+    <member refid="spleeter_8cc_1a159e164eff7f38c3ec3d16072b77fa1e" kind="function"><name>Split</name></member>
+    <member refid="spleeter_8cc_1add06aa9a9b29628d5a0724815338a79f" kind="function"><name>Split</name></member>
+    <member refid="spleeter__common_8cc_1a8485e0f61f7b433d835df5b5873c7291" kind="function"><name>GetPath</name></member>
+    <member refid="spleeter__common_8cc_1a0dbc582b9d9efd07317be7a62c6209bc" kind="function"><name>Initialize</name></member>
+    <member refid="spleeter__common_8cc_1a50356673b469490c01c46afab5e6db97" kind="function"><name>Initialize</name></member>
+    <member refid="tf__handle_8cc_1ad112f93303ec09fb396c7645e2a40098" kind="function"><name>SessionDeleter</name></member>
+    <member refid="tf__handle_8h_1ab32467f162926155b8a2fffd86642d25" kind="function"><name>MakeHandle</name></member>
+    <member refid="tensor_8cc_1a75d8c80d80df4aa45f757ff4a0b2a082" kind="function"><name>TensorAlloc</name></member>
+    <member refid="tensor_8h_1a698cc5089115c3447ed2132397e82acd" kind="function"><name>SetFrame</name></member>
+    <member refid="tensor_8h_1adb1e91dc91984cf41f6880df3d40a7f7" kind="function"><name>GetFrame</name></member>
+    <member refid="tensor_8h_1ad4990e8febcb7eadfe2a5f0bdccfd762" kind="function"><name>MoveFrame</name></member>
+    <member refid="tensor_8h_1a6e2ec1ed878fd51e1420d4ccc26d8f83" kind="function"><name>Copy</name></member>
   </compound>
-  <compound refid="filter_8cc" kind="file"><name>filter.cc</name>
-  </compound>
-  <compound refid="filter_8h" kind="file"><name>filter.h</name>
+  <compound refid="namespacespleeter_1_1internal" kind="namespace"><name>spleeter::internal</name>
+    <member refid="tensor_8h_1af9e774f1fa68c3796f1b7067bc1a3f51" kind="function"><name>DataAlloc</name></member>
+    <member refid="tensor_8h_1a3339931d91503e3d657b26e11b4fbd70" kind="function"><name>DataDealloc</name></member>
   </compound>
   <compound refid="model_8cc" kind="file"><name>model.cc</name>
   </compound>
+  <compound refid="filter_2model_8cc" kind="file"><name>model.cc</name>
+  </compound>
   <compound refid="model_8h" kind="file"><name>model.h</name>
   </compound>
-  <compound refid="registry_8cc" kind="file"><name>registry.cc</name>
-  </compound>
-  <compound refid="registry_8h" kind="file"><name>registry.h</name>
+  <compound refid="filter_2model_8h" kind="file"><name>model.h</name>
   </compound>
   <compound refid="spleeter_8cc" kind="file"><name>spleeter.cc</name>
   </compound>
   <compound refid="spleeter_8h" kind="file"><name>spleeter.h</name>
   </compound>
+  <compound refid="registry_8cc" kind="file"><name>registry.cc</name>
+  </compound>
+  <compound refid="registry_8h" kind="file"><name>registry.h</name>
+  </compound>
+  <compound refid="spleeter__common_8cc" kind="file"><name>spleeter_common.cc</name>
+  </compound>
+  <compound refid="spleeter__common_8h" kind="file"><name>spleeter_common.h</name>
+  </compound>
+  <compound refid="tf__handle_8cc" kind="file"><name>tf_handle.cc</name>
+  </compound>
+  <compound refid="tf__handle_8h" kind="file"><name>tf_handle.h</name>
+  </compound>
   <compound refid="type_8h" kind="file"><name>type.h</name>
   </compound>
+  <compound refid="filter_8cc" kind="file"><name>filter.cc</name>
+  </compound>
+  <compound refid="filter_8h" kind="file"><name>filter.h</name>
+  </compound>
+  <compound refid="tensor_8cc" kind="file"><name>tensor.cc</name>
+  </compound>
+  <compound refid="tensor_8h" kind="file"><name>tensor.h</name>
+  </compound>
   <compound refid="dir_cf8dda79de50e3e42e3b1f531732fb91" kind="dir"><name>/code/src/spleeter</name>
+  </compound>
+  <compound refid="dir_960157c8da09d6d02f997f6b381aed41" kind="dir"><name>/code/src/spleeter_common</name>
+  </compound>
+  <compound refid="dir_b5c8968fdc860107d345181a35ebb53d" kind="dir"><name>/code/src/spleeter_filter</name>
   </compound>
   <compound refid="dir_68267d1309a1af8e8297ef4c3efbcdba" kind="dir"><name>/code/src</name>
   </compound>

@@ -1,0 +1,184 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classspleeter_1_1internal_1_1Adapter" kind="class" language="C++" prot="public">
+    <compoundname>spleeter::internal::Adapter</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename</type>
+        <declname>T</declname>
+        <defname>T</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classspleeter_1_1internal_1_1Adapter_1a16068cfba78d32b5559d08885173a305" prot="private" static="no" mutable="no">
+        <type>TFHandlePtr&lt; TF_Tensor &gt;</type>
+        <definition>TFHandlePtr&lt;TF_Tensor&gt; spleeter::internal::Adapter&lt; T &gt;::m_tensor</definition>
+        <argsstring></argsstring>
+        <name>m_tensor</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_filter/tensor.h" line="56" column="1" bodyfile="/code/src/spleeter_filter/tensor.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classspleeter_1_1internal_1_1Adapter_1a3790cd5bdca49ba14b216383e2ef31a0" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; int64_t &gt;</type>
+        <definition>std::vector&lt;int64_t&gt; spleeter::internal::Adapter&lt; T &gt;::m_shapes</definition>
+        <argsstring></argsstring>
+        <name>m_shapes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_filter/tensor.h" line="57" column="1" bodyfile="/code/src/spleeter_filter/tensor.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classspleeter_1_1internal_1_1Adapter_1a6de577e4dee25a41d29e66645a7f2c3b" prot="private" static="no" mutable="no">
+        <type>int64_t</type>
+        <definition>int64_t spleeter::internal::Adapter&lt; T &gt;::m_frame_index</definition>
+        <argsstring></argsstring>
+        <name>m_frame_index</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_filter/tensor.h" line="58" column="1" bodyfile="/code/src/spleeter_filter/tensor.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classspleeter_1_1internal_1_1Adapter_1a2860e9f08b9f8829e019bae4cda5f833" prot="private" static="no" mutable="no">
+        <type>int64_t</type>
+        <definition>int64_t spleeter::internal::Adapter&lt; T &gt;::m_bin_index</definition>
+        <argsstring></argsstring>
+        <name>m_bin_index</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_filter/tensor.h" line="59" column="1" bodyfile="/code/src/spleeter_filter/tensor.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classspleeter_1_1internal_1_1Adapter_1a08e45f34d0e0510743462d2fba94cd2e" prot="private" static="no" mutable="no">
+        <type>int64_t</type>
+        <definition>int64_t spleeter::internal::Adapter&lt; T &gt;::m_channel_index</definition>
+        <argsstring></argsstring>
+        <name>m_channel_index</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_filter/tensor.h" line="60" column="1" bodyfile="/code/src/spleeter_filter/tensor.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classspleeter_1_1internal_1_1Adapter_1ac06e590134e2910682bf6bc39bd50e30" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>spleeter::internal::Adapter&lt; T &gt;::Adapter</definition>
+        <argsstring>(TFHandlePtr&lt; TF_Tensor &gt; tensor, std::vector&lt; int64_t &gt; shapes)</argsstring>
+        <name>Adapter</name>
+        <param>
+          <type>TFHandlePtr&lt; TF_Tensor &gt;</type>
+          <declname>tensor</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; int64_t &gt;</type>
+          <declname>shapes</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_filter/tensor.h" line="28" column="1" bodyfile="/code/src/spleeter_filter/tensor.h" bodystart="28" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classspleeter_1_1internal_1_1Adapter_1a7ead696b1a0f29772bc2269500f85e90" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T &amp;</type>
+        <definition>T&amp; spleeter::internal::Adapter&lt; T &gt;::operator()</definition>
+        <argsstring>(size_t frame_index, size_t bin_index, size_t channel_index)</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>size_t</type>
+          <declname>frame_index</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>bin_index</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>channel_index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_filter/tensor.h" line="32" column="1" bodyfile="/code/src/spleeter_filter/tensor.h" bodystart="32" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classspleeter_1_1internal_1_1Adapter_1a4339c2ee67113b1ea412ab7fcf31cdb7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int64_t</type>
+        <definition>int64_t spleeter::internal::Adapter&lt; T &gt;::frame_count</definition>
+        <argsstring>() const</argsstring>
+        <name>frame_count</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_filter/tensor.h" line="51" column="1" bodyfile="/code/src/spleeter_filter/tensor.h" bodystart="51" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="classspleeter_1_1internal_1_1Adapter_1a7c1560ffbe3314c9e44ab2505da979c2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int64_t</type>
+        <definition>int64_t spleeter::internal::Adapter&lt; T &gt;::bin_count</definition>
+        <argsstring>() const</argsstring>
+        <name>bin_count</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_filter/tensor.h" line="52" column="1" bodyfile="/code/src/spleeter_filter/tensor.h" bodystart="52" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="classspleeter_1_1internal_1_1Adapter_1a9ef887a4a333521d74146ba2073fd292" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int64_t</type>
+        <definition>int64_t spleeter::internal::Adapter&lt; T &gt;::channel_count</definition>
+        <argsstring>() const</argsstring>
+        <name>channel_count</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_filter/tensor.h" line="53" column="1" bodyfile="/code/src/spleeter_filter/tensor.h" bodystart="53" bodyend="53"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/code/src/spleeter_filter/tensor.h" line="26" column="1" bodyfile="/code/src/spleeter_filter/tensor.h" bodystart="26" bodyend="61"/>
+    <listofallmembers>
+      <member refid="classspleeter_1_1internal_1_1Adapter_1ac06e590134e2910682bf6bc39bd50e30" prot="public" virt="non-virtual"><scope>spleeter::internal::Adapter</scope><name>Adapter</name></member>
+      <member refid="classspleeter_1_1internal_1_1Adapter_1a7c1560ffbe3314c9e44ab2505da979c2" prot="public" virt="non-virtual"><scope>spleeter::internal::Adapter</scope><name>bin_count</name></member>
+      <member refid="classspleeter_1_1internal_1_1Adapter_1a9ef887a4a333521d74146ba2073fd292" prot="public" virt="non-virtual"><scope>spleeter::internal::Adapter</scope><name>channel_count</name></member>
+      <member refid="classspleeter_1_1internal_1_1Adapter_1a4339c2ee67113b1ea412ab7fcf31cdb7" prot="public" virt="non-virtual"><scope>spleeter::internal::Adapter</scope><name>frame_count</name></member>
+      <member refid="classspleeter_1_1internal_1_1Adapter_1a2860e9f08b9f8829e019bae4cda5f833" prot="private" virt="non-virtual"><scope>spleeter::internal::Adapter</scope><name>m_bin_index</name></member>
+      <member refid="classspleeter_1_1internal_1_1Adapter_1a08e45f34d0e0510743462d2fba94cd2e" prot="private" virt="non-virtual"><scope>spleeter::internal::Adapter</scope><name>m_channel_index</name></member>
+      <member refid="classspleeter_1_1internal_1_1Adapter_1a6de577e4dee25a41d29e66645a7f2c3b" prot="private" virt="non-virtual"><scope>spleeter::internal::Adapter</scope><name>m_frame_index</name></member>
+      <member refid="classspleeter_1_1internal_1_1Adapter_1a3790cd5bdca49ba14b216383e2ef31a0" prot="private" virt="non-virtual"><scope>spleeter::internal::Adapter</scope><name>m_shapes</name></member>
+      <member refid="classspleeter_1_1internal_1_1Adapter_1a16068cfba78d32b5559d08885173a305" prot="private" virt="non-virtual"><scope>spleeter::internal::Adapter</scope><name>m_tensor</name></member>
+      <member refid="classspleeter_1_1internal_1_1Adapter_1a7ead696b1a0f29772bc2269500f85e90" prot="public" virt="non-virtual"><scope>spleeter::internal::Adapter</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,131 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classspleeter_1_1TFHandle" kind="class" language="C++" prot="public">
+    <compoundname>spleeter::TFHandle</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classspleeter_1_1TFHandle_1afa12a1dadbb989ca2a63a80e3adce251" prot="private" static="no" mutable="no">
+        <type>T *</type>
+        <definition>T* spleeter::TFHandle&lt; T &gt;::m_ptr</definition>
+        <argsstring></argsstring>
+        <name>m_ptr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_common/tf_handle.h" line="27" column="1" bodyfile="/code/src/spleeter_common/tf_handle.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classspleeter_1_1TFHandle_1a42ecef4d983c13c4f83a0ac6463e3188" prot="private" static="no" mutable="no">
+        <type>std::function&lt; void(T *)&gt;</type>
+        <definition>std::function&lt;void(T*)&gt; spleeter::TFHandle&lt; T &gt;::m_deleter</definition>
+        <argsstring></argsstring>
+        <name>m_deleter</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_common/tf_handle.h" line="28" column="1" bodyfile="/code/src/spleeter_common/tf_handle.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classspleeter_1_1TFHandle_1a4d41bbc4972649492ef6e70c9970516e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>spleeter::TFHandle&lt; T &gt;::TFHandle</definition>
+        <argsstring>(T *ptr, std::function&lt; void(T *)&gt; deleter)</argsstring>
+        <name>TFHandle</name>
+        <param>
+          <type>T *</type>
+          <declname>ptr</declname>
+        </param>
+        <param>
+          <type>std::function&lt; void(T *)&gt;</type>
+          <declname>deleter</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_common/tf_handle.h" line="15" column="1" bodyfile="/code/src/spleeter_common/tf_handle.h" bodystart="15" bodyend="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classspleeter_1_1TFHandle_1a39426ec9482fb90cf8dede16b4f9a3d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>spleeter::TFHandle&lt; T &gt;::TFHandle</definition>
+        <argsstring>(const TFHandle &amp;)=delete</argsstring>
+        <name>TFHandle</name>
+        <param>
+          <type>const <ref refid="classspleeter_1_1TFHandle" kindref="compound">TFHandle</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_common/tf_handle.h" line="16" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classspleeter_1_1TFHandle_1adff7c927303ae562f76491b84f3c1f14" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>spleeter::TFHandle&lt; T &gt;::~TFHandle</definition>
+        <argsstring>()</argsstring>
+        <name>~TFHandle</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_common/tf_handle.h" line="17" column="1" bodyfile="/code/src/spleeter_common/tf_handle.h" bodystart="17" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classspleeter_1_1TFHandle_1a0c9d1adc2e7928744a82996c8b57e27c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T *</type>
+        <definition>T* spleeter::TFHandle&lt; T &gt;::get</definition>
+        <argsstring>()</argsstring>
+        <name>get</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_common/tf_handle.h" line="20" column="1" bodyfile="/code/src/spleeter_common/tf_handle.h" bodystart="20" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classspleeter_1_1TFHandle_1ac0e09e65c504cbae5dc39170d48afda3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const T *</type>
+        <definition>const T* spleeter::TFHandle&lt; T &gt;::get</definition>
+        <argsstring>() const</argsstring>
+        <name>get</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_common/tf_handle.h" line="23" column="1" bodyfile="/code/src/spleeter_common/tf_handle.h" bodystart="23" bodyend="25"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/code/src/spleeter_common/tf_handle.h" line="13" column="1" bodyfile="/code/src/spleeter_common/tf_handle.h" bodystart="13" bodyend="29"/>
+    <listofallmembers>
+      <member refid="classspleeter_1_1TFHandle_1a0c9d1adc2e7928744a82996c8b57e27c" prot="public" virt="non-virtual"><scope>spleeter::TFHandle</scope><name>get</name></member>
+      <member refid="classspleeter_1_1TFHandle_1ac0e09e65c504cbae5dc39170d48afda3" prot="public" virt="non-virtual"><scope>spleeter::TFHandle</scope><name>get</name></member>
+      <member refid="classspleeter_1_1TFHandle_1a42ecef4d983c13c4f83a0ac6463e3188" prot="private" virt="non-virtual"><scope>spleeter::TFHandle</scope><name>m_deleter</name></member>
+      <member refid="classspleeter_1_1TFHandle_1afa12a1dadbb989ca2a63a80e3adce251" prot="private" virt="non-virtual"><scope>spleeter::TFHandle</scope><name>m_ptr</name></member>
+      <member refid="classspleeter_1_1TFHandle_1a4d41bbc4972649492ef6e70c9970516e" prot="public" virt="non-virtual"><scope>spleeter::TFHandle</scope><name>TFHandle</name></member>
+      <member refid="classspleeter_1_1TFHandle_1a39426ec9482fb90cf8dede16b4f9a3d8" prot="public" virt="non-virtual"><scope>spleeter::TFHandle</scope><name>TFHandle</name></member>
+      <member refid="classspleeter_1_1TFHandle_1adff7c927303ae562f76491b84f3c1f14" prot="public" virt="non-virtual"><scope>spleeter::TFHandle</scope><name>~TFHandle</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

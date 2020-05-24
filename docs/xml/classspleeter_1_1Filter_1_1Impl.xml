@@ -1,0 +1,241 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classspleeter_1_1Filter_1_1Impl" kind="class" language="C++" prot="public">
+    <compoundname>spleeter::Filter::Impl</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classspleeter_1_1Filter_1_1Impl_1ac9fe28d2e7b849b185816afd7b3875a4" prot="public" static="no" mutable="no">
+        <type>BundlePtr</type>
+        <definition>BundlePtr spleeter::Filter::Impl::bundle</definition>
+        <argsstring></argsstring>
+        <name>bundle</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_filter/filter.cc" line="18" column="1" bodyfile="/code/src/spleeter_filter/filter.cc" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classspleeter_1_1Filter_1_1Impl_1ab65eb83f7ba5647c9f14f5f53166629b" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t spleeter::Filter::Impl::frame_index</definition>
+        <argsstring></argsstring>
+        <name>frame_index</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_filter/filter.cc" line="23" column="1" bodyfile="/code/src/spleeter_filter/filter.cc" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classspleeter_1_1Filter_1_1Impl_1a677bcea88a5ea3d87d0a05cb7f8d5906" prot="public" static="no" mutable="no">
+        <type>TFHandlePtr&lt; TF_Tensor &gt;</type>
+        <definition>TFHandlePtr&lt;TF_Tensor&gt; spleeter::Filter::Impl::network_input</definition>
+        <argsstring></argsstring>
+        <name>network_input</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_filter/filter.cc" line="25" column="1" bodyfile="/code/src/spleeter_filter/filter.cc" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classspleeter_1_1Filter_1_1Impl_1abab67261133fe3d34abbfa99be2d67e3" prot="public" static="no" mutable="no">
+        <type>TFHandlePtr&lt; TF_Tensor &gt;</type>
+        <definition>TFHandlePtr&lt;TF_Tensor&gt; spleeter::Filter::Impl::previous_network_input</definition>
+        <argsstring></argsstring>
+        <name>previous_network_input</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_filter/filter.cc" line="26" column="1" bodyfile="/code/src/spleeter_filter/filter.cc" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classspleeter_1_1Filter_1_1Impl_1aa42c5cf5f7c4f8c64fcc128eba54ea83" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; int64_t &gt;</type>
+        <definition>std::vector&lt;int64_t&gt; spleeter::Filter::Impl::shapes</definition>
+        <argsstring></argsstring>
+        <name>shapes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_filter/filter.cc" line="27" column="1" bodyfile="/code/src/spleeter_filter/filter.cc" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classspleeter_1_1Filter_1_1Impl_1a881775f1210381e2cf5c43417b14d97f" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; TFHandlePtr&lt; TF_Tensor &gt; &gt;</type>
+        <definition>std::vector&lt;TFHandlePtr&lt;TF_Tensor&gt; &gt; spleeter::Filter::Impl::network_result</definition>
+        <argsstring></argsstring>
+        <name>network_result</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_filter/filter.cc" line="29" column="1" bodyfile="/code/src/spleeter_filter/filter.cc" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classspleeter_1_1Filter_1_1Impl_1a7a51810a42966ba655795c44f0756632" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; TFHandlePtr&lt; TF_Tensor &gt; &gt;</type>
+        <definition>std::vector&lt;TFHandlePtr&lt;TF_Tensor&gt; &gt; spleeter::Filter::Impl::previous_network_result</definition>
+        <argsstring></argsstring>
+        <name>previous_network_result</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_filter/filter.cc" line="30" column="1" bodyfile="/code/src/spleeter_filter/filter.cc" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classspleeter_1_1Filter_1_1Impl_1a3bae5777963c19b951c464976723b9b0" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; std::vector&lt; float &gt; &gt;</type>
+        <definition>std::vector&lt;std::vector&lt;float&gt; &gt; spleeter::Filter::Impl::mask_vec_data</definition>
+        <argsstring></argsstring>
+        <name>mask_vec_data</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_filter/filter.cc" line="32" column="1" bodyfile="/code/src/spleeter_filter/filter.cc" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classspleeter_1_1Filter_1_1Impl_1ad6ea954adcd3500ba286d9af4803f4c1" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; std::vector&lt; float &gt; &gt;</type>
+        <definition>std::vector&lt;std::vector&lt;float&gt; &gt; spleeter::Filter::Impl::previous_mask_vec_data</definition>
+        <argsstring></argsstring>
+        <name>previous_mask_vec_data</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_filter/filter.cc" line="33" column="1" bodyfile="/code/src/spleeter_filter/filter.cc" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classspleeter_1_1Filter_1_1Impl_1a509ebe6766a030fd35fcbcc03e15f0bb" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; std::vector&lt; float &gt; &gt;</type>
+        <definition>std::vector&lt;std::vector&lt;float&gt; &gt; spleeter::Filter::Impl::mask_sum_vec_data</definition>
+        <argsstring></argsstring>
+        <name>mask_sum_vec_data</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_filter/filter.cc" line="34" column="1" bodyfile="/code/src/spleeter_filter/filter.cc" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classspleeter_1_1Filter_1_1Impl_1aef7c1b8d695c78b93da65d05d2ff32ce" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; float * &gt;</type>
+        <definition>std::vector&lt;float *&gt; spleeter::Filter::Impl::mask_data</definition>
+        <argsstring></argsstring>
+        <name>mask_data</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_filter/filter.cc" line="35" column="1" bodyfile="/code/src/spleeter_filter/filter.cc" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classspleeter_1_1Filter_1_1Impl_1a27611d0f03c6750e67b9a172b8f0981d" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; float * &gt;</type>
+        <definition>std::vector&lt;float *&gt; spleeter::Filter::Impl::previous_mask_data</definition>
+        <argsstring></argsstring>
+        <name>previous_mask_data</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_filter/filter.cc" line="36" column="1" bodyfile="/code/src/spleeter_filter/filter.cc" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classspleeter_1_1Filter_1_1Impl_1aa08e365ef841e62cc64a0493d1c6e521" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; float * &gt;</type>
+        <definition>std::vector&lt;float *&gt; spleeter::Filter::Impl::mask_sum_data</definition>
+        <argsstring></argsstring>
+        <name>mask_sum_data</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_filter/filter.cc" line="37" column="1" bodyfile="/code/src/spleeter_filter/filter.cc" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classspleeter_1_1Filter_1_1Impl_1a621b30acfa64fadc6edb7e3337668cbb" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; std::vector&lt; std::vector&lt; float &gt; &gt; &gt;</type>
+        <definition>std::vector&lt;std::vector&lt;std::vector&lt;float&gt; &gt; &gt; spleeter::Filter::Impl::masks_vec_data</definition>
+        <argsstring></argsstring>
+        <name>masks_vec_data</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_filter/filter.cc" line="38" column="1" bodyfile="/code/src/spleeter_filter/filter.cc" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classspleeter_1_1Filter_1_1Impl_1a5caefab17f04b10d8a21536684de9662" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; std::vector&lt; float * &gt; &gt;</type>
+        <definition>std::vector&lt;std::vector&lt;float *&gt; &gt; spleeter::Filter::Impl::masks_data</definition>
+        <argsstring></argsstring>
+        <name>masks_data</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_filter/filter.cc" line="39" column="1" bodyfile="/code/src/spleeter_filter/filter.cc" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classspleeter_1_1Filter_1_1Impl_1ac253d105b0c99ff8a8b280a99406b92c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>spleeter::Filter::Impl::Impl</definition>
+        <argsstring>()</argsstring>
+        <name>Impl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/code/src/spleeter_filter/filter.cc" line="16" column="1" bodyfile="/code/src/spleeter_filter/filter.cc" bodystart="16" bodyend="16"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/code/src/spleeter_filter/filter.cc" line="14" column="1" bodyfile="/code/src/spleeter_filter/filter.cc" bodystart="14" bodyend="40"/>
+    <listofallmembers>
+      <member refid="classspleeter_1_1Filter_1_1Impl_1ac9fe28d2e7b849b185816afd7b3875a4" prot="public" virt="non-virtual"><scope>spleeter::Filter::Impl</scope><name>bundle</name></member>
+      <member refid="classspleeter_1_1Filter_1_1Impl_1ab65eb83f7ba5647c9f14f5f53166629b" prot="public" virt="non-virtual"><scope>spleeter::Filter::Impl</scope><name>frame_index</name></member>
+      <member refid="classspleeter_1_1Filter_1_1Impl_1ac253d105b0c99ff8a8b280a99406b92c" prot="public" virt="non-virtual"><scope>spleeter::Filter::Impl</scope><name>Impl</name></member>
+      <member refid="classspleeter_1_1Filter_1_1Impl_1aef7c1b8d695c78b93da65d05d2ff32ce" prot="public" virt="non-virtual"><scope>spleeter::Filter::Impl</scope><name>mask_data</name></member>
+      <member refid="classspleeter_1_1Filter_1_1Impl_1aa08e365ef841e62cc64a0493d1c6e521" prot="public" virt="non-virtual"><scope>spleeter::Filter::Impl</scope><name>mask_sum_data</name></member>
+      <member refid="classspleeter_1_1Filter_1_1Impl_1a509ebe6766a030fd35fcbcc03e15f0bb" prot="public" virt="non-virtual"><scope>spleeter::Filter::Impl</scope><name>mask_sum_vec_data</name></member>
+      <member refid="classspleeter_1_1Filter_1_1Impl_1a3bae5777963c19b951c464976723b9b0" prot="public" virt="non-virtual"><scope>spleeter::Filter::Impl</scope><name>mask_vec_data</name></member>
+      <member refid="classspleeter_1_1Filter_1_1Impl_1a5caefab17f04b10d8a21536684de9662" prot="public" virt="non-virtual"><scope>spleeter::Filter::Impl</scope><name>masks_data</name></member>
+      <member refid="classspleeter_1_1Filter_1_1Impl_1a621b30acfa64fadc6edb7e3337668cbb" prot="public" virt="non-virtual"><scope>spleeter::Filter::Impl</scope><name>masks_vec_data</name></member>
+      <member refid="classspleeter_1_1Filter_1_1Impl_1a677bcea88a5ea3d87d0a05cb7f8d5906" prot="public" virt="non-virtual"><scope>spleeter::Filter::Impl</scope><name>network_input</name></member>
+      <member refid="classspleeter_1_1Filter_1_1Impl_1a881775f1210381e2cf5c43417b14d97f" prot="public" virt="non-virtual"><scope>spleeter::Filter::Impl</scope><name>network_result</name></member>
+      <member refid="classspleeter_1_1Filter_1_1Impl_1a27611d0f03c6750e67b9a172b8f0981d" prot="public" virt="non-virtual"><scope>spleeter::Filter::Impl</scope><name>previous_mask_data</name></member>
+      <member refid="classspleeter_1_1Filter_1_1Impl_1ad6ea954adcd3500ba286d9af4803f4c1" prot="public" virt="non-virtual"><scope>spleeter::Filter::Impl</scope><name>previous_mask_vec_data</name></member>
+      <member refid="classspleeter_1_1Filter_1_1Impl_1abab67261133fe3d34abbfa99be2d67e3" prot="public" virt="non-virtual"><scope>spleeter::Filter::Impl</scope><name>previous_network_input</name></member>
+      <member refid="classspleeter_1_1Filter_1_1Impl_1a7a51810a42966ba655795c44f0756632" prot="public" virt="non-virtual"><scope>spleeter::Filter::Impl</scope><name>previous_network_result</name></member>
+      <member refid="classspleeter_1_1Filter_1_1Impl_1aa42c5cf5f7c4f8c64fcc128eba54ea83" prot="public" virt="non-virtual"><scope>spleeter::Filter::Impl</scope><name>shapes</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="dir_b5c8968fdc860107d345181a35ebb53d" kind="dir">
+    <compoundname>/code/src/spleeter_filter</compoundname>
+    <innerfile refid="filter_8cc">filter.cc</innerfile>
+    <innerfile refid="filter_8h">filter.h</innerfile>
+    <innerfile refid="filter_2model_8cc">model.cc</innerfile>
+    <innerfile refid="filter_2model_8h">model.h</innerfile>
+    <innerfile refid="tensor_8cc">tensor.cc</innerfile>
+    <innerfile refid="tensor_8h">tensor.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/code/src/spleeter_filter/"/>
+  </compounddef>
+</doxygen>

@@ -3,6 +3,7 @@
   <compounddef id="classspleeter_1_1Filter" kind="class" language="C++" prot="public">
     <compoundname>spleeter::Filter</compoundname>
     <basecompoundref prot="public" virt="non-virtual">AbstractFilter</basecompoundref>
+    <innerclass refid="classspleeter_1_1Filter_1_1Impl" prot="public">spleeter::Filter::Impl</innerclass>
       <sectiondef kind="private-attrib">
       <memberdef kind="variable" id="classspleeter_1_1Filter_1a8305ebded47a397c7945d8fac853d848" prot="private" static="no" mutable="no">
         <type>SeparationType</type>
@@ -15,20 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/code/src/spleeter/filter.h" line="77" column="1" bodyfile="/code/src/spleeter/filter.h" bodystart="77" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classspleeter_1_1Filter_1a56ceec5fbb6744e1543458de6c5ed692" prot="private" static="no" mutable="no">
-        <type>BundlePtr</type>
-        <definition>BundlePtr spleeter::Filter::m_bundle</definition>
-        <argsstring></argsstring>
-        <name>m_bundle</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/code/src/spleeter/filter.h" line="78" column="1" bodyfile="/code/src/spleeter/filter.h" bodystart="78" bodyend="-1"/>
+        <location file="/code/src/spleeter_filter/filter.h" line="73" column="1" bodyfile="/code/src/spleeter_filter/filter.h" bodystart="73" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classspleeter_1_1Filter_1ac3e48a81917edd3d2c6d9bed675dc252" prot="private" static="no" mutable="no">
         <type>std::vector&lt; float &gt;</type>
@@ -41,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/code/src/spleeter/filter.h" line="79" column="1" bodyfile="/code/src/spleeter/filter.h" bodystart="79" bodyend="-1"/>
+        <location file="/code/src/spleeter_filter/filter.h" line="74" column="1" bodyfile="/code/src/spleeter_filter/filter.h" bodystart="74" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classspleeter_1_1Filter_1a03448316e97afcff9491659b822d9d24" prot="private" static="no" mutable="no">
         <type>uint16_t</type>
@@ -54,7 +42,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/code/src/spleeter/filter.h" line="81" column="1" bodyfile="/code/src/spleeter/filter.h" bodystart="81" bodyend="-1"/>
+        <location file="/code/src/spleeter_filter/filter.h" line="76" column="1" bodyfile="/code/src/spleeter_filter/filter.h" bodystart="76" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classspleeter_1_1Filter_1a0b293bdf6f864908b58dbe3fdc7f87f7" prot="private" static="no" mutable="no">
         <type>uint16_t</type>
@@ -67,7 +55,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/code/src/spleeter/filter.h" line="82" column="1" bodyfile="/code/src/spleeter/filter.h" bodystart="82" bodyend="-1"/>
+        <location file="/code/src/spleeter_filter/filter.h" line="77" column="1" bodyfile="/code/src/spleeter_filter/filter.h" bodystart="77" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classspleeter_1_1Filter_1ab838e9ff6d6fafe01020fa8b4cf761a8" prot="private" static="no" mutable="no">
         <type>uint16_t</type>
@@ -80,7 +68,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/code/src/spleeter/filter.h" line="83" column="1" bodyfile="/code/src/spleeter/filter.h" bodystart="83" bodyend="-1"/>
+        <location file="/code/src/spleeter_filter/filter.h" line="78" column="1" bodyfile="/code/src/spleeter_filter/filter.h" bodystart="78" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classspleeter_1_1Filter_1a475ad4c8b4d07fcc24a96779029109a7" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -93,189 +81,20 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/code/src/spleeter/filter.h" line="84" column="1" bodyfile="/code/src/spleeter/filter.h" bodystart="84" bodyend="-1"/>
+        <location file="/code/src/spleeter_filter/filter.h" line="79" column="1" bodyfile="/code/src/spleeter_filter/filter.h" bodystart="79" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classspleeter_1_1Filter_1a7f650d9497340108b1cdb701ab17df25" prot="private" static="no" mutable="no">
-        <type>uint32_t</type>
-        <definition>uint32_t spleeter::Filter::m_frame_index</definition>
+      <memberdef kind="variable" id="classspleeter_1_1Filter_1af5b6d674f8763ef9be09c73580bf5862" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classspleeter_1_1Filter_1_1Impl" kindref="compound">Impl</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;Impl&gt; spleeter::Filter::m_impl</definition>
         <argsstring></argsstring>
-        <name>m_frame_index</name>
+        <name>m_impl</name>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/code/src/spleeter/filter.h" line="89" column="1" bodyfile="/code/src/spleeter/filter.h" bodystart="89" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classspleeter_1_1Filter_1a3d0b027cfe88676011e0d7e1409cefa5" prot="private" static="no" mutable="no">
-        <type>tensorflow::Tensor</type>
-        <definition>tensorflow::Tensor spleeter::Filter::m_network_input</definition>
-        <argsstring></argsstring>
-        <name>m_network_input</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/code/src/spleeter/filter.h" line="91" column="1" bodyfile="/code/src/spleeter/filter.h" bodystart="91" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classspleeter_1_1Filter_1a0e025ad30a3874f4a978eefe0ab1468e" prot="private" static="no" mutable="no">
-        <type>tensorflow::Tensor</type>
-        <definition>tensorflow::Tensor spleeter::Filter::m_previous_network_input</definition>
-        <argsstring></argsstring>
-        <name>m_previous_network_input</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/code/src/spleeter/filter.h" line="92" column="1" bodyfile="/code/src/spleeter/filter.h" bodystart="92" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classspleeter_1_1Filter_1ab7bf69cccffff1df48a2f03344443933" prot="private" static="no" mutable="no">
-        <type>std::vector&lt; tensorflow::Tensor &gt;</type>
-        <definition>std::vector&lt;tensorflow::Tensor&gt; spleeter::Filter::m_network_result</definition>
-        <argsstring></argsstring>
-        <name>m_network_result</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/code/src/spleeter/filter.h" line="94" column="1" bodyfile="/code/src/spleeter/filter.h" bodystart="94" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classspleeter_1_1Filter_1a62a3ea84a554f110406d0e022c4f1279" prot="private" static="no" mutable="no">
-        <type>std::vector&lt; tensorflow::Tensor &gt;</type>
-        <definition>std::vector&lt;tensorflow::Tensor&gt; spleeter::Filter::m_previous_network_result</definition>
-        <argsstring></argsstring>
-        <name>m_previous_network_result</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/code/src/spleeter/filter.h" line="95" column="1" bodyfile="/code/src/spleeter/filter.h" bodystart="95" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classspleeter_1_1Filter_1aee651c0a9740ffb43ce157b51270d7e9" prot="private" static="no" mutable="no">
-        <type>std::vector&lt; std::vector&lt; float &gt; &gt;</type>
-        <definition>std::vector&lt;std::vector&lt;float&gt; &gt; spleeter::Filter::m_mask_vec_data</definition>
-        <argsstring></argsstring>
-        <name>m_mask_vec_data</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/code/src/spleeter/filter.h" line="97" column="1" bodyfile="/code/src/spleeter/filter.h" bodystart="97" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classspleeter_1_1Filter_1aae9196ada6e10a10d3b7b8b071b88473" prot="private" static="no" mutable="no">
-        <type>std::vector&lt; std::vector&lt; float &gt; &gt;</type>
-        <definition>std::vector&lt;std::vector&lt;float&gt; &gt; spleeter::Filter::m_previous_mask_vec_data</definition>
-        <argsstring></argsstring>
-        <name>m_previous_mask_vec_data</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/code/src/spleeter/filter.h" line="98" column="1" bodyfile="/code/src/spleeter/filter.h" bodystart="98" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classspleeter_1_1Filter_1a6c3aef3fddb5ae4777dde2569099e0dc" prot="private" static="no" mutable="no">
-        <type>std::vector&lt; std::vector&lt; float &gt; &gt;</type>
-        <definition>std::vector&lt;std::vector&lt;float&gt; &gt; spleeter::Filter::m_mask_sum_vec_data</definition>
-        <argsstring></argsstring>
-        <name>m_mask_sum_vec_data</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/code/src/spleeter/filter.h" line="99" column="1" bodyfile="/code/src/spleeter/filter.h" bodystart="99" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classspleeter_1_1Filter_1ac207028d50e8ab7386d78983f0267043" prot="private" static="no" mutable="no">
-        <type>std::vector&lt; float * &gt;</type>
-        <definition>std::vector&lt;float*&gt; spleeter::Filter::m_mask_data</definition>
-        <argsstring></argsstring>
-        <name>m_mask_data</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/code/src/spleeter/filter.h" line="100" column="1" bodyfile="/code/src/spleeter/filter.h" bodystart="100" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classspleeter_1_1Filter_1a6b98a4ba00b23b5c4446326480540db7" prot="private" static="no" mutable="no">
-        <type>std::vector&lt; float * &gt;</type>
-        <definition>std::vector&lt;float*&gt; spleeter::Filter::m_previous_mask_data</definition>
-        <argsstring></argsstring>
-        <name>m_previous_mask_data</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/code/src/spleeter/filter.h" line="101" column="1" bodyfile="/code/src/spleeter/filter.h" bodystart="101" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classspleeter_1_1Filter_1a10d305323df45ccf4001882b03db352b" prot="private" static="no" mutable="no">
-        <type>std::vector&lt; float * &gt;</type>
-        <definition>std::vector&lt;float*&gt; spleeter::Filter::m_mask_sum_data</definition>
-        <argsstring></argsstring>
-        <name>m_mask_sum_data</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/code/src/spleeter/filter.h" line="102" column="1" bodyfile="/code/src/spleeter/filter.h" bodystart="102" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classspleeter_1_1Filter_1af761f3b3e11eaf60d2636c2d9b94e5dd" prot="private" static="no" mutable="no">
-        <type>std::vector&lt; std::vector&lt; std::vector&lt; float &gt; &gt; &gt;</type>
-        <definition>std::vector&lt;std::vector&lt;std::vector&lt;float&gt; &gt; &gt; spleeter::Filter::m_masks_vec_data</definition>
-        <argsstring></argsstring>
-        <name>m_masks_vec_data</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/code/src/spleeter/filter.h" line="103" column="1" bodyfile="/code/src/spleeter/filter.h" bodystart="103" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classspleeter_1_1Filter_1af566f9b301ce7810cd862caf4c637e5e" prot="private" static="no" mutable="no">
-        <type>std::vector&lt; std::vector&lt; float * &gt; &gt;</type>
-        <definition>std::vector&lt;std::vector&lt;float*&gt; &gt; spleeter::Filter::m_masks_data</definition>
-        <argsstring></argsstring>
-        <name>m_masks_data</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/code/src/spleeter/filter.h" line="104" column="1" bodyfile="/code/src/spleeter/filter.h" bodystart="104" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classspleeter_1_1Filter_1a6fd019e936a0eae2b0e787d0f1b50442" prot="private" static="no" mutable="no">
-        <type>std::mutex</type>
-        <definition>std::mutex spleeter::Filter::m_mutex</definition>
-        <argsstring></argsstring>
-        <name>m_mutex</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/code/src/spleeter/filter.h" line="106" column="1" bodyfile="/code/src/spleeter/filter.h" bodystart="106" bodyend="-1"/>
+        <location file="/code/src/spleeter_filter/filter.h" line="82" column="1" bodyfile="/code/src/spleeter_filter/filter.h" bodystart="81" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -294,7 +113,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/code/src/spleeter/filter.h" line="18" column="1" bodyfile="/code/src/spleeter/filter.cc" bodystart="11" bodyend="27"/>
+        <location file="/code/src/spleeter_filter/filter.h" line="14" column="1" bodyfile="/code/src/spleeter_filter/filter.cc" bodystart="42" bodyend="58"/>
       </memberdef>
       <memberdef kind="function" id="classspleeter_1_1Filter_1abaf85eb48aa211b3ca16331ab4f3d485" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -311,7 +130,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/code/src/spleeter/filter.h" line="21" column="1" bodyfile="/code/src/spleeter/filter.cc" bodystart="29" bodyend="45"/>
+        <location file="/code/src/spleeter_filter/filter.h" line="17" column="1" bodyfile="/code/src/spleeter_filter/filter.cc" bodystart="60" bodyend="76"/>
       </memberdef>
       <memberdef kind="function" id="classspleeter_1_1Filter_1af2a5a206f6a4b361f99b1821b5fa01dc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -347,7 +166,7 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/code/src/spleeter/filter.h" line="28" column="1" bodyfile="/code/src/spleeter/filter.cc" bodystart="47" bodyend="49"/>
+        <location file="/code/src/spleeter_filter/filter.h" line="24" column="1" bodyfile="/code/src/spleeter_filter/filter.cc" bodystart="78" bodyend="80"/>
       </memberdef>
       <memberdef kind="function" id="classspleeter_1_1Filter_1ad4fac13e7116ae1f40d6cf3a3bc6548f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>float</type>
@@ -364,7 +183,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/code/src/spleeter/filter.h" line="29" column="1" bodyfile="/code/src/spleeter/filter.cc" bodystart="50" bodyend="50"/>
+        <location file="/code/src/spleeter_filter/filter.h" line="25" column="1" bodyfile="/code/src/spleeter_filter/filter.cc" bodystart="81" bodyend="81"/>
       </memberdef>
       <memberdef kind="function" id="classspleeter_1_1Filter_1af242e0b835bacea0d46744067c241b71" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -390,7 +209,7 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/code/src/spleeter/filter.h" line="38" column="1" bodyfile="/code/src/spleeter/filter.cc" bodystart="52" bodyend="52"/>
+        <location file="/code/src/spleeter_filter/filter.h" line="34" column="1" bodyfile="/code/src/spleeter_filter/filter.cc" bodystart="83" bodyend="83"/>
       </memberdef>
       <memberdef kind="function" id="classspleeter_1_1Filter_1a29b37edad3b144225a33d632cf04cb3e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>uint16_t</type>
@@ -403,7 +222,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/code/src/spleeter/filter.h" line="39" column="1" bodyfile="/code/src/spleeter/filter.cc" bodystart="53" bodyend="53"/>
+        <location file="/code/src/spleeter_filter/filter.h" line="35" column="1" bodyfile="/code/src/spleeter_filter/filter.cc" bodystart="84" bodyend="84"/>
       </memberdef>
       <memberdef kind="function" id="classspleeter_1_1Filter_1a995a121b3e5300ab2129636943bd6086" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -429,7 +248,7 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/code/src/spleeter/filter.h" line="44" column="1" bodyfile="/code/src/spleeter/filter.cc" bodystart="55" bodyend="55"/>
+        <location file="/code/src/spleeter_filter/filter.h" line="40" column="1" bodyfile="/code/src/spleeter_filter/filter.cc" bodystart="86" bodyend="86"/>
       </memberdef>
       <memberdef kind="function" id="classspleeter_1_1Filter_1a15fc2c5c47730c3569250e3c44434f6b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>uint16_t</type>
@@ -442,7 +261,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/code/src/spleeter/filter.h" line="45" column="1" bodyfile="/code/src/spleeter/filter.cc" bodystart="56" bodyend="56"/>
+        <location file="/code/src/spleeter_filter/filter.h" line="41" column="1" bodyfile="/code/src/spleeter_filter/filter.cc" bodystart="87" bodyend="87"/>
       </memberdef>
       <memberdef kind="function" id="classspleeter_1_1Filter_1a3581c17c71107eab3c97ff58c17ba6ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -467,7 +286,7 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/code/src/spleeter/filter.h" line="50" column="1" bodyfile="/code/src/spleeter/filter.cc" bodystart="58" bodyend="58"/>
+        <location file="/code/src/spleeter_filter/filter.h" line="46" column="1" bodyfile="/code/src/spleeter_filter/filter.cc" bodystart="89" bodyend="89"/>
       </memberdef>
       <memberdef kind="function" id="classspleeter_1_1Filter_1af9a655b894367af8b9a52151f1c99d56" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>uint16_t</type>
@@ -480,7 +299,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/code/src/spleeter/filter.h" line="51" column="1" bodyfile="/code/src/spleeter/filter.cc" bodystart="59" bodyend="59"/>
+        <location file="/code/src/spleeter_filter/filter.h" line="47" column="1" bodyfile="/code/src/spleeter_filter/filter.cc" bodystart="90" bodyend="90"/>
       </memberdef>
       <memberdef kind="function" id="classspleeter_1_1Filter_1ae648103ed818f744b214724e3d621ecd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -505,7 +324,7 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/code/src/spleeter/filter.h" line="56" column="1" bodyfile="/code/src/spleeter/filter.cc" bodystart="61" bodyend="63"/>
+        <location file="/code/src/spleeter_filter/filter.h" line="52" column="1" bodyfile="/code/src/spleeter_filter/filter.cc" bodystart="92" bodyend="94"/>
       </memberdef>
       <memberdef kind="function" id="classspleeter_1_1Filter_1ae8544877085b334b414f838c0b1ae3a7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -518,7 +337,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/code/src/spleeter/filter.h" line="57" column="1" bodyfile="/code/src/spleeter/filter.cc" bodystart="64" bodyend="64"/>
+        <location file="/code/src/spleeter_filter/filter.h" line="53" column="1" bodyfile="/code/src/spleeter_filter/filter.cc" bodystart="95" bodyend="95"/>
       </memberdef>
       <memberdef kind="function" id="classspleeter_1_1Filter_1a586ab362a4723e419284dff19864def2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -531,7 +350,7 @@
 <para>Every time we run a process, we will do it on ProcessLength. However, if we decide to reduce FrameLength, it will get more CPU intensive as we will process more often but it will reduce the latency. Latency is T - (T - FrameLength) / 2 If FrameLength = 1, latency is ~T/2 as we always need to process the center of the matrix. It is the one that beneficit the most of temporal information. </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/code/src/spleeter/filter.h" line="66" column="1" bodyfile="/code/src/spleeter/filter.cc" bodystart="66" bodyend="68"/>
+        <location file="/code/src/spleeter_filter/filter.h" line="62" column="1" bodyfile="/code/src/spleeter_filter/filter.cc" bodystart="97" bodyend="99"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -546,7 +365,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/code/src/spleeter/filter.h" line="70" column="1" bodyfile="/code/src/spleeter/filter.cc" bodystart="74" bodyend="128"/>
+        <location file="/code/src/spleeter_filter/filter.h" line="66" column="1" bodyfile="/code/src/spleeter_filter/filter.cc" bodystart="105" bodyend="163"/>
       </memberdef>
       <memberdef kind="function" id="classspleeter_1_1Filter_1af398288b3ede3b7f4fe9c463149d80b7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -567,7 +386,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/code/src/spleeter/filter.h" line="71" column="1" bodyfile="/code/src/spleeter/filter.cc" bodystart="130" bodyend="242"/>
+        <location file="/code/src/spleeter_filter/filter.h" line="67" column="1" bodyfile="/code/src/spleeter_filter/filter.cc" bodystart="165" bodyend="302"/>
       </memberdef>
       <memberdef kind="function" id="classspleeter_1_1Filter_1a41bc38f48ed835cbb3aa3956f4ded44c" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>uint32_t</type>
@@ -580,7 +399,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/code/src/spleeter/filter.h" line="74" column="1" bodyfile="/code/src/spleeter/filter.cc" bodystart="70" bodyend="72"/>
+        <location file="/code/src/spleeter_filter/filter.h" line="70" column="1" bodyfile="/code/src/spleeter_filter/filter.cc" bodystart="101" bodyend="103"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -588,17 +407,6 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="0">
-        <label>spleeter::Filter</label>
-        <link refid="classspleeter_1_1Filter"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="1">
-        <label>artff::AbstractFilter</label>
-      </node>
-    </inheritancegraph>
-    <collaborationgraph>
       <node id="2">
         <label>spleeter::Filter</label>
         <link refid="classspleeter_1_1Filter"/>
@@ -608,8 +416,19 @@
       <node id="3">
         <label>artff::AbstractFilter</label>
       </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>spleeter::Filter</label>
+        <link refid="classspleeter_1_1Filter"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>artff::AbstractFilter</label>
+      </node>
     </collaborationgraph>
-    <location file="/code/src/spleeter/filter.h" line="16" column="1" bodyfile="/code/src/spleeter/filter.h" bodystart="16" bodyend="107"/>
+    <location file="/code/src/spleeter_filter/filter.h" line="12" column="1" bodyfile="/code/src/spleeter_filter/filter.h" bodystart="12" bodyend="83"/>
     <listofallmembers>
       <member refid="classspleeter_1_1Filter_1af398288b3ede3b7f4fe9c463149d80b7" prot="private" virt="non-virtual"><scope>spleeter::Filter</scope><name>AsyncProcessTransformedBlock</name></member>
       <member refid="classspleeter_1_1Filter_1acaaf4345541afe5545c57d867cedf6f1" prot="public" virt="non-virtual"><scope>spleeter::Filter</scope><name>Filter</name></member>
@@ -617,24 +436,10 @@
       <member refid="classspleeter_1_1Filter_1a586ab362a4723e419284dff19864def2" prot="public" virt="non-virtual"><scope>spleeter::Filter</scope><name>FrameLatency</name></member>
       <member refid="classspleeter_1_1Filter_1a15fc2c5c47730c3569250e3c44434f6b" prot="public" virt="non-virtual"><scope>spleeter::Filter</scope><name>FrameLength</name></member>
       <member refid="classspleeter_1_1Filter_1abaf85eb48aa211b3ca16331ab4f3d485" prot="public" virt="non-virtual"><scope>spleeter::Filter</scope><name>Init</name></member>
-      <member refid="classspleeter_1_1Filter_1a56ceec5fbb6744e1543458de6c5ed692" prot="private" virt="non-virtual"><scope>spleeter::Filter</scope><name>m_bundle</name></member>
       <member refid="classspleeter_1_1Filter_1a475ad4c8b4d07fcc24a96779029109a7" prot="private" virt="non-virtual"><scope>spleeter::Filter</scope><name>m_force_conservativity</name></member>
-      <member refid="classspleeter_1_1Filter_1a7f650d9497340108b1cdb701ab17df25" prot="private" virt="non-virtual"><scope>spleeter::Filter</scope><name>m_frame_index</name></member>
       <member refid="classspleeter_1_1Filter_1a0b293bdf6f864908b58dbe3fdc7f87f7" prot="private" virt="non-virtual"><scope>spleeter::Filter</scope><name>m_frame_length</name></member>
-      <member refid="classspleeter_1_1Filter_1ac207028d50e8ab7386d78983f0267043" prot="private" virt="non-virtual"><scope>spleeter::Filter</scope><name>m_mask_data</name></member>
-      <member refid="classspleeter_1_1Filter_1a10d305323df45ccf4001882b03db352b" prot="private" virt="non-virtual"><scope>spleeter::Filter</scope><name>m_mask_sum_data</name></member>
-      <member refid="classspleeter_1_1Filter_1a6c3aef3fddb5ae4777dde2569099e0dc" prot="private" virt="non-virtual"><scope>spleeter::Filter</scope><name>m_mask_sum_vec_data</name></member>
-      <member refid="classspleeter_1_1Filter_1aee651c0a9740ffb43ce157b51270d7e9" prot="private" virt="non-virtual"><scope>spleeter::Filter</scope><name>m_mask_vec_data</name></member>
-      <member refid="classspleeter_1_1Filter_1af566f9b301ce7810cd862caf4c637e5e" prot="private" virt="non-virtual"><scope>spleeter::Filter</scope><name>m_masks_data</name></member>
-      <member refid="classspleeter_1_1Filter_1af761f3b3e11eaf60d2636c2d9b94e5dd" prot="private" virt="non-virtual"><scope>spleeter::Filter</scope><name>m_masks_vec_data</name></member>
-      <member refid="classspleeter_1_1Filter_1a6fd019e936a0eae2b0e787d0f1b50442" prot="private" virt="non-virtual"><scope>spleeter::Filter</scope><name>m_mutex</name></member>
-      <member refid="classspleeter_1_1Filter_1a3d0b027cfe88676011e0d7e1409cefa5" prot="private" virt="non-virtual"><scope>spleeter::Filter</scope><name>m_network_input</name></member>
-      <member refid="classspleeter_1_1Filter_1ab7bf69cccffff1df48a2f03344443933" prot="private" virt="non-virtual"><scope>spleeter::Filter</scope><name>m_network_result</name></member>
+      <member refid="classspleeter_1_1Filter_1af5b6d674f8763ef9be09c73580bf5862" prot="private" virt="non-virtual"><scope>spleeter::Filter</scope><name>m_impl</name></member>
       <member refid="classspleeter_1_1Filter_1ab838e9ff6d6fafe01020fa8b4cf761a8" prot="private" virt="non-virtual"><scope>spleeter::Filter</scope><name>m_overlap_length</name></member>
-      <member refid="classspleeter_1_1Filter_1a6b98a4ba00b23b5c4446326480540db7" prot="private" virt="non-virtual"><scope>spleeter::Filter</scope><name>m_previous_mask_data</name></member>
-      <member refid="classspleeter_1_1Filter_1aae9196ada6e10a10d3b7b8b071b88473" prot="private" virt="non-virtual"><scope>spleeter::Filter</scope><name>m_previous_mask_vec_data</name></member>
-      <member refid="classspleeter_1_1Filter_1a0e025ad30a3874f4a978eefe0ab1468e" prot="private" virt="non-virtual"><scope>spleeter::Filter</scope><name>m_previous_network_input</name></member>
-      <member refid="classspleeter_1_1Filter_1a62a3ea84a554f110406d0e022c4f1279" prot="private" virt="non-virtual"><scope>spleeter::Filter</scope><name>m_previous_network_result</name></member>
       <member refid="classspleeter_1_1Filter_1a03448316e97afcff9491659b822d9d24" prot="private" virt="non-virtual"><scope>spleeter::Filter</scope><name>m_process_length</name></member>
       <member refid="classspleeter_1_1Filter_1a8305ebded47a397c7945d8fac853d848" prot="private" virt="non-virtual"><scope>spleeter::Filter</scope><name>m_type</name></member>
       <member refid="classspleeter_1_1Filter_1ac3e48a81917edd3d2c6d9bed675dc252" prot="private" virt="non-virtual"><scope>spleeter::Filter</scope><name>m_volumes</name></member>

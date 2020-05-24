@@ -14,7 +14,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/code/src/spleeter/registry.h" line="22" column="1" bodyfile="/code/src/spleeter/registry.h" bodystart="22" bodyend="-1"/>
+        <location file="/code/src/spleeter_common/registry.h" line="24" column="1" bodyfile="/code/src/spleeter_common/registry.h" bodystart="24" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-static-func">
@@ -29,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/code/src/spleeter/registry.h" line="13" column="1" bodyfile="/code/src/spleeter/registry.cc" bodystart="8" bodyend="11"/>
+        <location file="/code/src/spleeter_common/registry.h" line="15" column="1" bodyfile="/code/src/spleeter_common/registry.cc" bodystart="8" bodyend="11"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -52,7 +52,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/code/src/spleeter/registry.h" line="14" column="1" bodyfile="/code/src/spleeter/registry.cc" bodystart="13" bodyend="15"/>
+        <location file="/code/src/spleeter_common/registry.h" line="16" column="1" bodyfile="/code/src/spleeter_common/registry.cc" bodystart="13" bodyend="15"/>
       </memberdef>
       <memberdef kind="function" id="classspleeter_1_1Registry_1a0e9cc941e762808c85089466e9bebf3f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>BundlePtr</type>
@@ -69,7 +69,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/code/src/spleeter/registry.h" line="15" column="1" bodyfile="/code/src/spleeter/registry.cc" bodystart="17" bodyend="22"/>
+        <location file="/code/src/spleeter_common/registry.h" line="17" column="1" bodyfile="/code/src/spleeter_common/registry.cc" bodystart="17" bodyend="22"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -84,7 +84,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/code/src/spleeter/registry.h" line="18" column="1" bodyfile="/code/src/spleeter/registry.cc" bodystart="5" bodyend="5"/>
+        <location file="/code/src/spleeter_common/registry.h" line="20" column="1" bodyfile="/code/src/spleeter_common/registry.cc" bodystart="5" bodyend="5"/>
       </memberdef>
       <memberdef kind="function" id="classspleeter_1_1Registry_1ae514ec64ee348c9828287819ebe2f2b0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -97,14 +97,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/code/src/spleeter/registry.h" line="19" column="1" bodyfile="/code/src/spleeter/registry.cc" bodystart="6" bodyend="6"/>
+        <location file="/code/src/spleeter_common/registry.h" line="21" column="1" bodyfile="/code/src/spleeter_common/registry.cc" bodystart="6" bodyend="6"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/code/src/spleeter/registry.h" line="11" column="1" bodyfile="/code/src/spleeter/registry.h" bodystart="11" bodyend="23"/>
+    <location file="/code/src/spleeter_common/registry.h" line="13" column="1" bodyfile="/code/src/spleeter_common/registry.h" bodystart="13" bodyend="25"/>
     <listofallmembers>
       <member refid="classspleeter_1_1Registry_1a0e9cc941e762808c85089466e9bebf3f" prot="public" virt="non-virtual"><scope>spleeter::Registry</scope><name>Get</name></member>
       <member refid="classspleeter_1_1Registry_1ac0d987f1ffbc5658470836908037f332" prot="public" virt="non-virtual"><scope>spleeter::Registry</scope><name>instance</name></member>

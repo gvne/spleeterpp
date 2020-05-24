@@ -3,50 +3,62 @@
   <compounddef id="type_8h" kind="file" language="C++">
     <compoundname>type.h</compoundname>
     <includes local="no">Eigen/Core</includes>
-    <includedby refid="filter_8h" local="yes">/code/src/spleeter/filter.h</includedby>
     <includedby refid="model_8h" local="yes">/code/src/spleeter/model.h</includedby>
-    <includedby refid="spleeter_8h" local="yes">/code/src/spleeter/spleeter.h</includedby>
+    <includedby refid="registry_8h" local="yes">/code/src/spleeter_common/registry.h</includedby>
+    <includedby refid="spleeter__common_8h" local="yes">/code/src/spleeter_common/spleeter_common.h</includedby>
+    <includedby refid="filter_8h" local="yes">/code/src/spleeter_filter/filter.h</includedby>
+    <includedby refid="filter_2model_8h" local="yes">/code/src/spleeter_filter/model.h</includedby>
     <incdepgraph>
-      <node id="113">
+      <node id="133">
         <label>Eigen/Core</label>
       </node>
-      <node id="112">
-        <label>/code/src/spleeter/type.h</label>
+      <node id="132">
+        <label>/code/src/spleeter_common/type.h</label>
         <link refid="type_8h"/>
-        <childnode refid="113" relation="include">
+        <childnode refid="133" relation="include">
         </childnode>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="118">
+      <node id="135">
         <label>/code/src/spleeter/model.h</label>
         <link refid="model_8h_source"/>
       </node>
-      <node id="117">
-        <label>/code/src/spleeter/registry.h</label>
+      <node id="137">
+        <label>/code/src/spleeter_common/spleeter_common.h</label>
+        <link refid="spleeter__common_8h_source"/>
+        <childnode refid="138" relation="include">
+        </childnode>
+      </node>
+      <node id="140">
+        <label>/code/src/spleeter_filter/model.h</label>
+        <link refid="filter_2model_8h_source"/>
+      </node>
+      <node id="139">
+        <label>/code/src/spleeter_filter/filter.h</label>
+        <link refid="filter_8h_source"/>
+      </node>
+      <node id="136">
+        <label>/code/src/spleeter_common/registry.h</label>
         <link refid="registry_8h_source"/>
       </node>
-      <node id="115">
-        <label>/code/src/spleeter/filter.h</label>
-        <link refid="filter_8h_source"/>
-        <childnode refid="116" relation="include">
+      <node id="134">
+        <label>/code/src/spleeter_common/type.h</label>
+        <link refid="type_8h"/>
+        <childnode refid="135" relation="include">
+        </childnode>
+        <childnode refid="136" relation="include">
+        </childnode>
+        <childnode refid="137" relation="include">
+        </childnode>
+        <childnode refid="139" relation="include">
+        </childnode>
+        <childnode refid="140" relation="include">
         </childnode>
       </node>
-      <node id="116">
+      <node id="138">
         <label>/code/src/spleeter/spleeter.h</label>
         <link refid="spleeter_8h_source"/>
-        <childnode refid="117" relation="include">
-        </childnode>
-      </node>
-      <node id="114">
-        <label>/code/src/spleeter/type.h</label>
-        <link refid="type_8h"/>
-        <childnode refid="115" relation="include">
-        </childnode>
-        <childnode refid="118" relation="include">
-        </childnode>
-        <childnode refid="116" relation="include">
-        </childnode>
       </node>
     </invincdepgraph>
     <innernamespace refid="namespacespleeter">spleeter</innernamespace>
@@ -55,8 +67,8 @@
     <detaileddescription>
     </detaileddescription>
     <programlisting>
-<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>SPLEETER_TYPE_H_</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SPLEETER_TYPE_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>SPLEETER_FILTER_TYPE_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SPLEETER_FILTER_TYPE_H_</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="3"><highlight class="normal"></highlight></codeline>
 <codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Eigen/Core&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="5"><highlight class="normal"></highlight></codeline>
@@ -68,8 +80,8 @@
 <codeline lineno="11"><highlight class="normal"></highlight></codeline>
 <codeline lineno="12"><highlight class="normal">}<sp/><sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>spleeter</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="13"><highlight class="normal"></highlight></codeline>
-<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/><sp/>//<sp/>SPLEETER_TYPE_H_</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/><sp/>//<sp/>SPLEETER_FILTER_TYPE_H_</highlight></codeline>
     </programlisting>
-    <location file="/code/src/spleeter/type.h"/>
+    <location file="/code/src/spleeter_common/type.h"/>
   </compounddef>
 </doxygen>

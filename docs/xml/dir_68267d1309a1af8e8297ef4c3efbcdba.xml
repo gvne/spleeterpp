@@ -3,6 +3,8 @@
   <compounddef id="dir_68267d1309a1af8e8297ef4c3efbcdba" kind="dir">
     <compoundname>/code/src</compoundname>
     <innerdir refid="dir_cf8dda79de50e3e42e3b1f531732fb91">/code/src/spleeter</innerdir>
+    <innerdir refid="dir_960157c8da09d6d02f997f6b381aed41">/code/src/spleeter_common</innerdir>
+    <innerdir refid="dir_b5c8968fdc860107d345181a35ebb53d">/code/src/spleeter_filter</innerdir>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
