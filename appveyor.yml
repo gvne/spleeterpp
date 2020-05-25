@@ -18,4 +18,5 @@ build_script:
   - cmake --build .
 
 test_script:
+  - cmd: copy C:/projects/spleeterpp/build/tensorflow/lib/tensorflow.dll C:/projects/spleeterpp/build/test/spleeter_filter/Debug
   - cmd: C:/projects/spleeterpp/build/test/spleeter_filter/Debug/test_spleeter_filter.exe --gtest_output=xml:tests.xml
