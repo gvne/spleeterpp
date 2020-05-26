@@ -7,6 +7,7 @@ set(CMAKE_CXX_STANDARD 14)
 option(spleeter_enable_tests "Enable unit tests" ON)
 option(spleeter_regenerate_models "Build the models from deezer/spleeter repository (requires conda)" OFF)
 option(spleeter_enable_filter "Enable the filter interface (for online processing)" ON)
+option(spleeter_enable_high_resolution "Process the spectrum up the 16KHz" OFF)
 
 ###############
 # Filter specific options
@@ -20,9 +21,8 @@ if (${spleeter_enable_filter})
   message(STATUS "using spleeter_input_frame_count ${spleeter_input_frame_count}")
 endif()
 ###############
-# 16KHz only available when regenerating the models
+# When regenerating the models, 16KHz is handled by the frequency bin count (F parameter in spleeter)
 if (${spleeter_regenerate_models})
-  option(spleeter_enable_high_resolution "Process the spectrum up the 16KHz" OFF)
   set(spleeter_frequency_bin_count "1024")
   if (${spleeter_enable_high_resolution})
     set(spleeter_frequency_bin_count "1536")  # from here: https://github.com/deezer/spleeter/blob/master/spleeter/resources/4stems-16kHz.json
