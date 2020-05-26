@@ -40,20 +40,25 @@ Options
 spleeter_enable_tests
 ^^^^^^^^^^^^^^^^^^^^^
 
-Enable or disable the unit tests
+Enable or disable the unit tests. Default is ON
+
+spleeter_enable_high_resolution
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Enable or disable the process extension up the 16KHz. Default is OFF
 
 spleeter_regenerate_models
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Uses the `cmake/export_spleeter_models` python scripts to run the conversion
-of Spleeter models for c++.
+of Spleeter models for c++. Default is OFF
 
 Requires Conda
 
 spleeter_enable_filter
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Enable the filter interface
+Enable the filter interface. Default is ON
 
 spleeter_input_frame_count
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -61,7 +66,7 @@ spleeter_input_frame_count
 Set spleeter `T
 <https://github.com/deezer/spleeter/wiki/3.-Models#audio-parameters>`_  parameter
 
-Available options are 64 / 128 / 256 / 512
+Available options are 64 / 128 / 256 / 512. Default is 64
 
 rtff_use_mkl
 ^^^^^^^^^^^^
