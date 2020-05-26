@@ -1,6 +1,9 @@
 include(FetchContent)
 
-set(spleeter_tag v1.4.0)
+# reference to 16KHz commit from romi1502
+# see https://github.com/deezer/spleeter/commit/fc1e3d9a2f620c481f9d876ee142be8787abc3d9
+set(spleeter_tag fc1e3d9a2f620c481f9d876ee142be8787abc3d9)
+set(spleeter_model_tag v1.4.0)
 set(spleeter_conda_version 1.4.9)  # 1.5.0 changes options
 
 FetchContent_Declare(spleeter
@@ -37,7 +40,7 @@ if(NOT spleeter_POPULATED)
   set(2stems_sha256 "f3a90b39dd2874269e8b05a48a86745df897b848c61f3958efc80a39152bd692")
   set(4stems_sha256 "3adb4a50ad4eb18c7c4d65fcf4cf2367a07d48408a5eb7d03cd20067429dfaa8")
   set(5stems_sha256 "25a1e87eb5f75cc72a4d2d5467a0a50ac75f05611f877c278793742513cc7218")
-  set(pretrained_models_url "https://github.com/deezer/spleeter/releases/download/${spleeter_tag}/")
+  set(pretrained_models_url "https://github.com/deezer/spleeter/releases/download/${spleeter_model_tag}/")
   set(pretrained_models_path "${spleeter_BINARY_DIR}/pretrained_models")
   file(MAKE_DIRECTORY ${pretrained_models_path})
 
@@ -56,13 +59,18 @@ if(NOT spleeter_POPULATED)
     if (NOT "${${pretrained_model}_sha256}" STREQUAL "${sha256}")
       message(STATUS "Downloading ${pretrained_model} model at ${url} to ${zip_file}")
       file(DOWNLOAD ${url} ${zip_file} SHOW_PROGRESS)
+
+
+      message(STATUS "Extracting ${zip_file} to ${pretrained_model_path}")
       execute_process(
         COMMAND ${CMAKE_COMMAND} -E tar -xf ${zip_file}
         WORKING_DIRECTORY ${pretrained_model_path}
       )
+      message(STATUS "${CMAKE_COMMAND} -E tar -xf ${zip_file}")
     else()
       message(STATUS "Pre-trained ${pretrained_model} already available.")
     endif()
+
 
   endforeach()
 
@@ -77,6 +85,7 @@ if(NOT spleeter_POPULATED)
         ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_LIST_DIR}/export_spleeter_models.py
           ${pretrained_models_path}
           ${spleeter_models_dir}
+          ${spleeter_frequency_bin_count}
       WORKING_DIRECTORY ${spleeter_SOURCE_DIR}
     )
   endif()
@@ -91,6 +100,7 @@ if(NOT spleeter_POPULATED)
           ${pretrained_models_path}
           ${spleeter_filter_models_dir}
           ${spleeter_input_frame_count}
+          ${spleeter_frequency_bin_count}
       WORKING_DIRECTORY ${spleeter_SOURCE_DIR}
     )
   endif()
