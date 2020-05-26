@@ -1,5 +1,7 @@
 [![Documentation Status](https://readthedocs.org/projects/spleeterpp/badge/?version=latest)](https://spleeterpp.readthedocs.io/en/latest/?badge=latest)
 [![Build Status](https://travis-ci.com/gvne/spleeterpp.svg?branch=master)](https://travis-ci.com/gvne/spleeterpp)
+[![Build status](https://ci.appveyor.com/api/projects/status/6sk3vq24ms9oy9l0/branch/master?svg=true)](https://ci.appveyor.com/project/gvne/spleeterpp/branch/master)
+
 
 # Spleeter C++ Inference
 
