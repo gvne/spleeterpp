@@ -32,26 +32,28 @@ endif()
 # ----------------------------------
 # real-time models
 # ----------------------------------
-set(spleeter_filter_models_dir ${spleeter_env_dir}/online)
-set(zip_file models.zip)
-set(zip_path ${spleeter_filter_models_dir}/${zip_file})
-set(expected_sha256 "3b1f7bc0c495b1b4ecb2c6e43d7bbb561a1fe499bfa16b15e3795687aa287257")
-set(url "https://github.com/gvne/spleeterpp/releases/download/olmodels-v1.0/models.zip")
-if (${spleeter_enable_high_resolution})
-  set(url "https://github.com/gvne/spleeterpp/releases/download/olmodels-v1.0/models-16KHz.zip")
-endif()
+if (${spleeter_enable_filter})
+  set(spleeter_filter_models_dir ${spleeter_env_dir}/online)
+  set(zip_file models.zip)
+  set(zip_path ${spleeter_filter_models_dir}/${zip_file})
+  set(expected_sha256 "3b1f7bc0c495b1b4ecb2c6e43d7bbb561a1fe499bfa16b15e3795687aa287257")
+  set(url "https://github.com/gvne/spleeterpp/releases/download/olmodels-v1.0/models.zip")
+  if (${spleeter_enable_high_resolution})
+    set(url "https://github.com/gvne/spleeterpp/releases/download/olmodels-v1.0/models-16KHz.zip")
+  endif()
 
-file(MAKE_DIRECTORY ${spleeter_filter_models_dir})
-set(sha256 "")
-if (EXISTS ${zip_path})
-  file(SHA256 ${zip_path} sha256)
-endif()
+  file(MAKE_DIRECTORY ${spleeter_filter_models_dir})
+  set(sha256 "")
+  if (EXISTS ${zip_path})
+    file(SHA256 ${zip_path} sha256)
+  endif()
 
-if (NOT "${sha256}" STREQUAL "${expected_sha256}")
-  message(STATUS "Downloading online models from ${url}")
-  file(DOWNLOAD ${url} ${zip_path} SHOW_PROGRESS)
-  execute_process(
-    COMMAND ${CMAKE_COMMAND} -E tar -xf ${zip_file}
-    WORKING_DIRECTORY ${spleeter_filter_models_dir}
-  )
+  if (NOT "${sha256}" STREQUAL "${expected_sha256}")
+    message(STATUS "Downloading online models from ${url}")
+    file(DOWNLOAD ${url} ${zip_path} SHOW_PROGRESS)
+    execute_process(
+      COMMAND ${CMAKE_COMMAND} -E tar -xf ${zip_file}
+      WORKING_DIRECTORY ${spleeter_filter_models_dir}
+    )
+  endif()
 endif()

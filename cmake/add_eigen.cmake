@@ -14,6 +14,6 @@ if(NOT eigen3_POPULATED)
 
   install(DIRECTORY
     ${eigen3_SOURCE_DIR}/Eigen
-    DESTINATION include/eigen
+    DESTINATION include
   )
 endif()
