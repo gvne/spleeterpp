@@ -11,4 +11,9 @@ if(NOT eigen3_POPULATED)
   add_library(eigen INTERFACE)
   target_include_directories(eigen INTERFACE ${eigen3_SOURCE_DIR})
   add_library(Eigen3::Eigen ALIAS eigen)
+
+  install(DIRECTORY
+    ${eigen3_SOURCE_DIR}/Eigen
+    DESTINATION include/eigen
+  )
 endif()

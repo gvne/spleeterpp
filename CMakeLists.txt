@@ -32,12 +32,13 @@ endif()
 ###############
 
 # External dependencies
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 if (${spleeter_regenerate_models})
   include(add_spleeter)
 else()
   include(add_spleeter_models)
 endif()
+message("ici !!")
 include(add_eigen)
 include(add_tensorflow)
 if (${spleeter_enable_filter})
