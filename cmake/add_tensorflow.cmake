@@ -13,13 +13,15 @@ find_library(tensorflow_lib
   NAMES ${tensorflow_lib_name}
   PATHS ${tensorflow_dir}/lib
 )
-find_library(tensorflow_framework_lib
-  NAMES ${tensorflow_framework_name}
-  PATHS ${tensorflow_dir}/lib
-)
+if (UNIX)
+  find_library(tensorflow_framework_lib
+    NAMES ${tensorflow_framework_name}
+    PATHS ${tensorflow_dir}/lib
+  )
+endif()
 
 # If not found
-if (NOT tensorflow_lib OR NOT tensorflow_framework_lib)
+if (NOT tensorflow_lib)
   message(STATUS "Downloading tensorflow C API pre-built")
 
   # Download
@@ -38,6 +40,14 @@ if (NOT tensorflow_lib OR NOT tensorflow_framework_lib)
   )
   execute_process(COMMAND ${CMAKE_COMMAND} -E tar -xf tensorflow_cc.zip
                   WORKING_DIRECTORY ${tensorflow_dir})
+
+  # On linux, we need to remove the symlinks for simpler install process
+  if (UNIX and NOT APPLE)
+    file(REMOVE ${tensorflow_dir}/lib/libtensorflow_framework.so.1)
+    file(RENAME ${tensorflow_dir}/lib/libtensorflow_framework.so.1.15.0 ${tensorflow_dir}/lib/libtensorflow_framework.so.1)
+    file(REMOVE ${tensorflow_dir}/lib/libtensorflow.so.1)
+    file(RENAME ${tensorflow_dir}/lib/libtensorflow.so.1.15.0 ${tensorflow_dir}/lib/libtensorflow.so.1)
+  endif()
 endif()
 
 # Find the libraries again
