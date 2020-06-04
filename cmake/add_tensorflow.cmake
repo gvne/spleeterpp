@@ -3,10 +3,6 @@ set(tensorflow_dir ${CMAKE_CURRENT_BINARY_DIR}/tensorflow)
 # On OSX, we want to install the libtensorflow.1.dylib
 set(tensorflow_lib_name tensorflow)
 set(tensorflow_framework_name tensorflow_framework)
-if (UNIX AND APPLE)
-  set(tensorflow_lib_name tensorflow.1)
-  set(tensorflow_framework_name tensorflow_framework.1)
-endif()
 
 # Find the libraries again
 find_library(tensorflow_lib
@@ -41,12 +37,19 @@ if (NOT tensorflow_lib)
   execute_process(COMMAND ${CMAKE_COMMAND} -E tar -xf tensorflow_cc.zip
                   WORKING_DIRECTORY ${tensorflow_dir})
 
-  # On linux, we need to remove the symlinks for simpler install process
-  if (UNIX AND NOT APPLE)
-    file(REMOVE ${tensorflow_dir}/lib/libtensorflow_framework.so.1)
-    file(RENAME ${tensorflow_dir}/lib/libtensorflow_framework.so.1.15.0 ${tensorflow_dir}/lib/libtensorflow_framework.so.1)
-    file(REMOVE ${tensorflow_dir}/lib/libtensorflow.so.1)
-    file(RENAME ${tensorflow_dir}/lib/libtensorflow.so.1.15.0 ${tensorflow_dir}/lib/libtensorflow.so.1)
+  # On unix, we need to remove the symlinks for simpler install process
+  if (UNIX)
+    if (APPLE)
+      file(REMOVE ${tensorflow_dir}/lib/libtensorflow_framework.1.dylib)
+      file(RENAME ${tensorflow_dir}/lib/libtensorflow_framework.1.15.0.dylib ${tensorflow_dir}/lib/libtensorflow_framework.1.dylib)
+      file(REMOVE ${tensorflow_dir}/lib/libtensorflow.1.dylib)
+      file(RENAME ${tensorflow_dir}/lib/libtensorflow.1.15.0.dylib ${tensorflow_dir}/lib/libtensorflow.1.dylib)
+    else()
+      file(REMOVE ${tensorflow_dir}/lib/libtensorflow_framework.so.1)
+      file(RENAME ${tensorflow_dir}/lib/libtensorflow_framework.so.1.15.0 ${tensorflow_dir}/lib/libtensorflow_framework.so.1)
+      file(REMOVE ${tensorflow_dir}/lib/libtensorflow.so.1)
+      file(RENAME ${tensorflow_dir}/lib/libtensorflow.so.1.15.0 ${tensorflow_dir}/lib/libtensorflow.so.1)
+    endif()
   endif()
 endif()
 
@@ -88,8 +91,7 @@ if(IS_SYMLINK ${tensorflow_lib})
   get_filename_component(filename ${tensorflow_lib} NAME)
   get_filename_component(dir ${tensorflow_lib} DIRECTORY)
   file(READ_SYMLINK "${tensorflow_lib}" raw_symlink)
-
-  INSTALL(FILES ${dir}/${raw_symlink} DESTINATION lib RENAME ${filename})
+  INSTALL(FILES ${dir}/${raw_symlink} DESTINATION lib)
 else()
   INSTALL(FILES ${tensorflow_lib} DESTINATION lib)
 endif()
@@ -100,9 +102,19 @@ if (NOT MSVC)
     get_filename_component(filename ${tensorflow_framework_lib} NAME)
     get_filename_component(dir ${tensorflow_framework_lib} DIRECTORY)
     file(READ_SYMLINK "${tensorflow_framework_lib}" raw_symlink)
-
-    INSTALL(FILES ${dir}/${raw_symlink} DESTINATION lib RENAME ${filename})
+    INSTALL(FILES ${dir}/${raw_symlink} DESTINATION lib)
   else()
     INSTALL(FILES ${tensorflow_framework_lib} DESTINATION lib)
+  endif()
+endif()
+
+# Also install a symlinks
+if (UNIX)
+  if (APPLE)
+    install(CODE "execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_INSTALL_PREFIX}/lib/libtensorflow.1.dylib ${CMAKE_INSTALL_PREFIX}/lib/libtensorflow.dylib)")
+    install(CODE "execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_INSTALL_PREFIX}/lib/libtensorflow_framework.1.dylib ${CMAKE_INSTALL_PREFIX}/lib/libtensorflow_framework.dylib)")
+  else()
+    install(CODE "execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_INSTALL_PREFIX}/lib/libtensorflow.so.1 ${CMAKE_INSTALL_PREFIX}/lib/libtensorflow.so)")
+    install(CODE "execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_INSTALL_PREFIX}/lib/libtensorflow_framework.so.1 ${CMAKE_INSTALL_PREFIX}/lib/libtensorflow_framework.so)")
   endif()
 endif()
