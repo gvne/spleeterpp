@@ -42,7 +42,7 @@ if (NOT tensorflow_lib)
                   WORKING_DIRECTORY ${tensorflow_dir})
 
   # On linux, we need to remove the symlinks for simpler install process
-  if (UNIX and NOT APPLE)
+  if (UNIX AND NOT APPLE)
     file(REMOVE ${tensorflow_dir}/lib/libtensorflow_framework.so.1)
     file(RENAME ${tensorflow_dir}/lib/libtensorflow_framework.so.1.15.0 ${tensorflow_dir}/lib/libtensorflow_framework.so.1)
     file(REMOVE ${tensorflow_dir}/lib/libtensorflow.so.1)
