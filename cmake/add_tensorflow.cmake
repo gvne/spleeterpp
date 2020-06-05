@@ -96,6 +96,11 @@ else()
   INSTALL(FILES ${tensorflow_lib} DESTINATION lib)
 endif()
 
+# Also install the dll on windows
+if (MSVC)
+  install(FILES ${tensorflow_dir}/lib/tensorflow.dll DESTINATION lib)
+endif()
+
 # And tensorflow framework
 if (NOT MSVC)
   if(IS_SYMLINK ${tensorflow_framework_lib})
