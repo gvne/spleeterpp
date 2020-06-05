@@ -27,6 +27,7 @@ if (NOT "${sha256}" STREQUAL "${expected_sha256}")
     COMMAND ${CMAKE_COMMAND} -E tar -xf ${zip_file}
     WORKING_DIRECTORY ${spleeter_models_dir}
   )
+  file(REMOVE ${zip_path})  # Cleanup
 endif()
 
 # ----------------------------------
@@ -55,5 +56,6 @@ if (${spleeter_enable_filter})
       COMMAND ${CMAKE_COMMAND} -E tar -xf ${zip_file}
       WORKING_DIRECTORY ${spleeter_filter_models_dir}
     )
+    file(REMOVE ${zip_path})  # Cleanup
   endif()
 endif()
