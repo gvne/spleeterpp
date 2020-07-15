@@ -1,7 +1,7 @@
-#ifndef ARTFF_ABSTRACT_FILTER_H_
-#define ARTFF_ABSTRACT_FILTER_H_
+#ifndef ARTFF_MIXING_FILTER_H_
+#define ARTFF_MIXING_FILTER_H_
 
-#include "rtff/abstract_filter.h"
+#include "rtff/mixing_filter.h"
 #include <vector>
 #include <iostream>
 #include <future>
@@ -22,24 +22,27 @@ namespace artff {
 /// Indeed in that case, processing the block may take some time and will
 /// block the audio thread for longer than authorized.
 /// Adding some computation latency fixes the problem
-class AbstractFilter : public rtff::AbstractFilter {
+class MixingFilter : public rtff::MixingFilter {
 public:
-  AbstractFilter(bool sequential = false);
+  MixingFilter(uint8_t input_count, uint8_t output_count, bool sequential = false);
   void set_extra_frame_latency(uint32_t count);
   uint32_t set_extra_frame_latency() const;
   virtual uint32_t FrameLatency() const override;
+  uint32_t frame_size() const;
 
 private:
-  void ProcessTransformedBlock(std::vector<std::complex<float> *> data,
-                               uint32_t size) override;
+  void ProcessTransformedBlock(const std::vector<const TransformedBlock *> &inputs, const std::vector<TransformedBlock *> &outputs) override;
 
 protected:
   virtual void PrepareToPlay() override;
-  virtual void
-  AsyncProcessTransformedBlock(std::vector<std::complex<float> *> data,
-                               uint32_t size) = 0;
-  void SequentialAsyncProcessTransformedBlock(
-      std::vector<std::complex<float>*> data, uint32_t size);
+
+  using MultichannelFrame = std::vector<std::complex<float>*>;
+  using MultichannelConstFrame = std::vector<const std::complex<float>*>;
+  using MultiSourceFrame = std::vector<MultichannelFrame>;
+  using MultiConstSourceFrame = std::vector<MultichannelConstFrame>;
+
+  virtual void AsyncProcessTransformedBlock(const MultiConstSourceFrame &inputs, const MultiSourceFrame &outputs) = 0;
+  void SequentialAsyncProcessTransformedBlock(const MultiConstSourceFrame &inputs, const MultiSourceFrame &outputs);
 
 private:
   bool m_sequential;
@@ -48,10 +51,11 @@ private:
   uint32_t m_extra_frame_latency;
 
   // Storage
-  CircularFrameBuffer m_circular_frame_buffer;
+  std::vector<CircularFrameBuffer> m_input_circular_frame_buffer;
+  std::vector<CircularFrameBuffer> m_output_circular_frame_buffer;
   CircularFutureBuffer m_circular_future;
 };
 
 } // namespace artff
 
-#endif // ARTFF_ABSTRACT_FILTER_H_
+#endif // ARTFF_MIXING_FILTER_H_
