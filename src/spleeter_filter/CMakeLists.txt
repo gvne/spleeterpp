@@ -3,8 +3,9 @@ add_library(spleeter_filter
   model.cc
   filter.cc
   filter.h
+  tensor_helper.h
+  tensor_helper.cc
   tensor.h
-  tensor.cc
 )
 
 target_link_libraries(spleeter_filter

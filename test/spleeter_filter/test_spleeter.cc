@@ -11,7 +11,7 @@ TEST(Spleeter, Filter) {
   // read a file
   wave::File file;
   std::string test_file(TEST_FILE);
-//  std::string test_file("/Users/gvne/Desktop/snipet.wav");
+//  std::string test_file("/Users/gvne/Desktop/snipet-HP.wav");
   file.Open(test_file, wave::kIn);
   std::vector<float> data;
   file.Read(&data);
@@ -24,10 +24,6 @@ TEST(Spleeter, Filter) {
   spleeter::Filter filter(separation_type);
   filter.set_extra_frame_latency(10);
   filter.Init(err);
-  filter.set_volume(0, 1.0);
-  filter.set_volume(1, 0.0);
-  filter.set_volume(2, 0.0);
-  filter.set_volume(3, 0.0);
   ASSERT_FALSE(err);
 
   filter.set_OverlapLength(2);
@@ -36,7 +32,11 @@ TEST(Spleeter, Filter) {
   // Initialize the audio buffer
   const auto block_size = 2048;
   filter.set_block_size(block_size);
-  rtff::AudioBuffer buffer(block_size, filter.channel_count());
+  rtff::Waveform buffer(block_size, filter.channel_count());
+  std::vector<rtff::Waveform> outputs;
+  for (auto source_idx = 0; source_idx < 4; source_idx++) {
+    outputs.push_back(buffer);
+  }
 
   // Run each frames
   auto multichannel_buffer_size = block_size * buffer.channel_count();
@@ -46,8 +46,10 @@ TEST(Spleeter, Filter) {
 
     float* sample_ptr = data.data() + sample_idx;
     buffer.fromInterleaved(sample_ptr);
-    filter.ProcessBlock(&buffer);
-    buffer.toInterleaved(sample_ptr);
+    filter.Write(&buffer);
+    filter.Read(outputs.data());
+    // TODO: mix instead of just copying the first source
+    outputs[0].toInterleaved(sample_ptr);
   }
 
   wave::File result_file;

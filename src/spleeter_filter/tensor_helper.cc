@@ -1,4 +1,4 @@
-#include "spleeter_filter/tensor.h"
+#include "spleeter_filter/tensor_helper.h"
 
 namespace spleeter {
 

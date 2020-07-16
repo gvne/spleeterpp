@@ -4,25 +4,17 @@
 #include <system_error>
 #include <mutex>
 
-#include "artff/abstract_filter.h"
+#include "artff/mixing_filter.h"
 #include "spleeter_common/type.h"
 
 namespace spleeter {
 
-class Filter : public artff::AbstractFilter {
+class Filter : public artff::MixingFilter {
 public:
   Filter(SeparationType separation_type);
 
   /// Initialize the filter with Spleeter specific options
-  void Init(std::error_code& err);
-
-  // ------
-  // FILTER PARAMETERS
-  /// Set the volume of a given stem
-  /// \param stem_index TODO: give the stem name according to process type
-  /// \param value the volume value (0 <= volume <= 1)
-  void set_volume(uint8_t stem_index, float value);
-  float volume(uint8_t stem_index) const;
+  void Init(std::error_code &err);
 
   // ----------------------------------------------------------------------
   // ALGORITHM PARAMETERS
@@ -46,12 +38,6 @@ public:
   void set_OverlapLength(uint16_t size);
   uint16_t OverlapLength() const;
 
-  /// Using Spleeter, The sum of each stem may not be conservative. We can force
-  /// it by deviding each mask by the mask sum
-  /// \param value
-  void set_ForceConservativity(bool value);
-  bool ForceConservativity() const;
-
   /// Every time we run a process, we will do it on ProcessLength.
   /// However, if we decide to reduce FrameLength, it will get more CPU
   /// intensive as we will process more often but it will reduce the latency.
@@ -61,23 +47,22 @@ public:
   /// information.
   uint32_t FrameLatency() const override;
 
+  uint8_t stem_count() const;
 
 private:
   void PrepareToPlay() override;
-  void AsyncProcessTransformedBlock(std::vector<std::complex<float>*> data,
-                                    uint32_t size) override;
+  void AsyncProcessTransformedBlock(const MultiConstSourceFrame &inputs,
+                                    const MultiSourceFrame &outputs) override;
 
   uint32_t SpleeterFrameLatency() const;
 
 private:
   SeparationType m_type;
-  std::vector<float> m_volumes;
 
   uint16_t m_process_length;
   uint16_t m_frame_length;
   uint16_t m_overlap_length;
-  bool m_force_conservativity;
-  
+
   class Impl;
   std::shared_ptr<Impl> m_impl;
 };
