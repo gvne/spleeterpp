@@ -63,7 +63,7 @@ if (NOT tensorflow_lib)
 endif()
 
 add_library(tensorflow INTERFACE)
-if (MSVC)
+if (WIN32)
   # On windows we don't have and don't need the tensorflow_framework library
   set(tensorflow_libs ${tensorflow_lib})
 else()
@@ -97,12 +97,12 @@ else()
 endif()
 
 # Also install the dll on windows
-if (MSVC)
+if (WIN32)
   install(FILES ${tensorflow_dir}/lib/tensorflow.dll DESTINATION lib)
 endif()
 
 # And tensorflow framework
-if (NOT MSVC)
+if (NOT WIN32)
   if(IS_SYMLINK ${tensorflow_framework_lib})
     get_filename_component(filename ${tensorflow_framework_lib} NAME)
     get_filename_component(dir ${tensorflow_framework_lib} DIRECTORY)
