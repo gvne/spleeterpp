@@ -26,3 +26,18 @@ install(DIRECTORY
   ${spleeter_models_dir}/
   DESTINATION models/default
 )
+
+# Add a simple standalone executable that uses the library
+add_executable(spleeter_exe
+  main.x.cc
+)
+target_link_libraries(spleeter_exe PUBLIC
+  spleeter
+  wave
+)
+target_compile_definitions(spleeter_exe PUBLIC
+  SPLEETER_MODELS="${spleeter_models_dir}"
+)
+install(TARGETS spleeter_exe
+  RUNTIME DESTINATION bin
+)

@@ -51,14 +51,17 @@ if (WIN32)
 endif()
 
 include_directories(src)
-add_subdirectory(src)
 
 if (${spleeter_enable_tests})
+  enable_testing()
   set(test_audio_path ${CMAKE_CURRENT_BINARY_DIR}/test.wav)
   if (NOT EXISTS ${test_audio_path})
     file(DOWNLOAD "https://archive.org/download/test_wav/Untitled3.wav" "${test_audio_path}")
   endif()
   include(add_googletest)
+  include(googletest)
   include(add_wave)
   add_subdirectory(test)
 endif()
+
+add_subdirectory(src)
